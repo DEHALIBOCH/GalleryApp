@@ -31,6 +31,9 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -55,7 +58,7 @@ dependencies {
     kapt("com.google.dagger:dagger-compiler:2.44.2")
 
     // Glide
-    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
     //noinspection KaptUsageInsteadOfKsp
     kapt("com.github.bumptech.glide:compiler:4.15.1")
 
