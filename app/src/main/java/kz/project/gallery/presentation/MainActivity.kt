@@ -6,6 +6,7 @@ import android.viewbinding.library.activity.viewBinding
 import kz.project.gallery.R
 import kz.project.gallery.databinding.ActivityMainBinding
 import kz.project.gallery.presentation.fragment.SignInFragment
+import kz.project.gallery.presentation.fragment.SignUpFragment
 import kz.project.gallery.presentation.fragment.WelcomeFragment
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.mainActivityFragmentContainerView, SignInFragment())
+            .replace(R.id.mainActivityFragmentContainerView, SignUpFragment())
             .commit()
     }
 }
