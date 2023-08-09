@@ -65,4 +65,34 @@
     </style>
 
 
+    <style name="MyWidget.SearchViewFromTextInputLayout" parent="MyWidget.CustomTextInputLayout">
+        <item name="errorEnabled">false</item>
+        <item name="startIconTint">@color/mainGray</item>
+        <item name="startIconDrawable">@drawable/search_icon</item>
+        <item name="endIconDrawable">@drawable/clear_icon</item>
+        <item name="boxBackgroundMode">none</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Text.TabItemStyle" parent="Widget.Design.TabLayout">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="textAllCaps">false</item>
+        <item name="tabTextColor">@color/mainGray</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="MyWidget.TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorColor">@color/mainPink</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabTextColor">@drawable/tab_text_selector</item>
+<!--        <item name="tabTextAppearance">@style/Text.TabItemStyle</item>-->
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
 </resources>
