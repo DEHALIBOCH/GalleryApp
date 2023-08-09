@@ -27,4 +27,6 @@
     <color name="editTextTextColor">@color/black</color>
     <color name="editTextHintColor">@color/mainGray</color>
 
+    <color name="imageViewBackground">#F3F3F3</color>
+
 </resources>
