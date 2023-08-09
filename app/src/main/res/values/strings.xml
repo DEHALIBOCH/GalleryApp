@@ -10,4 +10,9 @@
     <string name="hint_password">Password</string>
     <string name="forgot_login_or_password">Forgot login or password?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="hint_email_required">Email<font color='#E80000'>*</font></string>
+    <string name="hint_password_required">Password<font color='#E80000'>*</font></string>
+    <string name="hint_password_confirm_required">Confirm password<font color='#E80000'>*</font></string>
+    <string name="hint_user_name_required">User Name<font color='#E80000'>*</font></string>
+    <string name="hint_birthday_required">Birthday<font color='#E80000'>*</font></string>
 </resources>
