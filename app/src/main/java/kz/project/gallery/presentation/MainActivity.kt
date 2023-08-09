@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.viewbinding.library.activity.viewBinding
 import kz.project.gallery.R
 import kz.project.gallery.databinding.ActivityMainBinding
+import kz.project.gallery.presentation.fragment.HomeFragment
 import kz.project.gallery.presentation.fragment.MainFragment
 import kz.project.gallery.presentation.fragment.SignInFragment
 import kz.project.gallery.presentation.fragment.SignUpFragment
@@ -19,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.mainActivityFragmentContainerView, MainFragment())
+            .replace(R.id.mainActivityFragmentContainerView, HomeFragment())
             .commit()
     }
 }
