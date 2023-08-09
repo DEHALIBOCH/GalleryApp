@@ -23,5 +23,7 @@
     <color name="button_state_pressed">@color/mainPink</color>
     <color name="button_state_disabled">@color/gray</color>
 
+    <color name="editTextTextColor">@color/black</color>
+    <color name="editTextHintColor">@color/mainGray</color>
 
 </resources>
