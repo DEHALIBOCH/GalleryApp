@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?attr/selectableItemBackgroundBorderless"
+    android:background="?attr/selectableItemBackground"
     android:text="@string/cancel"
     android:textSize="15sp" />
-    <!--  TODO протестить селктабл айтем с foreground и background   -->
