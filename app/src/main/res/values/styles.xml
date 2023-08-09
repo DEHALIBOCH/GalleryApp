@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Button.BaseButton" parent="Widget.AppCompat.Button">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Widget.Button.BlackButton" parent="Widget.Button.BaseButton">
+        <item name="background">@drawable/button_colored_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Widget.Button.StrokeButton" parent="Widget.Button.BaseButton">
+        <item name="background">@drawable/button_stroke_selector</item>
+        <item name="android:textColor">@color/button_text_color_selector</item>
+    </style>
+
+    <style name="Widget.Button.TransparentButton" parent="Widget.Button.BaseButton">
+        <item name="background">@drawable/button_transparent_background</item>
+        <item name="android:textColor">@color/button_text_color_selector</item>
+    </style>
+
+    <style name="Widget.CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="shapeAppearanceOverlay">@style/MyShapeAppearanceOverlay.TextInputLayout</item>
+        <item name="errorEnabled">true</item>
+        <item name="errorIconDrawable">@drawable/error</item>
+    </style>
+
+
+    <style name="MyShapeAppearanceOverlay.TextInputLayout" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+
+
+</resources>
