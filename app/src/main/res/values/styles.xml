@@ -52,7 +52,7 @@
     </style>
 
     <style name="MyWidget.EditText" parent="Widget.AppCompat.EditText">
-        <item name="singleLine">true</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/editTextTextColor</item>
         <item name="android:textSize">17sp</item>
         <item name="android:imeOptions">actionGo</item>
@@ -65,16 +65,20 @@
     </style>
 
 
-    <style name="MyWidget.SearchViewFromTextInputLayout" parent="MyWidget.CustomTextInputLayout">
-        <item name="errorEnabled">false</item>
-        <item name="startIconTint">@color/mainGray</item>
-        <item name="startIconDrawable">@drawable/search_icon</item>
+    <style name="MyWidget.TextInputLayoutWithTextDelete" parent="MyWidget.CustomTextInputLayout">
         <item name="endIconDrawable">@drawable/clear_icon</item>
         <item name="boxBackgroundMode">none</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="hintEnabled">false</item>
         <item name="hintAnimationEnabled">false</item>
         <item name="endIconMode">clear_text</item>
+    </style>
+
+
+    <style name="MyWidget.SearchViewFromTextInputLayout" parent="MyWidget.TextInputLayoutWithTextDelete">
+        <item name="errorEnabled">false</item>
+        <item name="startIconTint">@color/mainGray</item>
+        <item name="startIconDrawable">@drawable/search_icon</item>
         <item name="cornerSize">12dp</item>
     </style>
 
@@ -97,6 +101,21 @@
 
     <style name="Widget.MyShapeableImage" parent="">
         <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="BottomSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom_sheet</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom_sheet</item>
+    </style>
+
+    <style name="MyWidget.EditText.Outlined.SingleLine" parent="MyWidget.EditText">
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="MyWidget.EditText.Outlined.MultiLine" parent="MyWidget.EditText.Outlined.SingleLine">
+        <item name="android:maxLines">3</item>
+        <item name="android:lines">3</item>
+        <item name="android:inputType">textMultiLine</item>
     </style>
 
 </resources>
