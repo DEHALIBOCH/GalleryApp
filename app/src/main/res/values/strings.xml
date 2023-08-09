@@ -15,4 +15,10 @@
     <string name="hint_password_confirm_required">Confirm password<font color='#E80000'>*</font></string>
     <string name="hint_user_name_required">User Name<font color='#E80000'>*</font></string>
     <string name="hint_birthday_required">Birthday<font color='#E80000'>*</font></string>
+    <string name="loading">Loading…</string>
+    <string name="sorry">Sorry!</string>
+    <string name="there_is_no_pictures">There is no pictures.\nPlease come back later.</string>
+    <string name="search">Search</string>
+    <string name="tab_new">New</string>
+    <string name="tab_popular">Popular</string>
 </resources>
