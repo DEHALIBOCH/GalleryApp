@@ -1,8 +1,9 @@
-package kz.project.gallery
+package kz.project.gallery.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.viewbinding.library.activity.viewBinding
+import kz.project.gallery.R
 import kz.project.gallery.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
