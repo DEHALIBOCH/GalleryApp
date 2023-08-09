@@ -18,6 +18,7 @@
 
     <style name="Widget.Button.TransparentButton" parent="Widget.Button.BaseButton">
         <item name="background">@drawable/button_transparent_background</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
         <item name="android:textColor">@color/button_text_color_selector</item>
     </style>
 
@@ -26,6 +27,13 @@
         <item name="shapeAppearanceOverlay">@style/MyShapeAppearanceOverlay.TextInputLayout</item>
         <item name="errorEnabled">true</item>
         <item name="errorIconDrawable">@drawable/error</item>
+    </style>
+
+    <style name="Widget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="singleLine">true</item>
+        <item name="android:textColor">@color/editTextTextColor</item>
+        <item name="android:textColorHint">@color/editTextHintColor</item>
+        <item name="android:textSize">17sp</item>
     </style>
 
 
