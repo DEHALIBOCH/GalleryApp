@@ -1,45 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.Button.BaseButton" parent="Widget.AppCompat.Button">
+    <style name="MyWidget.Button.BaseButton" parent="Widget.AppCompat.Button">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Widget.Button.BlackButton" parent="Widget.Button.BaseButton">
-        <item name="background">@drawable/button_colored_selector</item>
+    <style name="MyWidget.Button.BlackButton" parent="MyWidget.Button.BaseButton">
+        <item name="android:background">@drawable/button_colored_selector</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Widget.Button.StrokeButton" parent="Widget.Button.BaseButton">
-        <item name="background">@drawable/button_stroke_selector</item>
+    <style name="MyWidget.Button.BigBlackButton" parent="MyWidget.Button.BlackButton">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="MyWidget.Button.SmallBlackButton" parent="MyWidget.Button.BlackButton">
+        <item name="android:layout_marginHorizontal">120dp</item>
+    </style>
+
+    <style name="MyWidget.Button.StrokeButton" parent="MyWidget.Button.BaseButton">
+        <item name="android:background">@drawable/button_stroke_selector</item>
         <item name="android:textColor">@color/button_text_color_selector</item>
     </style>
 
-    <style name="Widget.Button.TransparentButton" parent="Widget.Button.BaseButton">
-        <item name="background">@drawable/button_transparent_background</item>
-        <item name="android:foreground">?attr/selectableItemBackground</item>
+    <style name="MyWidget.Button.BigStrokeButton" parent="MyWidget.Button.StrokeButton">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="MyWidget.Button.TransparentButton" parent="MyWidget.Button.BaseButton">
+        <item name="android:background">@drawable/button_transparent_background</item>
         <item name="android:textColor">@color/button_text_color_selector</item>
     </style>
 
-    <style name="Widget.CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="MyWidget.Button.SmallTransparentButton" parent="MyWidget.Button.TransparentButton">
+        <item name="android:layout_marginHorizontal">120dp</item>
+    </style>
+
+    <style name="MyWidget.CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidth">1dp</item>
         <item name="shapeAppearanceOverlay">@style/MyShapeAppearanceOverlay.TextInputLayout</item>
         <item name="errorEnabled">true</item>
         <item name="errorIconDrawable">@drawable/error</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:textColorHint">@color/editTextHintColor</item>
     </style>
 
-    <style name="Widget.EditText" parent="Widget.AppCompat.EditText">
+    <style name="MyWidget.EditText" parent="Widget.AppCompat.EditText">
         <item name="singleLine">true</item>
         <item name="android:textColor">@color/editTextTextColor</item>
-        <item name="android:textColorHint">@color/editTextHintColor</item>
         <item name="android:textSize">17sp</item>
     </style>
 
 
     <style name="MyShapeAppearanceOverlay.TextInputLayout" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">4dp</item>
+        <item name="cornerSize">6dp</item>
     </style>
 
 
