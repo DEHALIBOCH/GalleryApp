@@ -21,4 +21,9 @@
     <string name="search">Search</string>
     <string name="tab_new">New</string>
     <string name="tab_popular">Popular</string>
+    <string name="take_a_photo_from_the_gallery">Take a photo \nfrom the gallery</string>
+    <string name="take_a_photo_from_the_camera">Take a photo \nfrom the camera</string>
+    <string name="add">Add</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
 </resources>
