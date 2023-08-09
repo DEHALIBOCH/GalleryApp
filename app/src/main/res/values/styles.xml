@@ -91,8 +91,12 @@
         <item name="tabIndicatorHeight">2dp</item>
         <item name="tabMode">fixed</item>
         <item name="tabTextColor">@drawable/tab_text_selector</item>
-<!--        <item name="tabTextAppearance">@style/Text.TabItemStyle</item>-->
+        <item name="tabTextAppearance">@style/Text.TabItemStyle</item>
         <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="Widget.MyShapeableImage" parent="">
+        <item name="cornerSize">10%</item>
     </style>
 
 </resources>
