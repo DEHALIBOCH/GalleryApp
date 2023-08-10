@@ -33,4 +33,5 @@
     <string name="chip_max_count">Tags max count is 6</string>
     <string name="transitions_logo_start">logo_start</string>
     <string name="transitions_logo_destination">logo_destination</string>
+    <string name="successful_registration">Successful Registration</string>
 </resources>
