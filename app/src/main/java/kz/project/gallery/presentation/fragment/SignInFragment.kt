@@ -7,6 +7,8 @@ import kz.project.gallery.R
 
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
+    // TODO
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
