@@ -45,7 +45,7 @@
         <item name="boxStrokeWidth">1dp</item>
         <item name="shapeAppearanceOverlay">@style/MyShapeAppearanceOverlay.TextInputLayout</item>
         <item name="errorEnabled">true</item>
-        <item name="endIconTint">@color/colorPrimary</item>
+        <item name="endIconTint">@color/text_input_layout_state</item>
         <item name="errorIconDrawable">@drawable/error</item>
         <item name="android:layout_marginHorizontal">16dp</item>
         <item name="android:textColorHint">@color/editTextHintColor</item>
