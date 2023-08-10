@@ -148,4 +148,10 @@
         <item name="chipIconTint">@color/action_chip_text_selector</item>
     </style>
 
+    <style name="MyWidget.ClickableText" parent="Widget.AppCompat.TextView">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
 </resources>
