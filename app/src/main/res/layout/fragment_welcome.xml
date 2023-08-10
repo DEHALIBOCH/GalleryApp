@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo"
+        android:layout_width="136dp"
+        android:layout_height="139dp"
+        android:layout_gravity="center"
+        android:transitionName="@string/transitions_logo_destination"
+        android:layout_marginTop="140dp"
+        app:srcCompat="@drawable/main_logo" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:text="@string/welcome"
+        android:textColor="@color/black"
+        android:textSize="29sp"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/createAccountButton"
+        style="@style/MyWidget.Button.BigBlackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/create_an_account" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/alreadyHaveAccountButton"
+        style="@style/MyWidget.Button.BigStrokeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/already_have_account" />
+
+</LinearLayout>

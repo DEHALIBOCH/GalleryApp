@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/AddPhoto"
+                style="@style/MyWidget.ClickableText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add"
+                android:textColor="@color/mainPink"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:id="@+id/toolbarDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/mainGray"
+            app:layout_constraintEnd_toEndOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="@id/toolbar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewPhoto"
+            android:layout_width="0dp"
+            android:layout_height="320dp"
+            android:background="@color/imageViewBackground"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="@id/toolbarDivider"
+            app:layout_constraintStart_toStartOf="@id/toolbarDivider"
+            app:layout_constraintTop_toBottomOf="@id/toolbarDivider"
+            tools:src="@drawable/rectangle" />
+
+        <View
+            android:id="@+id/imageViewDivider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/mainGray"
+            app:layout_constraintEnd_toEndOf="@id/imageViewPhoto"
+            app:layout_constraintStart_toStartOf="@id/imageViewPhoto"
+            app:layout_constraintTop_toBottomOf="@id/imageViewPhoto" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutName"
+            style="@style/MyWidget.CustomTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/name"
+            app:layout_constraintEnd_toEndOf="@id/imageViewDivider"
+            app:layout_constraintStart_toStartOf="@id/imageViewDivider"
+            app:layout_constraintTop_toBottomOf="@id/imageViewDivider">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/photoNameEditText"
+                style="@style/MyWidget.EditText.Outlined.SingleLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDescription"
+            style="@style/MyWidget.CustomTextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutName">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/photoDescriptionEditText"
+                style="@style/MyWidget.EditText.Outlined.MultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipIsNew"
+            style="@style/MyWidget.CustomChipStyle.Checkable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/tab_new"
+            app:layout_constraintEnd_toStartOf="@id/chipIsPopular"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/textInputLayoutDescription"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutDescription" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipIsPopular"
+            style="@style/MyWidget.CustomChipStyle.Checkable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:text="@string/tab_popular"
+            app:layout_constraintEnd_toStartOf="@id/chipAddNewTag"
+            app:layout_constraintStart_toEndOf="@id/chipIsNew"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutDescription" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipAddNewTag"
+            style="@style/MyWidget.CustomChipStyle.AddNewChip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/tag"
+            app:layout_constraintEnd_toEndOf="@id/textInputLayoutDescription"
+            app:layout_constraintStart_toEndOf="@id/chipIsPopular"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayoutDescription" />
+
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp"
+            app:layout_constraintEnd_toEndOf="@id/chipAddNewTag"
+            app:layout_constraintStart_toStartOf="@id/chipIsNew"
+            app:layout_constraintTop_toBottomOf="@id/chipIsPopular"
+            app:selectionRequired="false"
+            app:singleSelection="false" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:indeterminate="true"
+            android:progressTint="@color/mainPink"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone"
+            android:indeterminateTint="@color/mainPink"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

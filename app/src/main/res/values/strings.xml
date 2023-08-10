@@ -1,3 +1,36 @@
 <resources>
     <string name="app_name">GalleryApp</string>
+    <string name="cancel">Cancel</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome">Welcome!</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="sign_in">Sign In</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="forgot_login_or_password">Forgot login or password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="hint_email_required">Email<font color='#E80000'>*</font></string>
+    <string name="hint_password_required">Password<font color='#E80000'>*</font></string>
+    <string name="hint_password_confirm_required">Confirm password<font color='#E80000'>*</font></string>
+    <string name="hint_user_name_required">User Name<font color='#E80000'>*</font></string>
+    <string name="hint_birthday_required">Birthday<font color='#E80000'>*</font></string>
+    <string name="loading">Loading…</string>
+    <string name="sorry">Sorry!</string>
+    <string name="there_is_no_pictures">There is no pictures.\nPlease come back later.</string>
+    <string name="search">Search</string>
+    <string name="tab_new">New</string>
+    <string name="tab_popular">Popular</string>
+    <string name="take_a_photo_from_the_gallery">Take a photo \nfrom the gallery</string>
+    <string name="take_a_photo_from_the_camera">Take a photo \nfrom the camera</string>
+    <string name="add">Add</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
+    <string name="tag">Tag</string>
+    <string name="create_tag">Create Tag</string>
+    <string name="new_tag">New Tag</string>
+    <string name="invalid_tag_name">Invalid Tag name</string>
+    <string name="chip_max_count">Tags max count is 6</string>
+    <string name="transitions_logo_start">logo_start</string>
+    <string name="transitions_logo_destination">logo_destination</string>
 </resources>

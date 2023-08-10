@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyWidget.Button.BaseButton" parent="Widget.AppCompat.Button">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyWidget.Button.BlackButton" parent="MyWidget.Button.BaseButton">
+        <item name="android:background">@drawable/button_colored_selector</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="MyWidget.Button.BigBlackButton" parent="MyWidget.Button.BlackButton">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="MyWidget.Button.SmallBlackButton" parent="MyWidget.Button.BlackButton">
+        <item name="android:layout_marginHorizontal">120dp</item>
+    </style>
+
+    <style name="MyWidget.Button.StrokeButton" parent="MyWidget.Button.BaseButton">
+        <item name="android:background">@drawable/button_stroke_selector</item>
+        <item name="android:textColor">@color/button_text_color_selector</item>
+    </style>
+
+    <style name="MyWidget.Button.BigStrokeButton" parent="MyWidget.Button.StrokeButton">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="MyWidget.Button.TransparentButton" parent="MyWidget.Button.BaseButton">
+        <item name="android:background">@drawable/button_transparent_background</item>
+        <item name="android:textColor">@color/button_text_color_selector</item>
+    </style>
+
+    <style name="MyWidget.Button.SmallTransparentButton" parent="MyWidget.Button.TransparentButton">
+        <item name="android:layout_marginHorizontal">120dp</item>
+    </style>
+
+    <style name="MyWidget.CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input_layout_state</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="shapeAppearanceOverlay">@style/MyShapeAppearanceOverlay.TextInputLayout</item>
+        <item name="errorEnabled">true</item>
+        <item name="endIconTint">@color/text_input_layout_state</item>
+        <item name="errorIconDrawable">@drawable/error</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:textColorHint">@color/editTextHintColor</item>
+        <item name="hintTextColor">@color/mainPink</item>
+    </style>
+
+    <style name="MyWidget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/editTextTextColor</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:imeOptions">actionGo</item>
+    </style>
+
+
+    <style name="MyShapeAppearanceOverlay.TextInputLayout" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">6dp</item>
+    </style>
+
+
+    <style name="MyWidget.TextInputLayoutWithTextDelete" parent="MyWidget.CustomTextInputLayout">
+        <item name="endIconDrawable">@drawable/clear_icon</item>
+        <item name="boxBackgroundMode">none</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="hintEnabled">false</item>
+        <item name="hintAnimationEnabled">false</item>
+        <item name="endIconMode">clear_text</item>
+    </style>
+
+
+    <style name="MyWidget.SearchViewFromTextInputLayout" parent="MyWidget.TextInputLayoutWithTextDelete">
+        <item name="errorEnabled">false</item>
+        <item name="startIconTint">@color/mainGray</item>
+        <item name="startIconDrawable">@drawable/search_icon</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Text.TabItemStyle" parent="Widget.Design.TabLayout">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="textAllCaps">false</item>
+        <item name="tabTextColor">@color/mainGray</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="MyWidget.TabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorColor">@color/mainPink</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabTextColor">@drawable/tab_text_selector</item>
+        <item name="tabTextAppearance">@style/Text.TabItemStyle</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="Widget.MyShapeableImage" parent="">
+        <item name="cornerSize">10%</item>
+    </style>
+
+    <style name="BottomSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom_sheet</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom_sheet</item>
+    </style>
+
+    <style name="MyWidget.EditText.Outlined.SingleLine" parent="MyWidget.EditText">
+        <item name="android:inputType">text</item>
+    </style>
+
+    <style name="MyWidget.EditText.Outlined.MultiLine" parent="MyWidget.EditText.Outlined.SingleLine">
+        <item name="android:maxLines">3</item>
+        <item name="android:lines">3</item>
+        <item name="android:inputType">textMultiLine</item>
+    </style>
+
+    <style name="MyWidget.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="thumbTint">@color/bottom_nav_view_tint</item>
+        <item name="trackTint">@color/grayLight</item>
+        <item name="android:textColor">@color/mainGray</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:background">@drawable/switcher_background</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">8dp</item>
+    </style>
+
+
+    <style name="MyWidget.CustomChipStyle.Checkable" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_color_selector</item>
+        <item name="android:textColor">@color/chip_text_selector</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyWidget.CustomChipStyle.AddNewChip" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipBackgroundColor">@color/chip_background_color_selector</item>
+        <item name="android:textColor">@color/action_chip_text_selector</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="chipIcon">@drawable/plus_icon</item>
+        <item name="chipIconTint">@color/action_chip_text_selector</item>
+    </style>
+
+    <style name="MyWidget.ClickableText" parent="Widget.AppCompat.TextView">
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+    </style>
+
+</resources>

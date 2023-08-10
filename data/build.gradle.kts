@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
 }
@@ -9,11 +9,11 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "kz.project.data"
+//        applicationId = "kz.project.data"
         minSdk = 28
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+//        versionCode = 1
+//        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,6 +34,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":domain"))
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
