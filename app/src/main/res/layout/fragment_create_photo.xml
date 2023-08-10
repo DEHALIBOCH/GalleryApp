@@ -145,15 +145,12 @@
             app:selectionRequired="false"
             app:singleSelection="false" />
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <include
+            android:id="@+id/progress_bar"
+            layout="@layout/progress_bar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:indeterminate="true"
-            android:progressTint="@color/mainPink"
-            android:indeterminateTintMode="src_atop"
-            android:visibility="gone"
-            android:indeterminateTint="@color/mainPink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
