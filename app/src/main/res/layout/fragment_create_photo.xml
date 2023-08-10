@@ -1,74 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:text="@string/add"
+                android:textColor="@color/mainPink"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGray" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:background="@color/imageViewBackground"
+            android:scaleType="fitCenter"
+            tools:src="@drawable/rectangle" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGray" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutName"
+            style="@style/MyWidget.CustomTextInputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:text="@string/add"
-            android:textColor="@color/mainPink"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:hint="@string/name">
 
-    </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/photoNameEditText"
+                style="@style/MyWidget.EditText.Outlined.SingleLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/mainGray" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="match_parent"
-        android:layout_height="376dp"
-        android:background="@color/imageViewBackground"
-        android:scaleType="fitCenter"
-        tools:src="@drawable/rectangle" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/mainGray" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutName"
-        style="@style/MyWidget.CustomTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/name">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/photoNameEditText"
-            style="@style/MyWidget.EditText.Outlined.SingleLine"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDescription"
+            style="@style/MyWidget.CustomTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:hint="@string/description">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutDescription"
-        style="@style/MyWidget.CustomTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:hint="@string/description">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/photoDescriptionEditText"
+                style="@style/MyWidget.EditText.Outlined.MultiLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="3" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/photoDescriptionEditText"
-            style="@style/MyWidget.EditText.Outlined.MultiLine"
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
 
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="horizontal">
 
-    <!--    TODO изучить ChipLayout для тэгов, и доверстать экраны-->
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipIsNew"
+                style="@style/MyWidget.CustomChipStyle.Checkable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="@string/tab_new" />
 
-</LinearLayout>
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipIsPopular"
+                style="@style/MyWidget.CustomChipStyle.Checkable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4dp"
+                android:layout_weight="1"
+                android:text="@string/tab_popular" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAddNewTag"
+                style="@style/MyWidget.CustomChipStyle.AddNewChip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:text="@string/new_tag" />
+
+        </LinearLayout>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp"
+            app:selectionRequired="false"
+            app:singleSelection="false" />
+
+    </LinearLayout>
+
+</ScrollView>
