@@ -9,6 +9,7 @@
         android:layout_width="136dp"
         android:layout_height="139dp"
         android:layout_gravity="center"
+        android:transitionName="@string/transitions_logo_destination"
         android:layout_marginTop="140dp"
         app:srcCompat="@drawable/main_logo" />
 
