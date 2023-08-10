@@ -25,7 +25,6 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
         super.onViewCreated(view, savedInstanceState)
 
         setupAnimations()
-
         setupButtons()
     }
 
