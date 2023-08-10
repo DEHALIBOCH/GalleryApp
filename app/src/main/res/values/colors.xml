@@ -11,6 +11,7 @@
     <color name="searchViewBackground">#338E8E93</color>
     <color name="gray">#BCBCBC</color>
     <color name="grayLight">#EEEEEF</color>
+    <color name="logoSecondaryColor">#E69633</color>
 
     <color name="colorPrimary">@color/mainGray</color>
     <color name="colorPrimaryDark">@color/grayText</color>
