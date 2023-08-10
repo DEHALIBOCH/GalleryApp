@@ -41,7 +41,7 @@
     </style>
 
     <style name="MyWidget.CustomTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeColor">@color/text_input_layout_state</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="shapeAppearanceOverlay">@style/MyShapeAppearanceOverlay.TextInputLayout</item>
         <item name="errorEnabled">true</item>
@@ -49,6 +49,7 @@
         <item name="errorIconDrawable">@drawable/error</item>
         <item name="android:layout_marginHorizontal">16dp</item>
         <item name="android:textColorHint">@color/editTextHintColor</item>
+        <item name="hintTextColor">@color/mainPink</item>
     </style>
 
     <style name="MyWidget.EditText" parent="Widget.AppCompat.EditText">
@@ -152,6 +153,8 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
     </style>
 
 </resources>
