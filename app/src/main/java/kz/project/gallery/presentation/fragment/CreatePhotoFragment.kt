@@ -2,11 +2,8 @@ package kz.project.gallery.presentation.fragment
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Gravity
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -14,6 +11,7 @@ import android.viewbinding.library.fragment.viewBinding
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputLayout
 import kz.project.gallery.R
