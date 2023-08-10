@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/logo"
         android:layout_width="136dp"
         android:layout_height="139dp"
         android:layout_gravity="center"
@@ -14,6 +15,7 @@
         app:srcCompat="@drawable/main_logo" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
