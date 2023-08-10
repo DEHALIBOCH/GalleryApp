@@ -31,4 +31,6 @@
     <string name="new_tag">New Tag</string>
     <string name="invalid_tag_name">Invalid Tag name</string>
     <string name="chip_max_count">Tags max count is 6</string>
+    <string name="transitions_logo_start">logo_start</string>
+    <string name="transitions_logo_destination">logo_destination</string>
 </resources>
