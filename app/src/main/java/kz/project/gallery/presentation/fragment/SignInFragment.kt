@@ -150,7 +150,10 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    goToMainFragment()
+                    parentFragmentManager.commit {
+                        setReorderingAllowed(true)
+                        replace<MainFragment>(R.id.mainActivityFragmentContainerView, MainFragment.FRAGMENT_TAG)
+                    }
                 }
 
                 is Resource.Error -> {
@@ -160,14 +163,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 }
             }
         })
-    }
-
-    /**
-     * Перемещает пользователя на главный фрагмент, после успешной авторизации
-     */
-    private fun goToMainFragment() = parentFragmentManager.commit {
-        setReorderingAllowed(true)
-        replace<MainFragment>(R.id.mainActivityFragmentContainerView)
     }
 
 
