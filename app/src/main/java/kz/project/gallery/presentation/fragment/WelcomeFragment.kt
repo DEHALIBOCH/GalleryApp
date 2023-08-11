@@ -11,6 +11,7 @@ import androidx.fragment.app.replace
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentWelcomeBinding
 
+
 class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
 
     private val binding: FragmentWelcomeBinding by viewBinding()
@@ -32,26 +33,28 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
 
         createAccountButton.setOnClickListener {
             parentFragmentManager.commit {
+                setReorderingAllowed(true)
                 setCustomAnimations(
                     R.anim.enter_from_right,
                     R.anim.exit_to_left,
                     R.anim.enter_from_left,
                     R.anim.exit_to_right
                 )
-                replace<SignUpFragment>(R.id.mainActivityFragmentContainerView)
+                replace<SignUpFragment>(R.id.mainActivityFragmentContainerView, SignUpFragment.FRAGMENT_TAG)
                 addToBackStack(null)
             }
         }
 
         alreadyHaveAccountButton.setOnClickListener {
             parentFragmentManager.commit {
+                setReorderingAllowed(true)
                 setCustomAnimations(
                     R.anim.enter_from_right,
                     R.anim.exit_to_left,
                     R.anim.enter_from_left,
                     R.anim.exit_to_right
                 )
-                replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
+                replace<SignInFragment>(R.id.mainActivityFragmentContainerView, SignInFragment.FRAGMENT_TAG)
                 addToBackStack(null)
             }
         }
@@ -62,5 +65,9 @@ class WelcomeFragment : Fragment(R.layout.fragment_welcome) {
         welcomeTextView.startAnimation(anim)
         createAccountButton.startAnimation(anim)
         alreadyHaveAccountButton.startAnimation(anim)
+    }
+
+    companion object {
+        const val FRAGMENT_TAG = "WelcomeFragment"
     }
 }
