@@ -1,11 +1,8 @@
 package kz.project.gallery.presentation.fragment
 
-import android.app.DatePickerDialog
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -22,7 +19,6 @@ import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.RegistrationForm
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.observeAndRemoveError
-import java.util.Calendar
 import javax.inject.Inject
 
 
@@ -34,7 +30,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private val binding: FragmentSignUpBinding by viewBinding()
 
-    private val compositeDisposable = CompositeDisposable()
+//    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +45,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
         observeValidationResult()
         observeRegistrationResult()
-        observeInputFieldsToRemoveErrors()
+//        observeInputFieldsToRemoveErrors()
     }
 
     /**
@@ -96,8 +92,8 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
                     // TODO разобраться с каруселью
                     parentFragmentManager.commit {
+                        setReorderingAllowed(true)
                         replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
-                        addToBackStack(null)
                     }
                 }
 
@@ -147,33 +143,41 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private fun setupButtons() = binding.apply {
 
         toolbarCancel.root.setOnClickListener {
-            // TODO разобраться с каруселью
             parentFragmentManager.popBackStack()
         }
 
         binding.signInButton.setOnClickListener {
-            // TODO разобраться с каруселью
+            val fragment = parentFragmentManager.findFragmentByTag(SignInFragment.FRAGMENT_TAG)
+
+            if (fragment is SignInFragment) {
+                parentFragmentManager.popBackStack()
+                return@setOnClickListener
+            }
+
             parentFragmentManager.commit {
+                setReorderingAllowed(true)
                 replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
+                addToBackStack(null)
             }
         }
 
         binding.signUpButton.setOnClickListener {
+            //TODO доработать ввод даты рождения
             registerUser()
         }
     }
 
-    /**
-     * Следит за вводом в EditText и убирает ошибку с TextInputLayout если пользователь ввел хотя бы 1 символ,
-     * так как ошибка мешает взаимодействовать с кнопкой TextInputLayout, показом пароля например
-     */
-    private fun observeInputFieldsToRemoveErrors() = binding.apply {
-        usernameEditText.observeAndRemoveError(textInputLayoutUsername).let(compositeDisposable::add)
-        birthdayEditText.observeAndRemoveError(textInputLayoutBirthday).let(compositeDisposable::add)
-        emailEditText.observeAndRemoveError(textInputLayoutEmail).let(compositeDisposable::add)
-        passwordEditText.observeAndRemoveError(textInputLayoutPassword).let(compositeDisposable::add)
-        confirmPasswordEditText.observeAndRemoveError(textInputLayoutConfirmPassword).let(compositeDisposable::add)
-    }
+//    /**
+//     * Следит за вводом в EditText и убирает ошибку с TextInputLayout если пользователь ввел хотя бы 1 символ,
+//     * так как ошибка мешает взаимодействовать с кнопкой TextInputLayout, показом пароля например
+//     */
+//    private fun observeInputFieldsToRemoveErrors() = binding.apply {
+//        usernameEditText.observeAndRemoveError(textInputLayoutUsername).let(compositeDisposable::add)
+//        birthdayEditText.observeAndRemoveError(textInputLayoutBirthday).let(compositeDisposable::add)
+//        emailEditText.observeAndRemoveError(textInputLayoutEmail).let(compositeDisposable::add)
+//        passwordEditText.observeAndRemoveError(textInputLayoutPassword).let(compositeDisposable::add)
+//        confirmPasswordEditText.observeAndRemoveError(textInputLayoutConfirmPassword).let(compositeDisposable::add)
+//    }
 
     /**
      *  Отправляет RegistrationForm в функцию ViewModel для валидации полей, при успешной валидации
@@ -230,6 +234,10 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.clear()
+//        compositeDisposable.clear()
+    }
+
+    companion object {
+        const val FRAGMENT_TAG = "SignUpFragment"
     }
 }
