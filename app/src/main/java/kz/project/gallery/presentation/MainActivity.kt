@@ -11,9 +11,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.commit {
-            replace(R.id.mainActivityFragmentContainerView, SplashFragment())
+        if (savedInstanceState == null) {
+            supportFragmentManager.commit {
+                replace(R.id.mainActivityFragmentContainerView, SplashFragment())
+            }
         }
-
     }
 }
