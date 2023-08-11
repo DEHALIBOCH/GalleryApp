@@ -10,4 +10,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onCreate(savedInstanceState)
     }
 
+    companion object {
+        const val FRAGMENT_TAG = "HomeFragment"
+    }
 }
