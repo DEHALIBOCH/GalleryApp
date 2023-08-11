@@ -34,4 +34,6 @@
     <string name="transitions_logo_start">logo_start</string>
     <string name="transitions_logo_destination">logo_destination</string>
     <string name="successful_registration">Successful Registration</string>
+    <string name="functionality_under_development">Functionality under development</string>
+    <string name="successful_authentication">Successful authentication</string>
 </resources>
