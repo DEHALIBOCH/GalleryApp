@@ -1,4 +1,4 @@
-package kz.project.gallery.presentation.viewmodel
+package kz.project.gallery.presentation.viewmodel.access_token
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
