@@ -11,4 +11,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onCreate(savedInstanceState)
     }
 
+    companion object {
+        const val FRAGMENT_TAG = "ProfileFragment"
+    }
 }
