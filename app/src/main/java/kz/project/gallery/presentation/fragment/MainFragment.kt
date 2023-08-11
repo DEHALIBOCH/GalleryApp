@@ -36,7 +36,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (savedInstanceState == null) replaceFragment<HomeFragment>(HomeFragment.FRAGMENT_TAG)
+        if (savedInstanceState == null) parentFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<HomeFragment>(R.id.mainFragmentFragmentContainerView, HomeFragment.FRAGMENT_TAG)
+        }
 
         binding.bottomNavigationView.setOnItemSelectedListener(navigationListener)
     }
