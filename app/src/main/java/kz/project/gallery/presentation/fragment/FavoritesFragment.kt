@@ -12,4 +12,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
 
     }
 
+    companion object {
+        const val FRAGMENT_TAG = "FavoritesFragment"
+    }
 }
