@@ -22,7 +22,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center"
-            android:tint="@color/mainGray"
+            android:tint="@color/black"
             app:srcCompat="@drawable/take_photo_from_camera" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -31,7 +31,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/take_a_photo_from_the_camera"
-            android:textColor="@color/mainGray"
+            android:textColor="@color/blackText"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_gravity="center"
-            android:tint="@color/mainGray"
+            android:tint="@color/black"
             app:srcCompat="@drawable/take_photo_from_gallery" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -60,7 +60,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/take_a_photo_from_the_gallery"
-            android:textColor="@color/mainGray"
+            android:textColor="@color/blackText"
             android:textSize="22sp"
             android:textStyle="bold" />
 
