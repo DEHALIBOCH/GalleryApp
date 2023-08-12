@@ -34,5 +34,5 @@ interface LoginApi {
 
 
     @POST("/api/users")
-    fun registerUser(@Body user: UserToPostDto): Single<UserToReceive> //TODO протестить
+    fun registerUser(@Body user: UserToPostDto): Single<UserToReceive>
 }

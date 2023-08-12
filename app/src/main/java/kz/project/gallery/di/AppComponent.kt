@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import kz.project.gallery.presentation.fragment.HomeFragment
+import kz.project.gallery.presentation.fragment.MainFragment
 import kz.project.gallery.presentation.fragment.SignInFragment
 import kz.project.gallery.presentation.fragment.SignUpFragment
 import kz.project.gallery.presentation.fragment.SplashFragment
@@ -19,6 +20,7 @@ interface AppComponent {
     fun inject(fragment: SignUpFragment)
     fun inject(fragment: SplashFragment)
     fun inject(fragment: HomeFragment)
+    fun inject(fragment: MainFragment)
 
     val viewModelFactory: MultiViewModelFactory
 

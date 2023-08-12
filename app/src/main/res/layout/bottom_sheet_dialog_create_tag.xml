@@ -11,7 +11,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/new_tag"
-        android:textColor="@color/mainGray"
+        android:textColor="@color/blackText"
         android:textSize="22sp"
         android:textStyle="bold" />
 

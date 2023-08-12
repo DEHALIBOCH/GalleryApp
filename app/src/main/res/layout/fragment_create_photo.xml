@@ -19,17 +19,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <include
+                android:id="@+id/toolbarArrowBack"
+                layout="@layout/back_arrow_left" />
+
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/AddPhoto"
-                style="@style/MyWidget.ClickableText"
+                android:id="@+id/toolbarAddPhoto"
+                style="@style/MyWidget.ClickableText.Pink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="16dp"
-                android:text="@string/add"
-                android:textColor="@color/mainPink"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:text="@string/add" />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -73,7 +72,7 @@
             app:layout_constraintTop_toBottomOf="@id/imageViewDivider">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/photoNameEditText"
+                android:id="@+id/photoNameTextView"
                 style="@style/MyWidget.EditText.Outlined.SingleLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -135,15 +134,12 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
+            style="@style/MyWidget.ChipGroup"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:chipSpacingHorizontal="8dp"
-            app:chipSpacingVertical="8dp"
             app:layout_constraintEnd_toEndOf="@id/chipAddNewTag"
             app:layout_constraintStart_toStartOf="@id/chipIsNew"
-            app:layout_constraintTop_toBottomOf="@id/chipIsPopular"
-            app:selectionRequired="false"
-            app:singleSelection="false" />
+            app:layout_constraintTop_toBottomOf="@id/chipIsPopular" />
 
         <include
             android:id="@+id/progress_bar"

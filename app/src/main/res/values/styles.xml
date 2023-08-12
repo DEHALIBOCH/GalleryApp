@@ -119,18 +119,6 @@
         <item name="android:inputType">textMultiLine</item>
     </style>
 
-    <style name="MyWidget.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
-        <item name="thumbTint">@color/bottom_nav_view_tint</item>
-        <item name="trackTint">@color/grayLight</item>
-        <item name="android:textColor">@color/mainGray</item>
-        <item name="android:textSize">17sp</item>
-        <item name="android:layout_marginHorizontal">16dp</item>
-        <item name="android:background">@drawable/switcher_background</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">8dp</item>
-    </style>
-
-
     <style name="MyWidget.CustomChipStyle.Checkable" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@color/chip_background_color_selector</item>
         <item name="android:textColor">@color/chip_text_selector</item>
@@ -153,8 +141,66 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="MyWidget.ClickableText.WithPadding" parent="MyWidget.ClickableText">
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingEnd">12dp</item>
+        <item name="android:paddingVertical">8dp</item>
+    </style>
+
+    <style name="MyWidget.ClickableText.Settings" parent="MyWidget.ClickableText">
+        <item name="android:textColor">@color/blackText</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:paddingVertical">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="paddingStart">0dp</item>
+    </style>
+
+    <style name="MyWidget.ClickableText.Pink" parent="MyWidget.ClickableText.WithPadding">
+        <item name="android:paddingStart">24dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/mainPink</item>
+        <item name="android:layout_gravity">end</item>
+    </style>
+
+    <style name="MyWidget.TextView.PhotoDetailsAttrs" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@color/mainGray</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="MyWidget.ChipGroup" parent="Widget.MaterialComponents.ChipGroup">
+        <item name="selectionRequired">false</item>
+        <item name="singleSelection">false</item>
+        <item name="chipSpacingHorizontal">8dp</item>
+        <item name="chipSpacingVertical">8dp</item>
+    </style>
+
+    <style name="MyWidget.CircleButtonStroke" parent="">
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/mainGray</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:layout_marginTop">21dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Circle</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="MyWidget.SettingsFragment.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/blackText</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

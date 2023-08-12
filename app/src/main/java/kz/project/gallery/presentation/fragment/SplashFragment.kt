@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentSplashBinding
-import kz.project.gallery.presentation.viewmodel.AccessTokenViewModel
+import kz.project.gallery.presentation.viewmodel.access_token.AccessTokenViewModel
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import javax.inject.Inject
 
@@ -56,13 +56,19 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private fun fragmentSwitchBasedOnAuthorizationStatus(isAuthorized: Boolean) = if (isAuthorized) {
         parentFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<MainFragment>(R.id.mainActivityFragmentContainerView)
+            setCustomAnimations(
+                R.anim.enter_from_right,
+                R.anim.exit_to_left,
+                R.anim.enter_from_left,
+                R.anim.exit_to_right
+            )
+            replace<MainFragment>(R.id.mainActivityFragmentContainerView, MainFragment.FRAGMENT_TAG)
         }
     } else {
         parentFragmentManager.commit {
             setReorderingAllowed(true)
             addSharedElement(binding.logo, "logo_destination")
-            replace<WelcomeFragment>(R.id.mainActivityFragmentContainerView)
+            replace<WelcomeFragment>(R.id.mainActivityFragmentContainerView, WelcomeFragment.FRAGMENT_TAG)
         }
     }
 
