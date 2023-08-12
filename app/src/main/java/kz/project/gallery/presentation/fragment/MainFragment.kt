@@ -30,18 +30,28 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         (activity?.application as GalleryApp).appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (savedInstanceState == null) parentFragmentManager.commit {
-            setReorderingAllowed(true)
-            replace<HomeFragment>(R.id.mainFragmentFragmentContainerView, HomeFragment.FRAGMENT_TAG)
-        }
+        addFragmentIfContainerIsEmpty()
 
         binding.bottomNavigationView.setOnItemSelectedListener(navigationListener)
+    }
+
+
+    /**
+     * Если контейнер пустой, добавит фрагмент
+     */
+    private fun addFragmentIfContainerIsEmpty() {
+        if (childFragmentManager.findFragmentByTag(HomeFragment.FRAGMENT_TAG) == null) {
+            childFragmentManager.commit {
+                replace<HomeFragment>(R.id.mainFragmentFragmentContainerView, HomeFragment.FRAGMENT_TAG)
+            }
+        }
     }
 
     /**
@@ -83,10 +93,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
      */
     private inline fun <reified T : Fragment> replaceFragment(tag: String) {
 
-        val fragment = parentFragmentManager.findFragmentByTag(tag)
+        val fragment = childFragmentManager.findFragmentByTag(tag)
 
         if (fragment is T) {
-            parentFragmentManager.commit {
+            childFragmentManager.commit {
                 setReorderingAllowed(true)
                 replace(R.id.mainFragmentFragmentContainerView, fragment, tag)
                 addToBackStack(null)
@@ -94,11 +104,12 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             return
         }
 
-        parentFragmentManager.commit {
+        childFragmentManager.commit {
             setReorderingAllowed(true)
             replace<T>(R.id.mainFragmentFragmentContainerView, tag)
             addToBackStack(null)
         }
+
     }
 
     /**
