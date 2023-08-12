@@ -1,10 +1,10 @@
 package kz.project.data.remote
 
 import io.reactivex.rxjava3.core.Single
-import kz.project.data.remote.dto.photo.Image
-import kz.project.data.remote.dto.photo.Photo
-import kz.project.data.remote.dto.photo.PhotoResponse
-import kz.project.data.remote.dto.photo.PhotoUploadForm
+import kz.project.data.remote.dto.photo.ImageDto
+import kz.project.data.remote.dto.photo.PhotoDto
+import kz.project.data.remote.dto.photo.PhotoResponseDto
+import kz.project.domain.model.photo.PhotoUploadForm
 import okhttp3.MultipartBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,32 +20,30 @@ interface PhotoApi {
     fun getPhotosList(
         @Query("new") new: Boolean?,
         @Query("popular") popular: Boolean?,
-        @Query("user.id") userId: List<Int>?,
+        @Query("user.id") userId: Int?,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-    ): Single<PhotoResponse>
+    ): Single<PhotoResponseDto>
 
     @GET("/api/photos")
     fun getPhotosByNameList(
-        @Query("new") new: Boolean?,
-        @Query("popular") popular: Boolean?,
         @Query("name") name: String,
-        @Query("user.id") userId: List<Int>?,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-    ): Single<PhotoResponse>
+    ): Single<PhotoResponseDto>
 
     @GET("/api/photos/{id}")
-    fun getPhotoById(@Path("id") id: Int): Single<Photo>
+    fun getPhotoById(@Path("id") id: Int): Single<PhotoDto>
 
-    //TODO Функционал по загрузке и отправке Фото
-    //TODO доделать функционал
     @Multipart
     @POST("/api/media_objects")
     fun postImage(
         @Part image: MultipartBody.Part
-    ): Single<Image>
+    ): Single<ImageDto>
 
+    /**
+     * images - это не объект images, это - путь "api/media_objects/{id}"
+     */
     @POST("/api/photos")
-    fun postPhoto(@Body photoUploadForm: PhotoUploadForm): Single<Photo>
+    fun postPhoto(@Body photoUploadForm: PhotoUploadForm): Single<PhotoDto>
 }
