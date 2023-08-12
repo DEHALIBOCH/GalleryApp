@@ -3,8 +3,11 @@ package kz.project.gallery.presentation.viewmodel.signin_signup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.domain.model.token.AccessToken
-import kz.project.domain.model.user.UserToReceive
+import kz.project.domain.model.user.User
 import kz.project.domain.use_case.LoginWithEmailAndPasswordUseCase
 import kz.project.domain.use_case.RegisterUserUseCase
 import kz.project.domain.use_case.SaveAccessTokenUseCase
@@ -15,9 +18,6 @@ import kz.project.domain.use_case.ValidatePasswordUseCase
 import kz.project.domain.use_case.ValidateUsernameUseCase
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 
@@ -41,8 +41,8 @@ class LoginViewModel @Inject constructor(
         get() = _registrationValidationResult
 
     /** Результат регистрации на сервере */
-    private val _registrationResult = MutableLiveData<Resource<UserToReceive>>()
-    val registrationResult: LiveData<Resource<UserToReceive>>
+    private val _registrationResult = MutableLiveData<Resource<User>>()
+    val registrationResult: LiveData<Resource<User>>
         get() = _registrationResult
 
     /** Результат валидации полей ввода авторизации */
