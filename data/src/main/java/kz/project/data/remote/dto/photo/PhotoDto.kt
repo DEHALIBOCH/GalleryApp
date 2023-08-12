@@ -3,7 +3,7 @@ package kz.project.data.remote.dto.photo
 
 import com.google.gson.annotations.SerializedName
 
-data class Photo(
+data class PhotoDto(
     @SerializedName("dateCreate")
     val dateCreate: String?,
     @SerializedName("description")
@@ -11,7 +11,7 @@ data class Photo(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("image")
-    val image: Image?,
+    val image: ImageDto?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("new")
