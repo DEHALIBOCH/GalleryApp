@@ -4,7 +4,7 @@ data class PhotoUploadForm(
     val dateCreate: String,
     val description: String,
     val name: String,
-    val new: Boolean = true,
+    val new: Boolean? = null,
     val popular: Boolean? = null,
     val image: Image
 )
