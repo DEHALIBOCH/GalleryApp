@@ -14,10 +14,6 @@
             android:layout_height="wrap_content">
 
             <include
-                android:id="@+id/toolbarArrowBack"
-                layout="@layout/back_arrow_left" />
-
-            <include
                 android:id="@+id/toolbarSettingsButton"
                 layout="@layout/settings_button" />
 
