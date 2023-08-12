@@ -4,7 +4,9 @@ import io.reactivex.rxjava3.core.Single
 import kz.project.data.remote.dto.photo.Image
 import kz.project.data.remote.dto.photo.Photo
 import kz.project.data.remote.dto.photo.PhotoResponse
+import kz.project.data.remote.dto.photo.PhotoUploadForm
 import okhttp3.MultipartBody
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
@@ -44,5 +46,6 @@ interface PhotoApi {
         @Part image: MultipartBody.Part
     ): Single<Image>
 
-
+    @POST("/api/photos")
+    fun postPhoto(@Body photoUploadForm: PhotoUploadForm): Single<Photo>
 }
