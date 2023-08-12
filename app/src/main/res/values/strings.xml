@@ -14,7 +14,9 @@
     <string name="hint_password_required">Password<font color='#E80000'>*</font></string>
     <string name="hint_password_confirm_required">Confirm password<font color='#E80000'>*</font></string>
     <string name="hint_user_name_required">User Name<font color='#E80000'>*</font></string>
+    <string name="hint_user_name">User Name</string>
     <string name="hint_birthday_required">Birthday<font color='#E80000'>*</font></string>
+    <string name="hint_birthday">Birthday</string>
     <string name="loading">Loading…</string>
     <string name="sorry">Sorry!</string>
     <string name="there_is_no_pictures">There is no pictures.\nPlease come back later.</string>
@@ -36,4 +38,24 @@
     <string name="successful_registration">Successful Registration</string>
     <string name="functionality_under_development">Functionality under development</string>
     <string name="successful_authentication">Successful authentication</string>
+    <string name="photo_name">%1$s</string>
+    <string name="photo_name_plug">Name</string>
+    <string name="photo_username_plug">User Name</string>
+    <string name="views_count">%1$s</string>
+    <string name="views_count_plug">999+</string>
+    <string name="date_created_plug">23.23.2323</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="profile_views_plug"><font color="#000000">Views:</font> 999+</string>
+    <string name="profile_views"><font color="#000000">Views:</font> %1$s</string>
+    <string name="profile_loaded_plug"><font color="#000000">Loaded:</font> 999+</string>
+    <string name="profile_loaded"><font color="#000000">Loaded:</font> %1$s</string>
+    <string name="save">Save</string>
+    <string name="upload_photo">Upload photo</string>
+    <string name="personal_data">Personal data</string>
+    <string name="e_mail_address">E-mail address</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="you_can_delete_your_account">You can <font color="#CF497E">delete your account</font></string>
+    <string name="sign_out">Sign out</string>
 </resources>
