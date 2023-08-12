@@ -34,5 +34,17 @@ object Constants {
      */
     const val PHOTOS_PER_PAGE_LIMIT = 12
 
+    const val EPOCH_TIME = "01.01.1970"
 
+    const val MEDIA_TYPE_IMAGE = "image/*"
+
+    const val FILE = "file"
+
+    const val PATH_TO_IMAGE = "api/media_objects/"
+
+    const val NOTICE_TRYING_TO_ACCESS = "Notice: Trying to access array offset on value of type null"
+
+    const val OLD_IS_PASSWORD_INCORRECT = "oldPassword is incorrect"
+
+    const val PASSWORD_UPDATE_SUCCESSFUL = "Successful password update"
 }
