@@ -21,6 +21,7 @@ class GalleryApiAuthenticator @Inject constructor(
 
 
     override fun authenticate(route: Route?, response: Response): Request? {
+
         val refreshToken = getRefreshTokenUseCase.get().invoke()
 
         return try {
