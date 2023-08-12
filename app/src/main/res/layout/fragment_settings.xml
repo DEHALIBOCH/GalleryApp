@@ -197,7 +197,7 @@
             style="@style/MyWidget.ClickableText.Settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="14dp"
             android:text="@string/you_can_delete_your_account" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -206,8 +206,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/mainPink"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:paddingVertical="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/sign_out" />
 
     </LinearLayout>
