@@ -19,7 +19,7 @@
 
             <include
                 android:id="@+id/toolbarSettingsButton"
-                layout="@layout/setting_button" />
+                layout="@layout/settings_button" />
 
         </androidx.appcompat.widget.Toolbar>
 
