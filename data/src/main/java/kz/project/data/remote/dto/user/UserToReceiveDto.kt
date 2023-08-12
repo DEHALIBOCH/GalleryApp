@@ -44,7 +44,7 @@ data class UserToReceiveDto(
     @SerializedName("passwordRequestedAt")
     val passwordRequestedAt: Any?,
     @SerializedName("phone")
-    val phone: Any?,
+    val phone: String?,
     @SerializedName("photos")
     val photos: List<Any?>?,
     @SerializedName("plainPassword")
