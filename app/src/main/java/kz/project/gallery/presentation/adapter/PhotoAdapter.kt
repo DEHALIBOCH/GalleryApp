@@ -7,8 +7,19 @@ import kz.project.domain.model.photo.Photo
 
 class PhotoAdapter : PagingDataAdapter<Photo, PhotoViewHolder>(COMPARATOR) {
 
+    private var onItemClickListener: ((Photo) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Photo) -> Unit) {
+        onItemClickListener = listener
+    }
+
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        getItem(position)?.let(holder::bind)
+        getItem(position)?.let { photo ->
+            holder.bind(photo = photo)
+            holder.binding.photoImageView.setOnClickListener {
+                onItemClickListener?.let { it(photo) }
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder =
