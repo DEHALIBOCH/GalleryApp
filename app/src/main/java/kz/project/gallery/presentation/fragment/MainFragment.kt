@@ -16,7 +16,7 @@ import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentMainBinding
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
-import kz.project.gallery.presentation.viewmodel.user.CurrentUserViewModel
+import kz.project.gallery.presentation.viewmodel.user.UserViewModel
 import javax.inject.Inject
 
 
@@ -24,7 +24,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     @Inject
     lateinit var factory: MultiViewModelFactory
-    private val viewModel: CurrentUserViewModel by activityViewModels { factory }
+    private val viewModel: UserViewModel by activityViewModels { factory }
 
     private val binding: FragmentMainBinding by viewBinding()
 
