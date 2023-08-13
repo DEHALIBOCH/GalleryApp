@@ -2,21 +2,17 @@ package kz.project.domain.repository
 
 import io.reactivex.rxjava3.core.Single
 import kz.project.domain.model.photo.Photo
+import kz.project.domain.model.photo.PhotoResponse
 import kz.project.domain.model.photo.PhotoUploadForm
 import java.io.File
 
 interface PhotoRepository {
 
-    /**
-     * Получение фото исходя из параметров new и popular
-     */
-    fun getAllPhotosList(
-        new: Boolean?,
-        popular: Boolean?,
-        userId: Int?,
+    fun getPhotosListByUserId(
+        userId: Int,
         page: Int,
-        limit: Int,
-    ): Single<List<Photo>>
+        limit: Int
+    ): Single<PhotoResponse>
 
     /**
      * Получение фото исходя из определенного имени
@@ -25,7 +21,7 @@ interface PhotoRepository {
         name: String,
         page: Int,
         limit: Int,
-    ): Single<List<Photo>>
+    ): Single<PhotoResponse>
 
     /**
      * Получение определенного фото по id
