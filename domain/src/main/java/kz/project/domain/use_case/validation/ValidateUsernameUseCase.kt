@@ -1,4 +1,4 @@
-package kz.project.domain.use_case
+package kz.project.domain.use_case.validation
 
 import kz.project.domain.forms_validation.UsernameValidator
 import kz.project.domain.forms_validation.ValidationResult
