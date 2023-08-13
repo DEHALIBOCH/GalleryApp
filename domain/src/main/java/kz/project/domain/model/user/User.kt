@@ -10,6 +10,6 @@ data class User(
     val phone: String,
     val fullName: String,
     val username: String,
-    val birthday: String,
+    val birthday: String?,
     val roles: List<String> = listOf("ROLE_USER"),
 )

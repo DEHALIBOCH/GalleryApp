@@ -3,9 +3,9 @@ package kz.project.data.remote.dto.photo
 
 import com.google.gson.annotations.SerializedName
 
-data class Image(
+data class ImageDto(
     @SerializedName("id")
-    val id: Int?,
+    val id: Int,
     @SerializedName("name")
-    val name: String?
+    val name: String,
 )

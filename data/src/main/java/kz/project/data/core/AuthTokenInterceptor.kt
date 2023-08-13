@@ -1,7 +1,7 @@
 package kz.project.data.core
 
 import kz.project.data.common.Constants
-import kz.project.domain.use_case.GetAuthenticationTokenUseCase
+import kz.project.domain.use_case.token.GetAuthenticationTokenUseCase
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject

@@ -24,15 +24,25 @@ object Constants {
      */
     const val BEARER = "Bearer"
 
-    /**
-     * Максимальное кол-во попыток повторной авторизации, чтобы не попасть в dead-loop
-     */
-    const val MAX_AUTH_ATTEMPTS = 3
+    const val EPOCH_TIME = "01.01.1970"
 
-    /**
-     *  Количество загружаемых элементов на 1 странице
-     */
-    const val PHOTOS_PER_PAGE_LIMIT = 12
+    const val MEDIA_TYPE_IMAGE = "image/*"
 
+    const val FILE = "file"
 
+    const val PATH_TO_IMAGE = "api/media_objects/"
+
+    const val NOTICE_TRYING_TO_ACCESS = "Notice: Trying to access array offset on value of type null"
+
+    const val OLD_IS_PASSWORD_INCORRECT = "oldPassword is incorrect"
+
+    const val PASSWORD_UPDATE_SUCCESSFUL = "Successful password update"
+
+    const val PHOTOS_PAGE_SIZE = 20
+
+    const val PHOTOS_PREFETCH_DISTANCE = 5
+
+    const val PHOTOS_MAX_SIZE = 30
+
+    const val PHOTOS_INITIAL_LOAD_SIZE = 40
 }

@@ -1,10 +1,10 @@
 package kz.project.data.remote
 
-import kz.project.data.remote.dto.user.UpdatePasswordForm
 import kz.project.data.remote.dto.user.UserDto
 import kz.project.data.remote.dto.user.UserToReceiveDto
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
+import kz.project.domain.model.user.UpdatePasswordForm
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PUT
@@ -24,7 +24,7 @@ interface UserApi {
     fun getUserById(@Path("id") id: Int): Single<UserDto>
 
     @DELETE("/api/users/{id}")
-    fun deleteUser(): Completable
+    fun deleteUser(@Path("id") currUserId: Int): Completable
 
 
 }

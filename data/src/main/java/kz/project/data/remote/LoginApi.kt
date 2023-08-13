@@ -1,10 +1,10 @@
 package kz.project.data.remote
 
+import io.reactivex.rxjava3.core.Single
 import kz.project.data.common.Constants
 import kz.project.data.remote.dto.token.AccessTokenDto
 import kz.project.data.remote.dto.user.UserToPostDto
-import kz.project.domain.model.user.UserToReceive
-import io.reactivex.rxjava3.core.Single
+import kz.project.data.remote.dto.user.UserToReceiveDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -34,5 +34,5 @@ interface LoginApi {
 
 
     @POST("/api/users")
-    fun registerUser(@Body user: UserToPostDto): Single<UserToReceive>
+    fun registerUser(@Body user: UserToPostDto): Single<UserToReceiveDto>
 }

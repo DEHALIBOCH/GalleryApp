@@ -1,9 +1,9 @@
-package kz.project.domain.use_case
+package kz.project.domain.use_case.singup_signin
 
-import kz.project.domain.model.user.UserToPost
-import kz.project.domain.model.user.UserToReceive
-import kz.project.domain.repository.LoginRepository
 import io.reactivex.rxjava3.core.Single
+import kz.project.domain.model.user.User
+import kz.project.domain.model.user.UserToPost
+import kz.project.domain.repository.LoginRepository
 import javax.inject.Inject
 
 /**
@@ -13,7 +13,7 @@ class RegisterUserUseCase @Inject constructor(
     private val loginRepository: LoginRepository
 ) {
 
-    operator fun invoke(user: UserToPost): Single<UserToReceive> {
+    operator fun invoke(user: UserToPost): Single<User> {
         return loginRepository.registerUser(user)
     }
 }

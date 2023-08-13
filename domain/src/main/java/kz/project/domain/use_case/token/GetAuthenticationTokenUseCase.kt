@@ -1,4 +1,4 @@
-package kz.project.domain.use_case
+package kz.project.domain.use_case.token
 
 import kz.project.domain.common.Constants
 import kz.project.domain.repository.AccessTokenRepository

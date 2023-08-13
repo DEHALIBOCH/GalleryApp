@@ -1,9 +1,9 @@
 package kz.project.domain.repository
 
-import kz.project.domain.model.token.AccessToken
-import kz.project.domain.model.user.UserToPost
-import kz.project.domain.model.user.UserToReceive
 import io.reactivex.rxjava3.core.Single
+import kz.project.domain.model.token.AccessToken
+import kz.project.domain.model.user.User
+import kz.project.domain.model.user.UserToPost
 
 
 interface LoginRepository {
@@ -21,5 +21,5 @@ interface LoginRepository {
     /**
      * Регистрация пользователя
      */
-    fun registerUser(user: UserToPost): Single<UserToReceive>
+    fun registerUser(user: UserToPost): Single<User>
 }

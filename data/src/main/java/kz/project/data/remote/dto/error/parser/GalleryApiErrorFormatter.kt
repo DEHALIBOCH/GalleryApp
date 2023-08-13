@@ -10,14 +10,12 @@ import javax.inject.Inject
 class GalleryApiErrorFormatter @Inject constructor() {
 
     /**
-     * Форматирует детали ошибки и убирает из них повторяющуюся информацию
+     * Форматирует детали ошибки регистрации и убирает из них повторяющуюся информацию
      */
-    fun formatRegistrationError(errorDetails: String?): String {
-        return if (errorDetails == null) {
-            Constants.UNEXPECTED_ERROR
-        } else {
-            errorDetails.replace(Regex("(?m)^.*(?<!Canonical):.*$\n"), "")
-        }
+    fun formatRegistrationError(errorDetails: String?) = errorDetails?.replace(
+        Regex("(?m)^.*(?<!Canonical):.*$\n"),
+        ""
+    ) ?: Constants.UNEXPECTED_ERROR
 
-    }
+
 }
