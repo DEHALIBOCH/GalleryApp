@@ -1,5 +1,7 @@
 package kz.project.domain.model.photo
 
+import java.io.Serializable
+
 data class Photo(
     val dateCreate: String,
     val description: String,
@@ -9,4 +11,4 @@ data class Photo(
     val new: Boolean,
     val popular: Boolean,
     val user: String
-)
+) : Serializable
