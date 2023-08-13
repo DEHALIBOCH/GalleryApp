@@ -42,14 +42,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
 
         setupRecyclerView()
         getPhotos(popular, new)
-        setupSwipeToRefresh(popular, new)
-    }
 
-    private fun setupSwipeToRefresh(popular: Boolean, new: Boolean) = binding.swipeRefresh.apply {
-        setColorSchemeColors(requireContext().getColor(R.color.mainPink), requireContext().getColor(R.color.mainGray))
-        setOnRefreshListener {
-            getPhotos(popular, new)
-        }
     }
 
     private fun getPhotos(popular: Boolean, new: Boolean) {
@@ -66,6 +59,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     private fun observeNewPhotosResult() {
         viewModel.newPhotosLiveData.observe(viewLifecycleOwner) { resource ->
             when (resource) {
+
                 is Resource.Loading -> {
                     showProgressBar(true)
                     showErrorNotification(false)
@@ -138,4 +132,8 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         const val NEW = "New"
     }
 
+    private fun setupSwipeToRefresh() = binding.swipeRefresh.apply {
+        setColorSchemeColors(requireContext().getColor(R.color.mainPink), requireContext().getColor(R.color.mainGray))
+        isEnabled = false
+    }
 }
