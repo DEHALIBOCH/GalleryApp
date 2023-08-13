@@ -17,4 +17,10 @@ object Constants {
     const val UNEXPECTED_ERROR = "Unexpected error"
 
     const val isAlreadyCreated = "isAlreadyCreated"
+
+    const val PAGE = 1
+
+    const val LIMIT = 20
+
+    const val IMAGE_LOADING_URL = "https://gallery.prod1.webant.ru/media/"
 }
