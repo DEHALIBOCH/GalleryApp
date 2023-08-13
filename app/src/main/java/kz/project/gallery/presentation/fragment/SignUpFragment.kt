@@ -10,7 +10,6 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentSignUpBinding
@@ -18,7 +17,6 @@ import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.RegistrationForm
 import kz.project.gallery.utils.Resource
-import kz.project.gallery.utils.observeAndRemoveError
 import javax.inject.Inject
 
 
@@ -30,7 +28,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     private val binding: FragmentSignUpBinding by viewBinding()
 
-//    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +42,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
         observeValidationResult()
         observeRegistrationResult()
-//        observeInputFieldsToRemoveErrors()
     }
 
     /**
@@ -167,17 +163,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
     }
 
-//    /**
-//     * Следит за вводом в EditText и убирает ошибку с TextInputLayout если пользователь ввел хотя бы 1 символ,
-//     * так как ошибка мешает взаимодействовать с кнопкой TextInputLayout, показом пароля например
-//     */
-//    private fun observeInputFieldsToRemoveErrors() = binding.apply {
-//        usernameEditText.observeAndRemoveError(textInputLayoutUsername).let(compositeDisposable::add)
-//        birthdayEditText.observeAndRemoveError(textInputLayoutBirthday).let(compositeDisposable::add)
-//        emailEditText.observeAndRemoveError(textInputLayoutEmail).let(compositeDisposable::add)
-//        passwordEditText.observeAndRemoveError(textInputLayoutPassword).let(compositeDisposable::add)
-//        confirmPasswordEditText.observeAndRemoveError(textInputLayoutConfirmPassword).let(compositeDisposable::add)
-//    }
 
     /**
      *  Отправляет RegistrationForm в функцию ViewModel для валидации полей, при успешной валидации
@@ -234,7 +219,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     override fun onDestroy() {
         super.onDestroy()
-//        compositeDisposable.clear()
     }
 
     companion object {
