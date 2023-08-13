@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kz.project.domain.model.token.AccessToken
-import kz.project.domain.use_case.GetAuthenticationTokenUseCase
-import kz.project.domain.use_case.GetRefreshTokenUseCase
-import kz.project.domain.use_case.RefreshTokenUseCase
-import kz.project.domain.use_case.SaveAccessTokenUseCase
+import kz.project.domain.use_case.token.GetAuthenticationTokenUseCase
+import kz.project.domain.use_case.token.GetRefreshTokenUseCase
+import kz.project.domain.use_case.token.RefreshTokenUseCase
+import kz.project.domain.use_case.token.SaveAccessTokenUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
