@@ -1,4 +1,4 @@
-package kz.project.domain.use_case
+package kz.project.domain.use_case.singup_signin
 
 import kz.project.domain.model.token.AccessToken
 import kz.project.domain.repository.LoginRepository
