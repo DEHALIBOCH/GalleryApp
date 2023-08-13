@@ -45,8 +45,11 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         setupSwipeToRefresh(popular, new)
     }
 
-    private fun setupSwipeToRefresh(popular: Boolean, new: Boolean) = binding.swipeRefresh.setOnRefreshListener {
-        getPhotos(popular, new)
+    private fun setupSwipeToRefresh(popular: Boolean, new: Boolean) = binding.swipeRefresh.apply {
+        setColorSchemeColors(requireContext().getColor(R.color.mainPink), requireContext().getColor(R.color.mainGray))
+        setOnRefreshListener {
+            getPhotos(popular, new)
+        }
     }
 
     private fun getPhotos(popular: Boolean, new: Boolean) {
