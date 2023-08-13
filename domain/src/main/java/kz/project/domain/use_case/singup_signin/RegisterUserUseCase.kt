@@ -1,4 +1,4 @@
-package kz.project.domain.use_case
+package kz.project.domain.use_case.singup_signin
 
 import io.reactivex.rxjava3.core.Single
 import kz.project.domain.model.user.User
