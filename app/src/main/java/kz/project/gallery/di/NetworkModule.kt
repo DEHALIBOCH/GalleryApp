@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import kz.project.data.remote.PhotoApi
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -57,6 +58,11 @@ interface NetworkModule {
         @Provides
         fun provideLoginApi(retrofit: Retrofit): LoginApi {
             return retrofit.create(LoginApi::class.java)
+        }
+
+        @Provides
+        fun providePhotoApi(retrofit: Retrofit): PhotoApi {
+            return retrofit.create(PhotoApi::class.java)
         }
 
         @Provides
