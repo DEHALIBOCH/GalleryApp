@@ -12,11 +12,13 @@ import kz.project.data.forms_validation_impl.PasswordValidatorImpl
 import kz.project.data.forms_validation_impl.UsernameValidatorImpl
 import kz.project.data.remote.LoginApi
 import kz.project.data.remote.PhotoApi
+import kz.project.data.remote.UserApi
 import kz.project.data.remote.dto.error.parser.ErrorParser
 import kz.project.data.repository.AccessTokenRepositoryImpl
 import kz.project.data.repository.LoginRepositoryImpl
 import kz.project.data.repository.PagingPhotoRepositoryImpl
 import kz.project.data.repository.PhotoRepositoryImpl
+import kz.project.data.repository.UserRepositoryImpl
 import kz.project.domain.forms_validation.BirthdayValidator
 import kz.project.domain.forms_validation.ConfirmPasswordValidator
 import kz.project.domain.forms_validation.EmailValidator
@@ -26,6 +28,7 @@ import kz.project.domain.repository.AccessTokenRepository
 import kz.project.domain.repository.LoginRepository
 import kz.project.domain.repository.PagingPhotoRepository
 import kz.project.domain.repository.PhotoRepository
+import kz.project.domain.repository.UserRepository
 import kz.project.gallery.utils.Constants
 
 @Module
@@ -70,5 +73,9 @@ interface DataModule {
         @Provides
         fun providePhotoRepository(photoApi: PhotoApi): PhotoRepository =
             PhotoRepositoryImpl(photoApi)
+
+        @Provides
+        fun provideUserRepository(userApi: UserApi, errorParser: ErrorParser) : UserRepository =
+            UserRepositoryImpl(userApi, errorParser)
     }
 }
