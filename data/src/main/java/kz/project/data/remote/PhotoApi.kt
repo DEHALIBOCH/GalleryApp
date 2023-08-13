@@ -13,6 +13,7 @@ import retrofit2.http.POST
 import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.nio.ByteOrder
 
 interface PhotoApi {
 
@@ -23,6 +24,7 @@ interface PhotoApi {
         @Query("user.id") userId: Int?,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
+        @Query("order[id]") order: String = "desc"
     ): Single<PhotoResponseDto>
 
     @GET("/api/photos")
@@ -30,6 +32,7 @@ interface PhotoApi {
         @Query("name") name: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
+        @Query("order[id]") order: String = "desc"
     ): Single<PhotoResponseDto>
 
     @GET("/api/photos/{id}")

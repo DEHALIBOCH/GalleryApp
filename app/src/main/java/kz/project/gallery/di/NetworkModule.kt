@@ -9,6 +9,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import kz.project.data.remote.PhotoApi
+import kz.project.data.remote.UserApi
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -63,6 +64,11 @@ interface NetworkModule {
         @Provides
         fun providePhotoApi(retrofit: Retrofit): PhotoApi {
             return retrofit.create(PhotoApi::class.java)
+        }
+
+        @Provides
+        fun provideUserApi(retrofit: Retrofit) : UserApi {
+            return retrofit.create(UserApi::class.java)
         }
 
         @Provides
