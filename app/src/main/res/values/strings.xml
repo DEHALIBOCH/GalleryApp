@@ -19,6 +19,7 @@
     <string name="hint_birthday">Birthday</string>
     <string name="loading">Loading…</string>
     <string name="sorry">Sorry!</string>
+    <string name="sorry_something_went_wrong">Sorry! \nSomething went wrong.</string>
     <string name="there_is_no_pictures">There is no pictures.\nPlease come back later.</string>
     <string name="search">Search</string>
     <string name="tab_new">New</string>
