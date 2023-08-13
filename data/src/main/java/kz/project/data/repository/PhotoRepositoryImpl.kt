@@ -3,6 +3,7 @@ package kz.project.data.repository
 import io.reactivex.rxjava3.core.Single
 import kz.project.data.common.Constants
 import kz.project.data.mappers.toPhoto
+import kz.project.data.mappers.toPhotoResponse
 import kz.project.data.remote.PhotoApi
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.photo.PhotoUploadForm
@@ -17,49 +18,23 @@ class PhotoRepositoryImpl @Inject constructor(
     private val photoApi: PhotoApi
 ) : PhotoRepository {
 
-    //TODO DataSource для фотографий
-
-    override fun getAllPhotosList(
+    private fun getAllPhotosList(
         new: Boolean?,
         popular: Boolean?,
         userId: Int?,
         page: Int,
         limit: Int
     ) = photoApi.getPhotosList(
-        new = null,
-        popular = null,
-        userId = null,
+        new = new,
+        popular = new,
+        userId = userId,
         page = page,
         limit = limit,
-    ).flatMap { response ->
-        Single.just(response.photos?.filter { it.image != null }?.map { it.toPhoto() } ?: emptyList())
+    ).flatMap { photoResponseDto ->
+        Single.just(photoResponseDto.toPhotoResponse())
     }
 
-    fun getPopularPhotosList(
-        page: Int,
-        limit: Int,
-        popular: Boolean = true,
-    ) = getAllPhotosList(
-        new = null,
-        popular = popular,
-        userId = null,
-        page = page,
-        limit = limit,
-    )
-
-    fun getNewPhotosList(
-        page: Int,
-        limit: Int,
-        new: Boolean = true,
-    ) = getAllPhotosList(
-        new = new,
-        popular = null,
-        userId = null,
-        page = page,
-        limit = limit,
-    )
-
-    fun getPhotosListByUserId(
+    override fun getPhotosListByUserId(
         userId: Int,
         page: Int,
         limit: Int
@@ -75,12 +50,12 @@ class PhotoRepositoryImpl @Inject constructor(
         name: String,
         page: Int,
         limit: Int
-    ): Single<List<Photo>> = photoApi.getPhotosByNameList(
+    ) = photoApi.getPhotosByNameList(
         name = name,
         page = page,
         limit = limit,
-    ).flatMap { response ->
-        Single.just(response.photos?.filter { it.image != null }?.map { it.toPhoto() } ?: emptyList())
+    ).flatMap { photoResponseDto ->
+        Single.just(photoResponseDto.toPhotoResponse())
     }
 
     override fun getPhotoById(id: Int) = photoApi.getPhotoById(id).flatMap {
