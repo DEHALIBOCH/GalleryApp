@@ -43,19 +43,28 @@
             app:layout_constraintTop_toBottomOf="@id/toolbarDivider"
             tools:src="@drawable/rectangle" />
 
+        <View
+            android:id="@+id/photoDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/mainGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/photoImageView" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/photoNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
-            android:text="@string/photo_name_plug"
             android:textColor="@color/blackText"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photoImageView" />
+            app:layout_constraintTop_toBottomOf="@id/photoImageView"
+            tools:text="@string/photo_name_plug" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/userNameTextView"
@@ -63,12 +72,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/photo_username_plug"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/photoNameTextView" />
+            app:layout_constraintTop_toBottomOf="@id/photoNameTextView"
+            tools:text="@string/photo_username_plug" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/viewsCountTextView"
@@ -76,10 +85,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:text="@string/views_count_plug"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/photoNameTextView"
             app:layout_constraintEnd_toStartOf="@id/viewsIconImageView"
-            app:layout_constraintTop_toTopOf="@id/photoNameTextView" />
+            app:layout_constraintTop_toTopOf="@id/photoNameTextView"
+            android:text="@string/views_count_plug" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/viewsIconImageView"
@@ -87,6 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:tint="@color/mainGray"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/viewsCountTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/viewsCountTextView"
@@ -97,10 +108,10 @@
             style="@style/MyWidget.TextView.PhotoDetailsAttrs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/date_created_plug"
             app:layout_constraintBottom_toBottomOf="@id/userNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/userNameTextView" />
+            app:layout_constraintTop_toTopOf="@id/userNameTextView"
+            tools:text="@string/date_created_plug" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/photoDescriptionTextView"
@@ -109,16 +120,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:ellipsize="end"
-            app:fontFamily="@font/roboto_light"
             android:lineSpacingExtra="2sp"
             android:maxLines="9"
-            android:text="@string/lorem_ipsum"
             android:textColor="@color/blackText"
             android:textFontWeight="300"
             android:textSize="15sp"
+            app:fontFamily="@font/roboto_light"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+            app:layout_constraintTop_toBottomOf="@id/userNameTextView"
+            tools:text="@string/lorem_ipsum" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
@@ -129,6 +140,42 @@
             app:layout_constraintEnd_toEndOf="@id/photoDescriptionTextView"
             app:layout_constraintStart_toStartOf="@id/photoDescriptionTextView"
             app:layout_constraintTop_toBottomOf="@id/photoDescriptionTextView" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/errorImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/mainPink"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/error_with_loading" />
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:text="@string/sorry_something_went_wrong"
+            android:textColor="@color/mainPink"
+            android:textSize="17sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/errorImage"
+            app:layout_constraintStart_toStartOf="@id/errorImage"
+            app:layout_constraintTop_toBottomOf="@id/errorImage" />
+
+        <include
+            android:id="@+id/loadingProgressBar"
+            layout="@layout/progress_bar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
