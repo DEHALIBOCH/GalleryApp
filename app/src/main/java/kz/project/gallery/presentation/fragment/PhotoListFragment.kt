@@ -3,9 +3,12 @@ package kz.project.gallery.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import kz.project.domain.model.photo.Photo
@@ -26,7 +29,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     private val viewModel: HomeViewModel by activityViewModels { factory }
 
     private val binding: FragmentPhotoListBinding by viewBinding()
-    private lateinit var adapter: PhotoAdapter
+    private lateinit var photoAdapter: PhotoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,22 +71,18 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 is Resource.Error -> {
                     showProgressBar(false)
                     showErrorNotification(true)
-                    hideSwapRefresh()
                 }
 
                 is Resource.Success -> {
                     showProgressBar(false)
                     showErrorNotification(false)
                     submitDataWithAdapter(resource.data)
-                    hideSwapRefresh()
                 }
             }
         }
     }
 
-    private fun hideSwapRefresh() {
-        binding.swipeRefresh.isRefreshing = false
-    }
+
 
 
     private fun observePopularPhotosResult() {
@@ -109,7 +108,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
     private fun submitDataWithAdapter(pagingData: PagingData<Photo>?) = pagingData?.let {
-        adapter.submitData(lifecycle, it)
+        photoAdapter.submitData(lifecycle, it)
     }
 
     private fun showErrorNotification(flag: Boolean) {
@@ -121,10 +120,24 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
     private fun setupRecyclerView() {
-        adapter = PhotoAdapter()
+        photoAdapter = PhotoAdapter()
+        photoAdapter.setOnItemClickListener { photo ->
+            goToPhotoDetailsFragment(photo)
+        }
         binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = photoAdapter
     }
+
+    private fun goToPhotoDetailsFragment(photo: Photo) = requireActivity().supportFragmentManager.commit {
+        setReorderingAllowed(true)
+        replace<PhotoDetailsFragment>(
+            R.id.mainActivityFragmentContainerView,
+            PhotoDetailsFragment.FRAGMENT_TAG,
+            bundleOf(PhotoDetailsFragment.PHOTO_TAG to photo)
+        )
+        addToBackStack(null)
+    }
+
 
     companion object {
         const val FRAGMENT_TAG = "PhotoListFragment"
@@ -132,8 +145,5 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         const val NEW = "New"
     }
 
-    private fun setupSwipeToRefresh() = binding.swipeRefresh.apply {
-        setColorSchemeColors(requireContext().getColor(R.color.mainPink), requireContext().getColor(R.color.mainGray))
-        isEnabled = false
-    }
+
 }
