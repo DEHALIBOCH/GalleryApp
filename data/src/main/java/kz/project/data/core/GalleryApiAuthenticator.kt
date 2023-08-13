@@ -2,9 +2,9 @@ package kz.project.data.core
 
 import android.util.Log
 import kz.project.data.common.Constants
-import kz.project.domain.use_case.GetRefreshTokenUseCase
-import kz.project.domain.use_case.RefreshTokenUseCase
-import kz.project.domain.use_case.SaveAccessTokenUseCase
+import kz.project.domain.use_case.token.GetRefreshTokenUseCase
+import kz.project.domain.use_case.token.RefreshTokenUseCase
+import kz.project.domain.use_case.token.SaveAccessTokenUseCase
 import dagger.Lazy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.Authenticator
