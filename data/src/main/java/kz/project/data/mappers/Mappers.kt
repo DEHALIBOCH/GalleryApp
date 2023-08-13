@@ -3,12 +3,14 @@ package kz.project.data.mappers
 import kz.project.data.common.Constants
 import kz.project.data.remote.dto.photo.ImageDto
 import kz.project.data.remote.dto.photo.PhotoDto
+import kz.project.data.remote.dto.photo.PhotoResponseDto
 import kz.project.data.remote.dto.token.AccessTokenDto
 import kz.project.data.remote.dto.user.UserDto
 import kz.project.data.remote.dto.user.UserToPostDto
 import kz.project.data.remote.dto.user.UserToReceiveDto
 import kz.project.domain.model.photo.Image
 import kz.project.domain.model.photo.Photo
+import kz.project.domain.model.photo.PhotoResponse
 import kz.project.domain.model.photo.createEmptyImage
 import kz.project.domain.model.token.AccessToken
 import kz.project.domain.model.user.User
@@ -70,4 +72,11 @@ fun PhotoDto.toPhoto() = Photo(
 fun ImageDto.toImage() = Image(
     id = id,
     name = name,
+)
+
+fun PhotoResponseDto.toPhotoResponse() = PhotoResponse(
+    countOfPages = countOfPages ?: 0,
+    photos = photos?.map { it.toPhoto() } ?: emptyList(),
+    itemsPerPage = itemsPerPage ?: 0,
+    totalItems = totalItems ?: 0,
 )
