@@ -20,7 +20,7 @@ class ViewPagerAdapterPhotosList(
     override fun createFragment(position: Int): Fragment = when (position) {
 
         0 -> PhotoListFragment().apply {
-            arguments = bundleOf(PhotoListFragment.NEW to true)
+            arguments = bundleOf(PhotoListFragment.POPULAR to false)
         }
 
         1 -> PhotoListFragment().apply {
@@ -28,7 +28,7 @@ class ViewPagerAdapterPhotosList(
         }
 
         else -> PhotoListFragment().apply {
-            arguments = bundleOf(PhotoListFragment.NEW to true)
+            arguments = bundleOf(PhotoListFragment.POPULAR to false)
         }
     }
 }

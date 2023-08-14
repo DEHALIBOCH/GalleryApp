@@ -11,18 +11,18 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kz.project.data.repository.paging_source.PhotosPagingSource
 import kz.project.domain.model.photo.Photo
-import kz.project.domain.use_case.photo.GetNewPhotosUseCase
-import kz.project.domain.use_case.photo.GetPopularPhotosUseCase
+import kz.project.domain.model.photo.PhotoResponse
+import kz.project.domain.use_case.photo.GetPagingPhotosUseCase
+import kz.project.domain.use_case.photo.GetPhotosByUserIdUseCase
+import kz.project.domain.use_case.user.GetCurrentUserUseCase
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
 import javax.inject.Inject
 
 class HomeViewModel @Inject constructor(
-    // TODO рефакторинг - по сути эти 2 usecase можно заменить одним
-    private val getNewPhotosUseCase: GetNewPhotosUseCase,
-    private val getPopularPhotosUseCase: GetPopularPhotosUseCase,
+    private val getPagingPhotosUseCase: GetPagingPhotosUseCase,
+    private val getPhotosByUserIdUseCase: GetPhotosByUserIdUseCase,
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -36,14 +36,35 @@ class HomeViewModel @Inject constructor(
     val popularPhotosLiveData: LiveData<Resource<PagingData<Photo>>>
         get() = _popularPhotosLiveData
 
+    private val _photosByUserIdLiveData = MutableLiveData<Resource<PhotoResponse>>()
+    val photosByUserIdLiveData: LiveData<Resource<PhotoResponse>>
+        get() = _photosByUserIdLiveData
+
+    fun getPhotosByUserId(id: Int) {
+        _photosByUserIdLiveData.value = Resource.Loading()
+
+        getPhotosByUserIdUseCase.invoke(id, 1, 40)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { photoResponse ->
+                    _photosByUserIdLiveData.value = Resource.Success(photoResponse)
+                },
+                { error ->
+                    _photosByUserIdLiveData.value = Resource.Error(error.message ?: Constants.UNEXPECTED_ERROR)
+                }
+            ).let(compositeDisposable::add)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPopularPhotos() {
         _popularPhotosLiveData.value = Resource.Loading()
 
-        getPopularPhotosUseCase.invoke(
+        getPagingPhotosUseCase.invoke(
             Constants.PAGE,
-            Constants.LIMIT
+            Constants.LIMIT,
+            true,
+            null,
         ).observeOn(AndroidSchedulers.mainThread())
             .map { pagingData ->
                 pagingData.filter { it.image.name.isNotBlank() }
@@ -63,9 +84,11 @@ class HomeViewModel @Inject constructor(
     fun getNewPhotos() {
         _newPhotosLiveData.value = Resource.Loading()
 
-        getNewPhotosUseCase.invoke(
+        getPagingPhotosUseCase.invoke(
             Constants.PAGE,
-            Constants.LIMIT
+            Constants.LIMIT,
+            null,
+            true,
         ).observeOn(AndroidSchedulers.mainThread())
             .map { pagingData ->
                 pagingData.filter { it.image.name.isNotBlank() }

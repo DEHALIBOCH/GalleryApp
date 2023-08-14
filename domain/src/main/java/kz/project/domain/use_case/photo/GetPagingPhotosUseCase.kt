@@ -1,10 +1,9 @@
 package kz.project.domain.use_case.photo
 
 import kz.project.domain.repository.PagingPhotoRepository
-import kz.project.domain.repository.PhotoRepository
 import javax.inject.Inject
 
-class GetNewPhotosUseCase @Inject constructor(
+class GetPagingPhotosUseCase @Inject constructor(
     private val pagingPhotoRepository: PagingPhotoRepository,
 ) {
 
@@ -12,14 +11,14 @@ class GetNewPhotosUseCase @Inject constructor(
      * Возвращает фотографии помеченные как новые.
      * @param page номер страницы.
      * @param limit количество элементов на странице.
-     * @param new по дефолту true.
+     * @param popular по дефолту true.
      */
-    operator fun invoke(page: Int, limit: Int, new: Boolean = true) =
+    operator fun invoke(page: Int, limit: Int, popular: Boolean?, new: Boolean?) =
         pagingPhotoRepository.getAllPhotosList(
             new = new,
-            popular = null,
+            popular = popular,
             userId = null,
             page = page,
-            limit = limit
+            limit = limit,
         )
 }

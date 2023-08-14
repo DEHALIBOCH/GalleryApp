@@ -86,7 +86,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    // TODO разобраться с каруселью
                     parentFragmentManager.commit {
                         setReorderingAllowed(true)
                         replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
@@ -158,7 +157,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
 
         binding.signUpButton.setOnClickListener {
-            //TODO доработать ввод даты рождения
             registerUser()
         }
     }

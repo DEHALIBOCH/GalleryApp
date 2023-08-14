@@ -15,6 +15,7 @@
     <string name="hint_password_confirm_required">Confirm password<font color='#E80000'>*</font></string>
     <string name="hint_user_name_required">User Name<font color='#E80000'>*</font></string>
     <string name="hint_user_name">User Name</string>
+    <string name="undefined_user">Undefined user</string>
     <string name="hint_birthday_required">Birthday<font color='#E80000'>*</font></string>
     <string name="hint_birthday">Birthday</string>
     <string name="loading">Loading…</string>

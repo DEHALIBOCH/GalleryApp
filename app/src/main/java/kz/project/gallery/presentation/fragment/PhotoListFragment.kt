@@ -16,6 +16,7 @@ import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentPhotoListBinding
 import kz.project.gallery.presentation.adapter.PhotoAdapter
+import kz.project.gallery.presentation.adapter.PhotoItemType
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.photo.HomeViewModel
 import kz.project.gallery.utils.Resource
@@ -30,6 +31,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
 
     private val binding: FragmentPhotoListBinding by viewBinding()
     private lateinit var photoAdapter: PhotoAdapter
+    private var isAlreadyLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,23 +41,28 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO рефактор, во вьюмодели 2 юз-кейса, можно обойтись одним и здесь использовать только один boolean
         val popular = arguments?.getBoolean(POPULAR) ?: false
-        val new = arguments?.getBoolean(NEW) ?: false
 
+        observeValidationResult(popular)
         setupRecyclerView()
-        getPhotos(popular, new)
 
+        if (!isAlreadyLoaded) {
+            getPhotos(popular)
+            isAlreadyLoaded = true
+        }
     }
 
-    private fun getPhotos(popular: Boolean, new: Boolean) {
-        // TODO рефактор, во вьюмодели 2 юз-кейса, можно обойтись одним и здесь использовать только один boolean
+
+    private fun observeValidationResult(popular: Boolean) {
+        if (popular) observePopularPhotosResult()
+        else observeNewPhotosResult()
+    }
+
+    private fun getPhotos(popular: Boolean) {
         if (popular) {
             viewModel.getPopularPhotos()
-            observePopularPhotosResult()
         } else {
             viewModel.getNewPhotos()
-            observeNewPhotosResult()
         }
     }
 
@@ -81,8 +88,6 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
             }
         }
     }
-
-
 
 
     private fun observePopularPhotosResult() {
@@ -120,7 +125,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
     private fun setupRecyclerView() {
-        photoAdapter = PhotoAdapter()
+        photoAdapter = PhotoAdapter(PhotoItemType.BigItemTwoColumns)
         photoAdapter.setOnItemClickListener { photo ->
             goToPhotoDetailsFragment(photo)
         }
@@ -138,11 +143,9 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         addToBackStack(null)
     }
 
-
     companion object {
         const val FRAGMENT_TAG = "PhotoListFragment"
         const val POPULAR = "Popular"
-        const val NEW = "New"
     }
 
 

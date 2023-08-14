@@ -20,9 +20,7 @@ import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.user.UserViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
 
 
@@ -46,8 +44,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
 
         setupBackButton()
 
-        if (photo == null) showError(true)
-        else observeUserResult(photo)
+        observeUserResult(photo)
     }
 
     private fun setupBackButton() = binding.apply {
@@ -56,7 +53,8 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
         }
     }
 
-    private fun observeUserResult(photo: Photo) {
+    private fun observeUserResult(photo: Photo?) = photo?.let {
+
         viewModel.getUserById(photo.user)
 
         viewModel.userById.observe(viewLifecycleOwner) { resource ->
@@ -67,7 +65,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
 
                 is Resource.Error -> {
                     showProgressBar(false)
-                    showError(true)
+                    setupWidgets(photo, null)
                 }
 
                 is Resource.Success -> {
@@ -77,6 +75,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
             }
         }
     }
+
 
     private fun showProgressBar(flag: Boolean) = binding.apply {
         loadingProgressBar.root.isVisible = flag
@@ -92,21 +91,13 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
             .into(photoImageView)
 
         photoNameTextView.text = photo.name
-        userNameTextView.text = user?.username ?: requireContext().getString(R.string.hint_user_name)
+        userNameTextView.text = user?.username ?: requireContext().getString(R.string.undefined_user)
         viewsCountTextView.isVisible = true
         viewsIconImageView.isVisible = true
         binding.dateCreatedTextView.text = parseDate(photo.dateCreate)
         photoDescriptionTextView.text = photo.description
         addChipToChipGroup(createChip("New:${photo.new}"))
         addChipToChipGroup(createChip("Popular:${photo.popular}"))
-    }
-
-    private fun parseDate(dateCreate: String): String {
-        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX", Locale.getDefault())
-        val outputFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-        val date: Date = inputFormat.parse(dateCreate) ?: Date()
-
-        return outputFormat.format(date)
     }
 
     /**
@@ -123,11 +114,6 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
         setChipBackgroundColorResource(R.color.mainPink)
         setTextColor(requireContext().getColor(R.color.white))
         setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
-    }
-
-    private fun showError(flag: Boolean) = binding.apply {
-        errorImage.isVisible = flag
-        errorText.isVisible = flag
     }
 
     companion object {
