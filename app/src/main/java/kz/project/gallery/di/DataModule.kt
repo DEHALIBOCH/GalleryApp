@@ -16,7 +16,6 @@ import kz.project.data.remote.UserApi
 import kz.project.data.remote.dto.error.parser.ErrorParser
 import kz.project.data.repository.AccessTokenRepositoryImpl
 import kz.project.data.repository.LoginRepositoryImpl
-import kz.project.data.repository.PagingPhotoRepositoryImpl
 import kz.project.data.repository.PhotoRepositoryImpl
 import kz.project.data.repository.UserRepositoryImpl
 import kz.project.domain.forms_validation.BirthdayValidator
@@ -26,7 +25,6 @@ import kz.project.domain.forms_validation.PasswordValidator
 import kz.project.domain.forms_validation.UsernameValidator
 import kz.project.domain.repository.AccessTokenRepository
 import kz.project.domain.repository.LoginRepository
-import kz.project.domain.repository.PagingPhotoRepository
 import kz.project.domain.repository.PhotoRepository
 import kz.project.domain.repository.UserRepository
 import kz.project.gallery.utils.Constants
@@ -65,10 +63,6 @@ interface DataModule {
         fun provideAccessTokenRepository(sharedPreferences: SharedPreferences): AccessTokenRepository {
             return AccessTokenRepositoryImpl(sharedPreferences)
         }
-
-        @Provides
-        fun providePagingPhotoRepository(photoApi: PhotoApi): PagingPhotoRepository =
-            PagingPhotoRepositoryImpl(photoApi)
 
         @Provides
         fun providePhotoRepository(photoApi: PhotoApi): PhotoRepository =
