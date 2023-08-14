@@ -6,9 +6,9 @@ import android.viewbinding.library.fragment.viewBinding
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.user.User
@@ -16,10 +16,9 @@ import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentProfileBinding
 import kz.project.gallery.presentation.adapter.PhotoItemType
-import kz.project.gallery.presentation.adapter.SmallPhotoAdapter
+import kz.project.gallery.presentation.adapter.PhotoAdapter
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
-import kz.project.gallery.presentation.viewmodel.photo.HomeViewModel
-import kz.project.gallery.presentation.viewmodel.user.UserViewModel
+import kz.project.gallery.presentation.viewmodel.photo.ProfileViewModel
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
@@ -29,14 +28,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     @Inject
     lateinit var factory: MultiViewModelFactory
-    private val homeViewModel: HomeViewModel by activityViewModels { factory }
-    private val userViewModel: UserViewModel by activityViewModels { factory }
-
+    private val viewModel: ProfileViewModel by viewModels { factory }
 
     private val binding: FragmentProfileBinding by viewBinding()
 
     // TODO много общих полей с PhotoListFragment, нужно создать базовый класс и вынести из туда
-    private lateinit var photoAdapter: SmallPhotoAdapter
+    private lateinit var photoAdapter: PhotoAdapter
     private var isAlreadyLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,13 +51,13 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         observeCurrentUser()
 
         if (!isAlreadyLoaded) {
-            userViewModel.getCurrentUser()
+            viewModel.getCurrentUser()
             isAlreadyLoaded = true
         }
     }
 
     private fun setupRecyclerView() {
-        photoAdapter = SmallPhotoAdapter(PhotoItemType.SmallItemFourColumns)
+        photoAdapter = PhotoAdapter(PhotoItemType.SmallItemFourColumns)
         photoAdapter.setOnItemClickListener { photo ->
             goToPhotoDetailsFragment(photo)
         }
@@ -70,19 +67,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun observeUserPhotos() {
 
-        homeViewModel.photosByUserIdLiveData.observe(viewLifecycleOwner) { resource ->
+        viewModel.photosByUserIdLiveData.observe(viewLifecycleOwner) { resource ->
             when (resource) {
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                }
+                is Resource.Loading -> Unit
 
                 is Resource.Error -> {
-                    showProgressBar(false)
+                    hideProgressBar()
                     showError(true)
                 }
 
                 is Resource.Success -> {
-                    showProgressBar(false)
+                    hideProgressBar()
                     if (resource.data?.photos?.isEmpty() == true) showError(true)
                     setLoadedPhotosCount(resource.data?.photos?.size ?: 0)
                     photoAdapter.submitList(resource.data?.photos)
@@ -96,14 +91,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         loadedCountTextView.text = requireContext().getString(R.string.profile_loaded, count)
     }
 
-    private fun showProgressBar(flag: Boolean) = binding.apply {
-        loadingProgressBar.root.isVisible = flag
+    private fun hideProgressBar() = binding.apply {
+        loadingProgressBar.root.isVisible = false
     }
 
 
     private fun observeCurrentUser() {
 
-        userViewModel.currentUser.observe(viewLifecycleOwner) { resource ->
+        viewModel.currentUser.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> Unit
 
@@ -113,7 +108,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
                 is Resource.Success -> {
                     setupWidgets(resource.data)
-                    homeViewModel.getPhotosByUserId(resource.data?.id ?: -1)
+                    viewModel.getPhotosByUserId(resource.data?.id ?: -1)
                 }
             }
         }

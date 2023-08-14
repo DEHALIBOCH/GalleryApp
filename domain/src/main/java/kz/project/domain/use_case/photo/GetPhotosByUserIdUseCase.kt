@@ -14,5 +14,11 @@ class GetPhotosByUserIdUseCase @Inject constructor(
      * @param limit количество элементов на странице.
      */
     operator fun invoke(userId: Int, page: Int, limit: Int) =
-        photoRepository.getPhotosListByUserId(userId, page, limit)
+        photoRepository.getAllPhotosList(
+            new = null,
+            popular = null,
+            userId = userId,
+            page = page,
+            limit = limit,
+        )
 }

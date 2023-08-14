@@ -76,7 +76,7 @@ fun ImageDto.toImage() = Image(
 
 fun PhotoResponseDto.toPhotoResponse() = PhotoResponse(
     countOfPages = countOfPages ?: 0,
-    photos = photos?.map { it.toPhoto() } ?: emptyList(),
+    photos = photos?.map { it.toPhoto() }?.toMutableList() ?: mutableListOf(),
     itemsPerPage = itemsPerPage ?: 0,
     totalItems = totalItems ?: 0,
 )

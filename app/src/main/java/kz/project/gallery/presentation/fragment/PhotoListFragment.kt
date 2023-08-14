@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import kz.project.domain.model.photo.Photo
 import kz.project.gallery.GalleryApp
@@ -43,7 +42,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
 
         val popular = arguments?.getBoolean(POPULAR) ?: false
 
-        observeValidationResult(popular)
+        observePhotoResult(popular)
         setupRecyclerView()
 
         if (!isAlreadyLoaded) {
@@ -53,7 +52,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
 
-    private fun observeValidationResult(popular: Boolean) {
+    private fun observePhotoResult(popular: Boolean) {
         if (popular) observePopularPhotosResult()
         else observeNewPhotosResult()
     }
@@ -83,7 +82,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 is Resource.Success -> {
                     showProgressBar(false)
                     showErrorNotification(false)
-                    submitDataWithAdapter(resource.data)
+                    photoAdapter.submitList(resource.data?.photos)
                 }
             }
         }
@@ -106,14 +105,10 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 is Resource.Success -> {
                     showProgressBar(false)
                     showErrorNotification(false)
-                    submitDataWithAdapter(resource.data)
+                    photoAdapter.submitList(resource.data?.photos)
                 }
             }
         }
-    }
-
-    private fun submitDataWithAdapter(pagingData: PagingData<Photo>?) = pagingData?.let {
-        photoAdapter.submitData(lifecycle, it)
     }
 
     private fun showErrorNotification(flag: Boolean) {
