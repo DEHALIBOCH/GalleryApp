@@ -116,11 +116,6 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
         setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
     }
 
-    private fun showError(flag: Boolean) = binding.apply {
-        errorImage.isVisible = flag
-        errorText.isVisible = flag
-    }
-
     companion object {
         const val FRAGMENT_TAG = "PhotoDetailsFragment"
         const val PHOTO_TAG = "Photo"
