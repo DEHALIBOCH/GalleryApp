@@ -15,7 +15,6 @@ import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.photo.PhotoResponse
 import kz.project.domain.use_case.photo.GetPagingPhotosUseCase
 import kz.project.domain.use_case.photo.GetPhotosByUserIdUseCase
-import kz.project.domain.use_case.user.GetCurrentUserUseCase
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
 import javax.inject.Inject
