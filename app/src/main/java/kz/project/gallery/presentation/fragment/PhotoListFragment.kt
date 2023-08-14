@@ -6,18 +6,18 @@ import android.viewbinding.library.fragment.viewBinding
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import kz.project.domain.model.photo.Photo
+import kz.project.domain.use_case.photo.GetPhotosListUseCase
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentPhotoListBinding
 import kz.project.gallery.presentation.adapter.PhotoAdapter
 import kz.project.gallery.presentation.adapter.PhotoItemType
-import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
-import kz.project.gallery.presentation.viewmodel.photo.HomeViewModel
+import kz.project.gallery.presentation.viewmodel.home.HomeViewModel
 import kz.project.gallery.utils.Resource
 import javax.inject.Inject
 
@@ -25,11 +25,17 @@ import javax.inject.Inject
 class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
 
     @Inject
-    lateinit var factory: MultiViewModelFactory
-    private val viewModel: HomeViewModel by activityViewModels { factory }
+    lateinit var getPhotosListUseCase: GetPhotosListUseCase
+    private var popular: Boolean = false
+
+    private val factory: HomeViewModel.Factory by lazy {
+        HomeViewModel.Factory(popular, getPhotosListUseCase)
+    }
+    private val viewModel: HomeViewModel by viewModels { factory }
 
     private val binding: FragmentPhotoListBinding by viewBinding()
     private lateinit var photoAdapter: PhotoAdapter
+
     private var isAlreadyLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,76 +46,38 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val popular = arguments?.getBoolean(POPULAR) ?: false
+        popular = arguments?.getBoolean(POPULAR) ?: false
 
-        observePhotoResult(popular)
+        observePhotosResult()
         setupRecyclerView()
 
         if (!isAlreadyLoaded) {
-            getPhotos(popular)
+            viewModel.getPhotos()
             isAlreadyLoaded = true
         }
     }
 
+    private fun observePhotosResult() = viewModel.photosLiveData.observe(viewLifecycleOwner) { resource ->
+        when (resource) {
 
-    private fun observePhotoResult(popular: Boolean) {
-        if (popular) observePopularPhotosResult()
-        else observeNewPhotosResult()
-    }
+            is Resource.Loading -> {
+                showProgressBar(true)
+                showErrorNotification(false)
+            }
 
-    private fun getPhotos(popular: Boolean) {
-        if (popular) {
-            viewModel.getPopularPhotos()
-        } else {
-            viewModel.getNewPhotos()
-        }
-    }
+            is Resource.Error -> {
+                showProgressBar(false)
+                showErrorNotification(true)
+            }
 
-    private fun observeNewPhotosResult() {
-        viewModel.newPhotosLiveData.observe(viewLifecycleOwner) { resource ->
-            when (resource) {
-
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                    showErrorNotification(false)
-                }
-
-                is Resource.Error -> {
-                    showProgressBar(false)
-                    showErrorNotification(true)
-                }
-
-                is Resource.Success -> {
-                    showProgressBar(false)
-                    showErrorNotification(false)
-                    photoAdapter.submitList(resource.data?.photos)
-                }
+            is Resource.Success -> {
+                showProgressBar(false)
+                showErrorNotification(false)
+                photoAdapter.submitList(resource.data?.photos)
             }
         }
     }
 
-
-    private fun observePopularPhotosResult() {
-        viewModel.popularPhotosLiveData.observe(viewLifecycleOwner) { resource ->
-            when (resource) {
-                is Resource.Loading -> {
-                    showProgressBar(true)
-                    showErrorNotification(false)
-                }
-
-                is Resource.Error -> {
-                    showProgressBar(false)
-                    showErrorNotification(true)
-                }
-
-                is Resource.Success -> {
-                    showProgressBar(false)
-                    showErrorNotification(false)
-                    photoAdapter.submitList(resource.data?.photos)
-                }
-            }
-        }
-    }
 
     private fun showErrorNotification(flag: Boolean) {
         binding.loadingError.isVisible = flag
@@ -142,6 +110,5 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         const val FRAGMENT_TAG = "PhotoListFragment"
         const val POPULAR = "Popular"
     }
-
 
 }

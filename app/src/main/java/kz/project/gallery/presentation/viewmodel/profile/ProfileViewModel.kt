@@ -1,4 +1,4 @@
-package kz.project.gallery.presentation.viewmodel.photo
+package kz.project.gallery.presentation.viewmodel.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

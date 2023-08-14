@@ -5,8 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import kz.project.gallery.presentation.viewmodel.access_token.AccessTokenViewModel
-import kz.project.gallery.presentation.viewmodel.photo.HomeViewModel
-import kz.project.gallery.presentation.viewmodel.photo.ProfileViewModel
+import kz.project.gallery.presentation.viewmodel.profile.ProfileViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.user.UserViewModel
 
@@ -21,9 +20,6 @@ interface AppBindsModule {
 
     @[Binds IntoMap ViewModelKey(UserViewModel::class)]
     fun userViewModel(userViewModel: UserViewModel): ViewModel
-
-    @[Binds IntoMap ViewModelKey(HomeViewModel::class)]
-    fun homeViewModel(homeViewModel: HomeViewModel): ViewModel
 
     @[Binds IntoMap ViewModelKey(ProfileViewModel::class)]
     fun profileViewModel(profileViewModel: ProfileViewModel): ViewModel

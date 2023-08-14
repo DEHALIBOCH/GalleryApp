@@ -18,7 +18,7 @@ import kz.project.gallery.databinding.FragmentProfileBinding
 import kz.project.gallery.presentation.adapter.PhotoItemType
 import kz.project.gallery.presentation.adapter.PhotoAdapter
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
-import kz.project.gallery.presentation.viewmodel.photo.ProfileViewModel
+import kz.project.gallery.presentation.viewmodel.profile.ProfileViewModel
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
