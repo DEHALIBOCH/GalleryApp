@@ -46,8 +46,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
 
         setupBackButton()
 
-        if (photo == null) showError(true)
-        else observeUserResult(photo)
+        observeUserResult(photo)
     }
 
     private fun setupBackButton() = binding.apply {
@@ -56,7 +55,8 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
         }
     }
 
-    private fun observeUserResult(photo: Photo) {
+    private fun observeUserResult(photo: Photo?) = photo?.let {
+
         viewModel.getUserById(photo.user)
 
         viewModel.userById.observe(viewLifecycleOwner) { resource ->
@@ -67,7 +67,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
 
                 is Resource.Error -> {
                     showProgressBar(false)
-                    showError(true)
+                    setupWidgets(photo, null)
                 }
 
                 is Resource.Success -> {
@@ -77,6 +77,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
             }
         }
     }
+
 
     private fun showProgressBar(flag: Boolean) = binding.apply {
         loadingProgressBar.root.isVisible = flag
@@ -92,7 +93,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
             .into(photoImageView)
 
         photoNameTextView.text = photo.name
-        userNameTextView.text = user?.username ?: requireContext().getString(R.string.hint_user_name)
+        userNameTextView.text = user?.username ?: requireContext().getString(R.string.undefined_user)
         viewsCountTextView.isVisible = true
         viewsIconImageView.isVisible = true
         binding.dateCreatedTextView.text = parseDate(photo.dateCreate)

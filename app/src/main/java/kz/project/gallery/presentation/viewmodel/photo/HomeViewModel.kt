@@ -9,9 +9,7 @@ import androidx.paging.filter
 import androidx.paging.rxjava3.cachedIn
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kz.project.data.repository.paging_source.PhotosPagingSource
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.use_case.photo.GetNewPhotosUseCase
 import kz.project.domain.use_case.photo.GetPopularPhotosUseCase
