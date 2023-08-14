@@ -1,10 +1,9 @@
 package kz.project.domain.use_case.photo
 
 import kz.project.domain.repository.PagingPhotoRepository
-import kz.project.domain.repository.PhotoRepository
 import javax.inject.Inject
 
-class GetPopularPhotosUseCase @Inject constructor(
+class GetPagingPhotosUseCase @Inject constructor(
     private val pagingPhotoRepository: PagingPhotoRepository,
 ) {
 
@@ -14,9 +13,9 @@ class GetPopularPhotosUseCase @Inject constructor(
      * @param limit количество элементов на странице.
      * @param popular по дефолту true.
      */
-    operator fun invoke(page: Int, limit: Int, popular: Boolean = true) =
+    operator fun invoke(page: Int, limit: Int, popular: Boolean?, new: Boolean?) =
         pagingPhotoRepository.getAllPhotosList(
-            new = null,
+            new = new,
             popular = popular,
             userId = null,
             page = page,
