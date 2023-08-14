@@ -38,7 +38,6 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
 
         addFragmentIfContainerIsEmpty()
-
         binding.bottomNavigationView.setOnItemSelectedListener(navigationListener)
     }
 
