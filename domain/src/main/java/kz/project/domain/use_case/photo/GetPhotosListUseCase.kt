@@ -1,10 +1,10 @@
 package kz.project.domain.use_case.photo
 
-import kz.project.domain.repository.PagingPhotoRepository
+import kz.project.domain.repository.PhotoRepository
 import javax.inject.Inject
 
-class GetPagingPhotosUseCase @Inject constructor(
-    private val pagingPhotoRepository: PagingPhotoRepository,
+class GetPhotosListUseCase @Inject constructor(
+    private val pagingPhotoRepository: PhotoRepository,
 ) {
 
     /**
