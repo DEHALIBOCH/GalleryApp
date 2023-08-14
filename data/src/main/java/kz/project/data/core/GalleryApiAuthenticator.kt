@@ -22,25 +22,29 @@ class GalleryApiAuthenticator @Inject constructor(
 
     override fun authenticate(route: Route?, response: Response): Request? {
 
-        val refreshToken = getRefreshTokenUseCase.get().invoke()
+        if (response.code == 401) {
 
-        return try {
-            val newToken = refreshTokenUseCase.get().invoke(refreshToken)
-                .subscribeOn(Schedulers.io())
-                .blockingGet()
+            val refreshToken = getRefreshTokenUseCase.get().invoke()
 
-            saveAccessTokenUseCase.get().invoke(newToken)
+            return try {
+                val newToken = refreshTokenUseCase.get().invoke(refreshToken)
+                    .subscribeOn(Schedulers.io())
+                    .blockingGet()
 
-            response.request.newBuilder()
-                .removeHeader(Constants.AUTHORIZATION)
-                .header(
-                    Constants.AUTHORIZATION,
-                    "${Constants.BEARER} ${newToken.accessToken}"
-                ).build()
+                saveAccessTokenUseCase.get().invoke(newToken)
 
-        } catch (e: Exception) {
-            Log.e(Constants.AUTHORIZATION, e.message.toString())
-            null
+                response.request.newBuilder()
+                    .removeHeader(Constants.AUTHORIZATION)
+                    .header(
+                        Constants.AUTHORIZATION,
+                        "${Constants.BEARER} ${newToken.accessToken}"
+                    ).build()
+
+            } catch (e: Exception) {
+                Log.e(Constants.AUTHORIZATION, e.message.toString())
+                null
+            }
         }
+        return null
     }
 }
