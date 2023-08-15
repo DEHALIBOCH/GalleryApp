@@ -23,7 +23,6 @@ abstract class PhotoCaptureFragment(@LayoutRes contentLayoutId: Int) : FileCreat
 
     private lateinit var photoFromCameraUri: Uri
 
-
     /**
      * Проверяет были ли выданы permission требуемые для работы, возвращает true если все разрешения выданы
      */
@@ -68,7 +67,7 @@ abstract class PhotoCaptureFragment(@LayoutRes contentLayoutId: Int) : FileCreat
     /**
      * Лаунчер для запуска камеры и получения фотографии
      */
-    val takePictureResultLauncher = registerForActivityResult(
+    private val takePictureResultLauncher = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { isTaken ->
         if (!isTaken) {
