@@ -24,5 +24,9 @@ object Constants {
 
     const val LIMIT = 20
 
+    const val JPG = ".jpg"
+
+    const val TEMP_IMAGE = "tmp_img"
+
     const val IMAGE_LOADING_URL = "https://gallery.prod1.webant.ru/media/"
 }
