@@ -18,7 +18,7 @@ class PhotoRepositoryImpl @Inject constructor(
     private val photoApi: PhotoApi
 ) : PhotoRepository {
 
-    private fun getAllPhotosList(
+    override fun getAllPhotosList(
         new: Boolean?,
         popular: Boolean?,
         userId: Int?,
@@ -26,25 +26,13 @@ class PhotoRepositoryImpl @Inject constructor(
         limit: Int
     ) = photoApi.getPhotosList(
         new = new,
-        popular = new,
+        popular = popular,
         userId = userId,
         page = page,
         limit = limit,
     ).flatMap { photoResponseDto ->
         Single.just(photoResponseDto.toPhotoResponse())
     }
-
-    override fun getPhotosListByUserId(
-        userId: Int,
-        page: Int,
-        limit: Int
-    ) = getAllPhotosList(
-        new = null,
-        popular = null,
-        userId = userId,
-        page = page,
-        limit = limit,
-    )
 
     override fun getPhotosByNameList(
         name: String,

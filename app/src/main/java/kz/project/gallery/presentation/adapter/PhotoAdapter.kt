@@ -2,12 +2,13 @@ package kz.project.gallery.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import kz.project.domain.model.photo.Photo
 import kz.project.gallery.R
 
-class PhotoAdapter(private val photoItemType: PhotoItemType) : PagingDataAdapter<Photo, PhotoViewHolder>(DIFF_UTIL) {
+class PhotoAdapter(private val photoItemType: PhotoItemType) :
+    ListAdapter<Photo, PhotoViewHolder>(DIFF_UTIL) {
 
     private var onItemClickListener: ((Photo) -> Unit)? = null
 
@@ -16,16 +17,7 @@ class PhotoAdapter(private val photoItemType: PhotoItemType) : PagingDataAdapter
     }
 
 
-    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        getItem(position)?.let { photo ->
-            holder.bind(photo = photo)
-            holder.itemView.setOnClickListener {
-                onItemClickListener?.let { it(photo) }
-            }
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder = when (photoItemType) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (photoItemType) {
         is PhotoItemType.BigItemTwoColumns -> {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.photo_list_item_big, parent, false)
@@ -38,6 +30,15 @@ class PhotoAdapter(private val photoItemType: PhotoItemType) : PagingDataAdapter
                 .inflate(R.layout.photo_list_item_small, parent, false)
 
             PhotoViewHolder(view)
+        }
+    }
+
+    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
+        getItem(position)?.let { photo ->
+            holder.bind(photo = photo)
+            holder.photoImageView.setOnClickListener {
+                onItemClickListener?.let { it(photo) }
+            }
         }
     }
 

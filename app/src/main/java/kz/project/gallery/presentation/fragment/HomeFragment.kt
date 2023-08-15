@@ -5,14 +5,13 @@ import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.tabs.TabLayoutMediator
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentHomeBinding
 import kz.project.gallery.presentation.adapter.ViewPagerAdapterPhotosList
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
-import kz.project.gallery.presentation.viewmodel.photo.HomeViewModel
+import kz.project.gallery.presentation.viewmodel.home.HomeViewModel
 import javax.inject.Inject
 
 class HomeFragment : Fragment(R.layout.fragment_home) {

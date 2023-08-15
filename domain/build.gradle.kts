@@ -50,7 +50,4 @@ dependencies {
     implementation("com.google.dagger:dagger:2.44.2")
     kapt("com.google.dagger:dagger-compiler:2.44.2")
 
-    // Pagination
-    implementation("androidx.paging:paging-runtime-ktx:3.2.0")
-    implementation("androidx.paging:paging-rxjava3:3.2.0")
 }

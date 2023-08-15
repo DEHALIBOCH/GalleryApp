@@ -36,8 +36,8 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/photoImageView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:scaleType="centerCrop"
+            android:layout_height="360dp"
+            android:background="@color/grayLight"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbarDivider"

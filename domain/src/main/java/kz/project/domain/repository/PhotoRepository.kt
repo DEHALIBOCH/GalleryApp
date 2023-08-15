@@ -8,11 +8,13 @@ import java.io.File
 
 interface PhotoRepository {
 
-    fun getPhotosListByUserId(
-        userId: Int,
+    fun getAllPhotosList(
+        new: Boolean?,
+        popular: Boolean?,
+        userId: Int?,
         page: Int,
-        limit: Int
-    ): Single<PhotoResponse>
+        limit: Int,
+    ) : Single<PhotoResponse>
 
     /**
      * Получение фото исходя из определенного имени
@@ -32,4 +34,5 @@ interface PhotoRepository {
      * Отправка фото на сервер
      */
     fun postPhoto(file: File, photoUploadForm: PhotoUploadForm): Single<Photo>
+
 }

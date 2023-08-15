@@ -20,6 +20,8 @@ object Constants {
 
     const val PAGE = 1
 
+    const val MAX_PAGE = 4
+
     const val LIMIT = 20
 
     const val IMAGE_LOADING_URL = "https://gallery.prod1.webant.ru/media/"
