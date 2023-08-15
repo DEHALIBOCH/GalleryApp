@@ -18,7 +18,6 @@ class ProfileViewModel @Inject constructor(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
 ) : BaseViewModel() {
 
-
     private val _photosByUserIdLiveData = MutableLiveData<Resource<PhotoResponse>>()
     val photosByUserIdLiveData: LiveData<Resource<PhotoResponse>>
         get() = _photosByUserIdLiveData
