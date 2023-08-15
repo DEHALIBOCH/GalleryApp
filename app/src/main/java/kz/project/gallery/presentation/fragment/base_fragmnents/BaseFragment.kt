@@ -1,4 +1,4 @@
-package kz.project.gallery.presentation.fragment
+package kz.project.gallery.presentation.fragment.base_fragmnents
 
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
