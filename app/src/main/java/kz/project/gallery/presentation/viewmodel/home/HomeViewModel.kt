@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.photo.PhotoResponse
 import kz.project.domain.use_case.photo.GetPhotosListUseCase
 import kz.project.gallery.presentation.viewmodel.BaseViewModel
@@ -17,21 +18,38 @@ class HomeViewModel(
     private val getPhotosListUseCase: GetPhotosListUseCase,
 ) : BaseViewModel() {
 
-
     private val popular: Boolean? = if (isPopular) true else null
     private val new: Boolean? = if (isPopular) null else true
 
+    private var allPhotosResponse: PhotoResponse? = null
+    var photosPage = Constants.PAGE
+    var maxPhotosPage = Constants.MAX_PAGE
 
-    private val _photosLiveData = MutableLiveData<Resource<PhotoResponse>>()
-    val photosLiveData: LiveData<Resource<PhotoResponse>>
+    private val _photosLiveData = MutableLiveData<Resource<List<Photo>>>()
+    val photosLiveData: LiveData<Resource<List<Photo>>>
         get() = _photosLiveData
 
+    init {
+        getPagingPhotos()
+    }
 
-    fun getPhotos() {
+    /**
+     * Метод для получения фото, важно - при создании вью модели он будет вызван в init блоке
+     */
+    fun getPagingPhotos() = getPhotos(false)
+
+    fun refreshPhotos() {
+        photosPage = Constants.PAGE
+        allPhotosResponse = null
+        getPhotos(true)
+    }
+
+    private fun getPhotos(isRefreshing: Boolean) {
+
         _photosLiveData.value = Resource.Loading()
 
         getPhotosListUseCase.invoke(
-            page = Constants.PAGE,
+            page = photosPage,
             limit = Constants.LIMIT,
             popular = popular,
             new = new,
@@ -39,13 +57,36 @@ class HomeViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { photoResponse ->
-                    _photosLiveData.value = Resource.Success(photoResponse)
+                    _photosLiveData.value = handleResponse(photoResponse, isRefreshing)
                 },
                 { error ->
                     _photosLiveData.value = Resource.Error(error.localizedMessage ?: Constants.UNEXPECTED_ERROR)
                 }
             ).let(compositeDisposable::add)
     }
+
+
+    /**
+     * Обрабатывает ответ с сервера исходя из параметра isRefreshing.
+     * Если параметр isRefreshing == false, добавляет полученные фото в конец allPhotosResponse и возвращает его.
+     * @param isRefreshing - происходит ли refresh с помощью SwipeRefreshLayout.
+     */
+    private fun handleResponse(photoResponse: PhotoResponse, isRefreshing: Boolean): Resource<List<Photo>> =
+        if (!isRefreshing) {
+            photosPage++
+            maxPhotosPage = photoResponse.countOfPages
+            if (allPhotosResponse == null) {
+                allPhotosResponse = photoResponse
+            } else {
+                val oldPhotos = allPhotosResponse?.photos
+                val newPhotos = photoResponse.photos
+                oldPhotos?.addAll(newPhotos)
+            }
+            Resource.Success(allPhotosResponse?.photos ?: photoResponse.photos)
+        } else {
+            Resource.Success(photoResponse.photos)
+        }
+
 
     @Suppress("UNCHECKED_CAST")
     class Factory(
