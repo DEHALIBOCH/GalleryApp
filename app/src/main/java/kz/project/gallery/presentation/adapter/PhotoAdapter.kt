@@ -36,7 +36,7 @@ class PhotoAdapter(private val photoItemType: PhotoItemType) :
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         getItem(position)?.let { photo ->
             holder.bind(photo = photo)
-            holder.itemView.setOnClickListener {
+            holder.photoImageView.setOnClickListener {
                 onItemClickListener?.let { it(photo) }
             }
         }
