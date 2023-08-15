@@ -14,3 +14,12 @@ fun parseDate(dateCreate: String): String {
 
     return outputFormat.format(date)
 }
+
+/**
+ * Парсит текущие миллисекунды в дату по типу 12.12.2012
+ */
+fun parseDate(timestamp: Long) : String {
+    val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    val date = Date(timestamp)
+    return dateFormat.format(date)
+}
