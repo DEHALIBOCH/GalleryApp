@@ -1,32 +1,33 @@
 package kz.project.gallery.presentation.fragment
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
 import android.viewbinding.library.fragment.viewBinding
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationBarView
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentMainBinding
+import kz.project.gallery.presentation.fragment.base_fragmnents.PhotoCaptureFragment
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.user.UserViewModel
 import javax.inject.Inject
 
-
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : PhotoCaptureFragment(R.layout.fragment_main) {
 
     @Inject
     lateinit var factory: MultiViewModelFactory
     private val viewModel: UserViewModel by activityViewModels { factory }
 
     private val binding: FragmentMainBinding by viewBinding()
+    private lateinit var bottomSheetDialog: Dialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        bottomSheetDialog = createBottomSheetDialog(requireContext())
         addFragmentIfContainerIsEmpty()
         binding.bottomNavigationView.setOnItemSelectedListener(navigationListener)
     }
@@ -65,7 +67,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
             }
 
             R.id.photoBottomNavBar -> {
-                showBottomSheetDialog()
+                bottomSheetDialog.show()
                 false
             }
 
@@ -111,25 +113,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     }
 
-    /**
-     * Создаёт и показывает BottomSheetDialog для добавления нового тэга
-     */
-    private fun showBottomSheetDialog() {
-        val bottomSheetDialog = Dialog(requireContext())
-        bottomSheetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        bottomSheetDialog.setContentView(R.layout.bottom_sheet_dialog_modal_photo)
-
-        // TODO доработать функционал по кликам на кнопки
-
-        bottomSheetDialog.window?.apply {
-            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            setBackgroundDrawableResource(R.drawable.bottom_sheet_dialog_background)
-            attributes.windowAnimations = R.style.BottomSheetAnimation
-            setGravity(Gravity.BOTTOM)
-        }
-
-        bottomSheetDialog.show()
+    override fun photoCaptured(photoUri: Uri) {
+        bottomSheetDialog.dismiss()
+        goToPhotoCreatingFragment(photoUri)
     }
+
+    private fun goToPhotoCreatingFragment(photoUri: Uri) = requireActivity().supportFragmentManager.commit {
+        setReorderingAllowed(true)
+        replace<CreatePhotoFragment>(
+            R.id.mainActivityFragmentContainerView,
+            CreatePhotoFragment.FRAGMENT_TAG,
+            bundleOf(CreatePhotoFragment.PHOTO_URI to photoUri)
+        )
+        addToBackStack(null)
+    }
+
 
     companion object {
         const val FRAGMENT_TAG = "MainFragment"
