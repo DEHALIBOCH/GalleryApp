@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
 //        applicationId = "kz.project.domain"
-        minSdk = 28
+        minSdk = 29
         targetSdk = 33
 //        versionCode = 1
 //        versionName = "1.0"

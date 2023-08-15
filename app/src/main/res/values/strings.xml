@@ -60,4 +60,13 @@
     <string name="confirm_new_password">Confirm new password</string>
     <string name="you_can_delete_your_account">You can <font color="#CF497E">delete your account</font></string>
     <string name="sign_out">Sign out</string>
+    <string name="authorities">kz.project.gallery.fileprovider</string>
+    <string name="temp_images_dir">temp_images</string>
+    <string name="temp_image">temp_image.jpg</string>
+    <string name="no_permissions">Without permissions application will not work properly</string>
+    <string name="empty_photo_name">Photo name can\'t be empty</string>
+    <string name="empty_photo_description">Photo description can\'t be empty</string>
+    <string name="not_checked_new_or_popular_chip">At least one of the New or Popular must be checked</string>
+    <string name="something_went_wrong_pls_try_later">Something went wrong, please check your internet connection or try later</string>
+    <string name="successfully_uploaded">Photo successfully uploaded!</string>
 </resources>

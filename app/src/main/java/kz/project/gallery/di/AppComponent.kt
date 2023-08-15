@@ -3,6 +3,7 @@ package kz.project.gallery.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import kz.project.gallery.presentation.fragment.CreatePhotoFragment
 import kz.project.gallery.presentation.fragment.HomeFragment
 import kz.project.gallery.presentation.fragment.MainFragment
 import kz.project.gallery.presentation.fragment.PhotoDetailsFragment
@@ -17,7 +18,6 @@ import javax.inject.Singleton
 @[Singleton Component(modules = [AppBindsModule::class, DataModule::class, NetworkModule::class, PresentationModule::class])]
 interface AppComponent {
 
-    // TODO - DI!!!
 
     fun inject(fragment: SignInFragment)
     fun inject(fragment: SignUpFragment)
@@ -27,6 +27,7 @@ interface AppComponent {
     fun inject(fragment: PhotoListFragment)
     fun inject(fragment: PhotoDetailsFragment)
     fun inject(fragment: ProfileFragment)
+    fun inject(fragment: CreatePhotoFragment)
 
     val viewModelFactory: MultiViewModelFactory
 
