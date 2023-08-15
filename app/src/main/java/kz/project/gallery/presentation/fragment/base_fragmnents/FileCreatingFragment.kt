@@ -1,5 +1,6 @@
 package kz.project.gallery.presentation.fragment.base_fragmnents
 
+import android.content.Context
 import android.net.Uri
 import android.util.Log
 import androidx.annotation.LayoutRes
@@ -31,9 +32,9 @@ open class FileCreatingFragment(@LayoutRes contentLayoutId: Int) : Fragment(cont
         )
     }
 
-    protected fun createTemporaryImage(selectedImageUri: Uri?): File? = try {
+    protected fun createTemporaryImage(selectedImageUri: Uri?, context: Context): File? = try {
         selectedImageUri?.let {
-            val inputStream = requireContext().contentResolver.openInputStream(selectedImageUri)
+            val inputStream = context.contentResolver.openInputStream(selectedImageUri)
             val file = File.createTempFile(createNameForImage(), Constants.JPG, requireContext().cacheDir)
 
             file.outputStream().use { fileOutputStream ->
