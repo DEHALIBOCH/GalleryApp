@@ -1,6 +1,7 @@
 package kz.project.gallery.presentation.fragment
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -28,6 +29,10 @@ class CreatePhotoFragment : Fragment(R.layout.fragment_create_photo) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val photoUri = arguments?.getParcelable<Uri>(PHOTO_URI)
+
+        binding.imageViewPhoto.setImageURI(photoUri)
 
         // TODO убрать
         binding.chipAddNewTag.setOnClickListener {
@@ -108,5 +113,11 @@ class CreatePhotoFragment : Fragment(R.layout.fragment_create_photo) {
         setTextColor(requireContext().getColor(R.color.white))
         setCloseIconTintResource(R.color.white)
         setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16f)
+    }
+
+    companion object {
+
+        const val FRAGMENT_TAG = "CreatePhotoFragment"
+        const val PHOTO_URI = "Photo uri"
     }
 }
