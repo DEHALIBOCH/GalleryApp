@@ -13,10 +13,11 @@ import kz.project.gallery.utils.Constants
 
 class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+    val photoImageView: ShapeableImageView = itemView.findViewById(R.id.photoImageView)
+
     fun bind(photo: Photo) {
         val imageName = photo.image.name
         val loadingUrl = "${Constants.IMAGE_LOADING_URL}$imageName"
-        val photoImageView = itemView.findViewById<ShapeableImageView>(R.id.photoImageView)
         Glide.with(photoImageView)
             .load(loadingUrl)
             .placeholder(ColorDrawable(Color.TRANSPARENT))
