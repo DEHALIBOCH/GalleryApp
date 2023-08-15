@@ -60,4 +60,8 @@
     <string name="confirm_new_password">Confirm new password</string>
     <string name="you_can_delete_your_account">You can <font color="#CF497E">delete your account</font></string>
     <string name="sign_out">Sign out</string>
+    <string name="authorities">kz.project.gallery.fileprovider</string>
+    <string name="temp_images_dir">temp_images</string>
+    <string name="temp_image">temp_image.jpg</string>
+    <string name="no_permissions">Without permissions application will not work properly</string>
 </resources>
