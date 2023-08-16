@@ -29,4 +29,6 @@ object Constants {
     const val TEMP_IMAGE = "tmp_img"
 
     const val IMAGE_LOADING_URL = "https://gallery.prod1.webant.ru/media/"
+
+    const val SEARCH_QUERY_ERROR = "Search query error"
 }
