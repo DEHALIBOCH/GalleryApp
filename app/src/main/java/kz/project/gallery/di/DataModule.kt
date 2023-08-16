@@ -15,6 +15,7 @@ import kz.project.data.remote.PhotoApi
 import kz.project.data.remote.UserApi
 import kz.project.data.remote.dto.error.parser.ErrorParser
 import kz.project.data.repository.AccessTokenRepositoryImpl
+import kz.project.data.repository.CompressImageRepositoryImpl
 import kz.project.data.repository.LoginRepositoryImpl
 import kz.project.data.repository.PhotoRepositoryImpl
 import kz.project.data.repository.UserRepositoryImpl
@@ -24,6 +25,7 @@ import kz.project.domain.forms_validation.EmailValidator
 import kz.project.domain.forms_validation.PasswordValidator
 import kz.project.domain.forms_validation.UsernameValidator
 import kz.project.domain.repository.AccessTokenRepository
+import kz.project.domain.repository.CompressImageRepository
 import kz.project.domain.repository.LoginRepository
 import kz.project.domain.repository.PhotoRepository
 import kz.project.domain.repository.UserRepository
@@ -33,19 +35,22 @@ import kz.project.gallery.utils.Constants
 interface DataModule {
 
     @Binds
-    fun provideConfirmPasswordValidator(confirmPasswordValidatorImpl: ConfirmPasswordValidatorImpl): ConfirmPasswordValidator
+    fun bindConfirmPasswordValidator(confirmPasswordValidatorImpl: ConfirmPasswordValidatorImpl): ConfirmPasswordValidator
 
     @Binds
-    fun provideUsernameValidator(usernameValidatorImpl: UsernameValidatorImpl): UsernameValidator
+    fun bindUsernameValidator(usernameValidatorImpl: UsernameValidatorImpl): UsernameValidator
 
     @Binds
-    fun providePasswordValidator(passwordValidatorImpl: PasswordValidatorImpl): PasswordValidator
+    fun bindPasswordValidator(passwordValidatorImpl: PasswordValidatorImpl): PasswordValidator
 
     @Binds
-    fun provideEmailValidator(emailValidatorImpl: EmailValidatorImpl): EmailValidator
+    fun bindEmailValidator(emailValidatorImpl: EmailValidatorImpl): EmailValidator
 
     @Binds
-    fun provideBirthdayValidator(birthdayValidatorImpl: BirthdayValidatorImpl): BirthdayValidator
+    fun bindBirthdayValidator(birthdayValidatorImpl: BirthdayValidatorImpl): BirthdayValidator
+
+    @Binds
+    fun bindCompressImageRepository(compressImageRepositoryImpl: CompressImageRepositoryImpl): CompressImageRepository
 
 
     companion object {
@@ -69,7 +74,7 @@ interface DataModule {
             PhotoRepositoryImpl(photoApi)
 
         @Provides
-        fun provideUserRepository(userApi: UserApi, errorParser: ErrorParser) : UserRepository =
+        fun provideUserRepository(userApi: UserApi, errorParser: ErrorParser): UserRepository =
             UserRepositoryImpl(userApi, errorParser)
     }
 }
