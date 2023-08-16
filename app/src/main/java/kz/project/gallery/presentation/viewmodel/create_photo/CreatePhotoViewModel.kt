@@ -6,6 +6,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.photo.PhotoUploadForm
+import kz.project.domain.use_case.photo.CompressImageUseCase
 import kz.project.domain.use_case.photo.PostPhotoUseCase
 import kz.project.gallery.presentation.viewmodel.BaseViewModel
 import kz.project.gallery.utils.Constants
@@ -15,6 +16,7 @@ import javax.inject.Inject
 
 class CreatePhotoViewModel @Inject constructor(
     private val postPhotoUseCase: PostPhotoUseCase,
+    private val compressImageUseCase: CompressImageUseCase
 ) : BaseViewModel() {
 
     private val _postPhotoLiveData = MutableLiveData<Resource<Photo>>()
@@ -25,7 +27,9 @@ class CreatePhotoViewModel @Inject constructor(
 
         _postPhotoLiveData.value = Resource.Loading()
 
-        postPhotoUseCase.invoke(file, photoUploadForm)
+        val image = compressImageUseCase(file)
+
+        postPhotoUseCase.invoke(image, photoUploadForm)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
