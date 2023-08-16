@@ -156,6 +156,7 @@ class CreatePhotoFragment : FileCreatingFragment(R.layout.fragment_create_photo)
                 requireContext().getString(R.string.not_checked_new_or_popular_chip),
                 Toast.LENGTH_SHORT
             ).show()
+            flag = false
         }
 
         return flag
