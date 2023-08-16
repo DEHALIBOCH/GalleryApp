@@ -46,11 +46,13 @@ class PhotoAdapter(private val photoItemType: PhotoItemType) :
 
         val DIFF_UTIL = object : DiffUtil.ItemCallback<Photo>() {
 
-            override fun areItemsTheSame(oldItem: Photo, newItem: Photo) =
-                oldItem.id == newItem.id
+            override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
+               return oldItem.id == newItem.id
+            }
 
-            override fun areContentsTheSame(oldItem: Photo, newItem: Photo) =
-                oldItem == newItem
+            override fun areContentsTheSame(oldItem: Photo, newItem: Photo): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

@@ -61,7 +61,9 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
     private fun setupSwipeRefresh() = binding.swipeRefreshLayout.apply {
-        setOnRefreshListener { viewModel.refreshPhotos() }
+        setOnRefreshListener {
+            viewModel.refreshPhotos()
+        }
         setColorSchemeResources(R.color.mainPink)
         setProgressBackgroundColorSchemeResource(R.color.grayLight)
     }
@@ -84,7 +86,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 hideProgressBar()
                 showErrorNotification(false)
                 isLastPage = viewModel.photosPage == viewModel.maxPhotosPage
-                photoAdapter.submitList(resource.data)
+                photoAdapter.submitList(resource.data?.map { it.copy() })
                 if (isLastPage) removeRecyclerViewPadding()
             }
         }
@@ -120,7 +122,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
             val totalItemsCount = layoutManager.itemCount
 
             val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
-            val isAtLastItem = firstVisibleItemPosition + visibleItemsCount >= totalItemsCount
+            val isAtLastItem = firstVisibleItemPosition + visibleItemsCount >= totalItemsCount - 2
             val isNotAtBeginning = firstVisibleItemPosition >= 0
             val isTotalMoreThanVisible = totalItemsCount >= Constants.LIMIT
             val shouldPaginate =
