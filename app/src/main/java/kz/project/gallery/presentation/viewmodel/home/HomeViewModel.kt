@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.photo.PhotoResponse
+import kz.project.domain.use_case.photo.GetPhotosByNameUseCase
 import kz.project.domain.use_case.photo.GetPhotosListUseCase
 import kz.project.gallery.presentation.viewmodel.BaseViewModel
 import kz.project.gallery.utils.Constants
@@ -16,6 +17,7 @@ import kz.project.gallery.utils.Resource
 class HomeViewModel(
     private val isPopular: Boolean,
     private val getPhotosListUseCase: GetPhotosListUseCase,
+    private val getPhotosByNameUseCase: GetPhotosByNameUseCase,
 ) : BaseViewModel() {
 
     private val popular: Boolean? = if (isPopular) true else null
@@ -87,18 +89,42 @@ class HomeViewModel(
             Resource.Success(photoResponse.photos)
         }
 
+    /**
+     * Получение фото по имени
+     */
+    fun getPhotosByName(name: String) {
+
+        _photosLiveData.value = Resource.Loading()
+
+        getPhotosByNameUseCase.invoke(
+            name = name,
+            page = Constants.PAGE,
+            limit = Constants.LIMIT,
+        ).subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { photoResponse ->
+                    _photosLiveData.value = Resource.Success(photoResponse.photos)
+                },
+                { error ->
+                    _photosLiveData.value = Resource.Error(error.localizedMessage ?: Constants.UNEXPECTED_ERROR)
+                }
+            ).let(compositeDisposable::add)
+    }
 
     @Suppress("UNCHECKED_CAST")
     class Factory(
         private val popular: Boolean,
         private val getPhotosListUseCase: GetPhotosListUseCase,
+        private val getPhotosByNameUseCase: GetPhotosByNameUseCase,
     ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
                 return HomeViewModel(
                     isPopular = popular,
-                    getPhotosListUseCase = getPhotosListUseCase
+                    getPhotosListUseCase = getPhotosListUseCase,
+                    getPhotosByNameUseCase = getPhotosByNameUseCase
                 ) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
