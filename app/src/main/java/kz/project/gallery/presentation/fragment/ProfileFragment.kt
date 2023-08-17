@@ -99,7 +99,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun observeCurrentUser() {
 
-        viewModel.currentUser.observe(viewLifecycleOwner) { resource ->
+        viewModel.currentUserLiveData.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> Unit
 
