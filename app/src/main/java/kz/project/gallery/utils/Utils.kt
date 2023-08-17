@@ -1,5 +1,10 @@
 package kz.project.gallery.utils
 
+import android.content.Context
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import kz.project.gallery.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -18,8 +23,18 @@ fun parseDate(dateCreate: String): String {
 /**
  * Парсит текущие миллисекунды в дату по типу 12.12.2012
  */
-fun parseDate(timestamp: Long) : String {
+fun parseDate(timestamp: Long): String {
     val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     val date = Date(timestamp)
     return dateFormat.format(date)
 }
+
+/**
+ * Настраивает progressBar под дизайн
+ */
+fun createCircularProgressDrawable(context: Context, @ColorRes colorId: Int) =
+    CircularProgressDrawable(context).apply {
+        strokeWidth = context.resources.getDimensionPixelSize(R.dimen.progress_bar_stroke_width).toFloat()
+        centerRadius = context.resources.getDimensionPixelSize(R.dimen.progress_bar_radius).toFloat()
+        setColorSchemeColors(context.getColor(colorId))
+    }
