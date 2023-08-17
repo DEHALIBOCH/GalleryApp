@@ -35,4 +35,8 @@ class AccessTokenRepositoryImpl @Inject constructor(
     override fun getRefreshToken(key: String): String {
         return sharedPreferences.getString(key, "") ?: ""
     }
+
+    override fun deleteToken() {
+        return sharedPreferences.edit().clear().apply()
+    }
 }
