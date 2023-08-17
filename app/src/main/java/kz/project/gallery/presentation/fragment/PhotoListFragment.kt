@@ -39,6 +39,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     @Inject
     lateinit var getPhotosByNameUseCase: GetPhotosByNameUseCase
 
+//    TODO lazy
     private var popular: Boolean = false
 
     private val factory: HomeViewModel.Factory by lazy {
@@ -96,9 +97,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
     private fun setupSwipeRefresh() = binding.swipeRefreshLayout.apply {
-        setOnRefreshListener {
-            viewModel.refreshPhotos()
-        }
+        setOnRefreshListener { viewModel.refreshPhotos() }
         setColorSchemeResources(R.color.mainPink)
         setProgressBackgroundColorSchemeResource(R.color.grayLight)
     }
@@ -125,7 +124,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 showErrorNotification(false)
                 isLastPage = viewModel.photosPage == viewModel.maxPhotosPage
                 photoAdapter.submitList(resource.data?.map { it.copy() })
-                if (isLastPage) removeRecyclerViewPadding()
+//                if (isLastPage) removeRecyclerViewPadding()
             }
         }
     }

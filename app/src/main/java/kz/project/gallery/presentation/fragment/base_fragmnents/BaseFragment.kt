@@ -12,8 +12,7 @@ import javax.inject.Inject
  */
 open class BaseFragment<ViewModel>(@LayoutRes contentLayoutId: Int) : Fragment(contentLayoutId) {
 
-    @Inject
-    lateinit var factory: MultiViewModelFactory
+    open lateinit var factory: MultiViewModelFactory
     protected val viewModel: ViewModel by viewModels { factory }
 
 }

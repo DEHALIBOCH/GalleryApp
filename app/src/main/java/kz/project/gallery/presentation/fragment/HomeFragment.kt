@@ -52,6 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
      * Настраивает searchView
      */
     private fun setupSearchView() = binding.apply {
+//        TODO move subscribe to viewModel
         disposable = searchEditText.textChanges()
             .debounce(300, TimeUnit.MILLISECONDS)
             .observeOn(Schedulers.io())
