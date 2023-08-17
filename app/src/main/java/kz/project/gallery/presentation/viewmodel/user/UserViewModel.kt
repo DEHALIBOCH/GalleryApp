@@ -48,11 +48,11 @@ class UserViewModel @Inject constructor(
 
     fun getUserById(userId: String) {
         val digits = userId.replace("\\D+".toRegex(), "")
-        val lastDigit = digits.lastOrNull()?.toString()?.toIntOrNull() ?: -1
+        val id = digits.toInt()
 
         _userById.value = Resource.Loading()
 
-        getUserByIdUseCase.invoke(id = lastDigit)
+        getUserByIdUseCase.invoke(id = id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
