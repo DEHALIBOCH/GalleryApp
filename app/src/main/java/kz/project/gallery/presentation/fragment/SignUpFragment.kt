@@ -17,6 +17,7 @@ import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.RegistrationForm
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
@@ -141,7 +142,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             parentFragmentManager.popBackStack()
         }
 
-        binding.signInButton.setOnClickListener {
+        signInButton.setOnClickListener {
             val fragment = parentFragmentManager.findFragmentByTag(SignInFragment.FRAGMENT_TAG)
 
             if (fragment is SignInFragment) {
@@ -156,9 +157,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             }
         }
 
-        binding.signUpButton.setOnClickListener {
+        signUpButton.setOnClickListener {
             registerUser()
         }
+
+        progressBar.root.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainPink)
     }
 
 
