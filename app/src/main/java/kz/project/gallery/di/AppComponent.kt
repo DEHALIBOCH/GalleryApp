@@ -9,6 +9,7 @@ import kz.project.gallery.presentation.fragment.MainFragment
 import kz.project.gallery.presentation.fragment.PhotoDetailsFragment
 import kz.project.gallery.presentation.fragment.PhotoListFragment
 import kz.project.gallery.presentation.fragment.ProfileFragment
+import kz.project.gallery.presentation.fragment.SettingsFragment
 import kz.project.gallery.presentation.fragment.SignInFragment
 import kz.project.gallery.presentation.fragment.SignUpFragment
 import kz.project.gallery.presentation.fragment.SplashFragment
@@ -28,6 +29,7 @@ interface AppComponent {
     fun inject(fragment: PhotoDetailsFragment)
     fun inject(fragment: ProfileFragment)
     fun inject(fragment: CreatePhotoFragment)
+    fun inject(fragment: SettingsFragment)
 
     val viewModelFactory: MultiViewModelFactory
 
