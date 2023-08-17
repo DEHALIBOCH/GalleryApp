@@ -17,6 +17,29 @@ class BirthdayValidatorImpl @Inject constructor() : BirthdayValidator {
             )
         }
 
+        val birthdayNumbers = birthday.split("-").map { it.toInt() }
+
+        if (birthdayNumbers[0] !in 1..31) {
+            return ValidationResult(
+                successful = false,
+                errorMessage = "This is not valid day"
+            )
+        }
+
+        if (birthdayNumbers[1] !in 1..12) {
+            return ValidationResult(
+                successful = false,
+                errorMessage = "This is not valid month"
+            )
+        }
+
+        if (birthdayNumbers[2] < 1900) {
+            return ValidationResult(
+                successful = false,
+                errorMessage = "This is not valid year"
+            )
+        }
+
         return ValidationResult(
             successful = true
         )
