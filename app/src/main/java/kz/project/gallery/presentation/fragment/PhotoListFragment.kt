@@ -27,6 +27,7 @@ import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.RecyclerViewScrollListener
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.SearchQueryEventBus
+import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
@@ -66,10 +67,15 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
 
         popular = arguments?.getBoolean(POPULAR) ?: false
 
+        setupProgressBar()
         observePhotosResult()
         setupRecyclerView()
         setupSwipeRefresh()
         observeSearchQuery()
+    }
+
+    private fun setupProgressBar() = binding.apply {
+        progressBar.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainGray)
     }
 
     /**
