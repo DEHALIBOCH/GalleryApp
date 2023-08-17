@@ -2,22 +2,16 @@ package kz.project.gallery.presentation.fragment
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.SpannableStringBuilder
 import android.text.TextWatcher
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.jakewharton.rxbinding4.widget.textChanges
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentSignUpBinding
@@ -26,8 +20,6 @@ import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.RegistrationForm
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.createCircularProgressDrawable
-import java.util.Calendar
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -97,10 +89,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    parentFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
-                    }
+                    goToSignInFragment()
                 }
 
                 is Resource.Error -> {
@@ -110,6 +99,21 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 }
             }
         })
+    }
+
+    private fun goToSignInFragment() {
+        val fragment = parentFragmentManager.findFragmentByTag(SignInFragment.FRAGMENT_TAG)
+
+        if (fragment is SignInFragment) {
+            parentFragmentManager.popBackStack()
+            return
+        }
+
+        parentFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
+            addToBackStack(null)
+        }
     }
 
     /**
@@ -153,18 +157,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
 
         signInButton.setOnClickListener {
-            val fragment = parentFragmentManager.findFragmentByTag(SignInFragment.FRAGMENT_TAG)
-
-            if (fragment is SignInFragment) {
-                parentFragmentManager.popBackStack()
-                return@setOnClickListener
-            }
-
-            parentFragmentManager.commit {
-                setReorderingAllowed(true)
-                replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
-                addToBackStack(null)
-            }
+            goToSignInFragment()
         }
 
         signUpButton.setOnClickListener {
