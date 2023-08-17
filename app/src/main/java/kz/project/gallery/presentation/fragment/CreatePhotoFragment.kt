@@ -24,6 +24,7 @@ import kz.project.gallery.presentation.fragment.base_fragmnents.FileCreatingFrag
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.create_photo.CreatePhotoViewModel
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import kz.project.gallery.utils.parseDate
 import java.util.Date
 import javax.inject.Inject
@@ -90,7 +91,7 @@ class CreatePhotoFragment : FileCreatingFragment(R.layout.fragment_create_photo)
     private fun isWidgetsEnabled(flag: Boolean) = binding.apply {
         toolbarArrowBack.root.isEnabled = flag
         toolbarAddPhoto.isEnabled = flag
-        photoNameEditText.isEnabled  = flag
+        photoNameEditText.isEnabled = flag
         photoDescriptionEditText.isEnabled = flag
         chipIsNew.isEnabled = flag
         chipIsPopular.isEnabled = flag
@@ -115,6 +116,8 @@ class CreatePhotoFragment : FileCreatingFragment(R.layout.fragment_create_photo)
 
             showBottomSheetDialog()
         }
+
+        progressBar.root.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainPink)
     }
 
 
