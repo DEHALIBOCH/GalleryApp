@@ -165,7 +165,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     companion object {
-        const val SAVE_BACK_STACK_PROFILE = "SAVE_BACK_STACK_PROFILE"
         const val FRAGMENT_TAG = "ProfileFragment"
     }
 }
