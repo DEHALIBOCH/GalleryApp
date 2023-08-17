@@ -1,10 +1,14 @@
 package kz.project.gallery.presentation.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.SpannableStringBuilder
+import android.text.TextWatcher
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -13,6 +17,7 @@ import androidx.lifecycle.Observer
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentSignUpBinding
@@ -21,6 +26,8 @@ import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.RegistrationForm
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.createCircularProgressDrawable
+import java.util.Calendar
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -31,7 +38,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private val viewModel: LoginViewModel by viewModels { factory }
 
     private val binding: FragmentSignUpBinding by viewBinding()
-    private lateinit var disposable: Disposable
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -172,19 +178,32 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun setupBirthdayEditText() = binding.apply {
-        disposable = birthdayEditText.textChanges()
-            .skipInitialValue()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { event ->
+        birthdayEditText.addTextChangedListener(object : TextWatcher {
+            private var current = ""
 
-                },
-                {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.toString() != current) {
+                    val userInput = s.toString().replace("[^\\d.]".toRegex(), "")
+                    val sb = StringBuilder(userInput)
+                    if (userInput.length >= 3) {
+                        sb.insert(2, "-")
+                    }
+                    if (userInput.length >= 6) {
+                        sb.insert(5, "-")
+                    }
+                    if (sb.toString() != current) {
+                        current = sb.toString()
+                        binding.birthdayEditText.setText(current)
+                        binding.birthdayEditText.setSelection(current.length)
+                    }
                 }
-            )
+            }
+        })
     }
-
 
     /**
      *  Отправляет RegistrationForm в функцию ViewModel для валидации полей, при успешной валидации
@@ -239,10 +258,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
      */
     private fun getInputUsername() = binding.usernameEditText.text.toString()
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposable.dispose()
-    }
 
     companion object {
         const val FRAGMENT_TAG = "SignUpFragment"
