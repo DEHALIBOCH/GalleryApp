@@ -29,7 +29,7 @@ class ProfileViewModel @Inject constructor(
     private val validateConfirmPasswordUseCase: ValidateConfirmPasswordUseCase,
 ) : BaseViewModel() {
 
-    var currentUser : User? = null
+    var currentUser: User? = null
 
     private val _photosByUserIdLiveData = MutableLiveData<Resource<PhotoResponse>>()
     val photosByUserIdLiveData: LiveData<Resource<PhotoResponse>>
@@ -49,6 +49,10 @@ class ProfileViewModel @Inject constructor(
     val passwordUpdateValidationResult: LiveData<Resource<UpdatePasswordValidationForm>>
         get() = _passwordUpdateValidationResult
 
+
+    private val _deleteAccountLiveData = MutableLiveData<Resource<String>>()
+    val deleteAccountLiveData: LiveData<Resource<String>>
+        get() = _deleteAccountLiveData
 
     fun validateUpdatePassword(currentUserId: Int, updatePasswordValidationForm: UpdatePasswordValidationForm) {
 
@@ -152,4 +156,22 @@ class ProfileViewModel @Inject constructor(
      * Удаляет из sharedPrefs данные об авторизованном пользователе.
      */
     fun signOut() = deleteTokenUseCase.invoke()
+
+    fun deleteAccount(currentUserId: Int) {
+
+        _deleteAccountLiveData.value = Resource.Loading()
+
+        deleteUserUseCase.invoke(currentUserId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    signOut()
+                    _deleteAccountLiveData.value = Resource.Success(null)
+                },
+                {
+                    _deleteAccountLiveData.value = Resource.Error(it.message ?: Constants.UNEXPECTED_ERROR)
+                },
+            ).let(compositeDisposable::add)
+    }
 }
