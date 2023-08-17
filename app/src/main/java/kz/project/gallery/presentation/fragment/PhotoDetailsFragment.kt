@@ -87,7 +87,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
     private fun setupWidgets(photo: Photo, user: User?) = binding.apply {
 
         val loadingUrl = "${Constants.IMAGE_LOADING_URL}${photo.image.name}"
-        Glide.with(requireActivity())
+        Glide.with(requireContext())
             .load(loadingUrl)
             .placeholder(ColorDrawable(Color.TRANSPARENT))
             .fitCenter()
