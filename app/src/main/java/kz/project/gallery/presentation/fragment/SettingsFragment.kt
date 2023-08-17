@@ -61,7 +61,7 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
         observePasswordUpdateValidation()
         observePasswordUpdate()
 
-        // TODO работа над удалением пользователя
+
     }
 
     /**

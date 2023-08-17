@@ -28,7 +28,6 @@ class ProfileViewModel @Inject constructor(
     private val validatePasswordUseCase: ValidatePasswordUseCase,
     private val validateConfirmPasswordUseCase: ValidateConfirmPasswordUseCase,
 ) : BaseViewModel() {
-    // TODO работа над удалением пользователя
 
     var currentUser : User? = null
 
