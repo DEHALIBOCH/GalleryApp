@@ -20,6 +20,7 @@ import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.user.UserViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
 
@@ -42,15 +43,17 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
 
         val photo = arguments?.getSerializable(PHOTO_TAG) as? Photo
 
-        setupBackButton()
+        setupWidgets()
 
         observeUserResult(photo)
     }
 
-    private fun setupBackButton() = binding.apply {
+    private fun setupWidgets() = binding.apply {
         toolbarArrowBack.root.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
+        loadingProgressBar.root.indeterminateDrawable =
+            createCircularProgressDrawable(requireContext(), R.color.mainPink)
     }
 
     private fun observeUserResult(photo: Photo?) = photo?.let {
