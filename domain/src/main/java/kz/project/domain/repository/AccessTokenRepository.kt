@@ -28,4 +28,9 @@ interface AccessTokenRepository {
      */
     fun getRefreshToken(key: String): String
 
+    /**
+     * Удаляет данные о Auth Token и RefreshToken
+     */
+    fun deleteToken()
+
 }
