@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
@@ -37,7 +38,6 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
 
     private val binding: FragmentSettingsBinding by viewBinding()
     private lateinit var bottomSheetDialog: Dialog
-    private lateinit var alertDialog: AlertDialog
     private var currentUser: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,6 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
 
         bottomSheetDialog = createBottomSheetDialog(requireContext())
-        alertDialog = createAlertDialog(requireContext())
 
         setupWidgets()
 
@@ -60,8 +59,39 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
         observeUserResult()
         observePasswordUpdateValidation()
         observePasswordUpdate()
+        observeDeleteAccount()
+    }
 
+    /**
+     * Обсервит состояние удаления аккаунта
+     */
+    private fun observeDeleteAccount() {
+        viewModel.deleteAccountLiveData.observe(viewLifecycleOwner) { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    showProgressBar(true)
+                }
 
+                is Resource.Error -> {
+                    showProgressBar(false)
+                    Toast.makeText(
+                        requireContext(),
+                        requireContext().getString(R.string.something_went_wrong_pls_try_later),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                is Resource.Success -> {
+                    showProgressBar(false)
+                    Toast.makeText(
+                        requireContext(),
+                        requireContext().getString(R.string.account_successfully_deleted),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    goToWelcomeFragment()
+                }
+            }
+        }
     }
 
     /**
@@ -78,7 +108,14 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
         }
 
         signOutTextView.setOnClickListener {
-            alertDialog.show()
+            createAlertDialog(
+                context = requireContext(),
+                title = R.string.sign_out,
+                message = R.string.are_you_sure_to_sign_out
+            ) {
+                viewModel.signOut()
+                goToWelcomeFragment()
+            }.show()
         }
 
         profileAvatarImageView.root.setOnClickListener {
@@ -87,6 +124,18 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
 
         toolbarSave.setOnClickListener {
             updateUserPassword()
+        }
+
+        deleteAccountTextView.setOnClickListener {
+            currentUser?.let {
+                createAlertDialog(
+                    context = requireContext(),
+                    title = R.string.delete_account,
+                    message = R.string.are_you_sure_to_delete_account
+                ) {
+                    viewModel.deleteAccount(it.id)
+                }.show()
+            }
         }
 
         loadingProgressBar.indeterminateDrawable =
@@ -226,14 +275,18 @@ class SettingsFragment : PhotoCaptureFragment(R.layout.fragment_settings) {
     /**
      * Создает AlertDialog который, показывается когда user, нажимает на sign out
      */
-    private fun createAlertDialog(context: Context): AlertDialog = AlertDialog.Builder(context).apply {
+    private fun createAlertDialog(
+        context: Context,
+        @StringRes title: Int,
+        @StringRes message: Int,
+        positiveButtonAction: () -> Unit,
+    ): AlertDialog = AlertDialog.Builder(context).apply {
 
-        setTitle(context.getString(R.string.sign_out))
-        setMessage(context.getString(R.string.sure_to_sign_out))
+        setTitle(context.getString(title))
+        setMessage(context.getString(message))
 
         setPositiveButton(context.getString(R.string.yes)) { dialog, _ ->
-            viewModel.signOut()
-            goToWelcomeFragment()
+            positiveButtonAction.invoke()
             dialog.dismiss()
         }
         setNegativeButton(context.getString(R.string.no)) { dialog, _ ->
