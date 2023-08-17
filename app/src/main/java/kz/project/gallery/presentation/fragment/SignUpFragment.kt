@@ -10,6 +10,9 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentSignUpBinding
@@ -28,6 +31,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private val viewModel: LoginViewModel by viewModels { factory }
 
     private val binding: FragmentSignUpBinding by viewBinding()
+    private lateinit var disposable: Disposable
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -162,6 +166,23 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         }
 
         progressBar.root.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainPink)
+
+        setupBirthdayEditText()
+
+    }
+
+    private fun setupBirthdayEditText() = binding.apply {
+        disposable = birthdayEditText.textChanges()
+            .skipInitialValue()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { event ->
+
+                },
+                {
+
+                }
+            )
     }
 
 
@@ -220,6 +241,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
     override fun onDestroy() {
         super.onDestroy()
+        disposable.dispose()
     }
 
     companion object {
