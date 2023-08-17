@@ -96,7 +96,9 @@
                 style="@style/MyWidget.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:inputType="number"
+                android:maxEms="10"
+                android:maxLength="10" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
