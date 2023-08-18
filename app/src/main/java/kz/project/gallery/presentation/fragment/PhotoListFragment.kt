@@ -39,7 +39,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     @Inject
     lateinit var getPhotosByNameUseCase: GetPhotosByNameUseCase
 
-//    TODO lazy
+    //    TODO lazy
     private var popular: Boolean = false
 
     private val factory: HomeViewModel.Factory by lazy {
@@ -124,7 +124,6 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 showErrorNotification(false)
                 isLastPage = viewModel.photosPage == viewModel.maxPhotosPage
                 photoAdapter.submitList(resource.data?.map { it.copy() })
-//                if (isLastPage) removeRecyclerViewPadding()
             }
         }
     }
@@ -132,8 +131,6 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     private fun hideSwipeRefresh() = binding.apply {
         swipeRefreshLayout.isRefreshing = false
     }
-
-    private fun removeRecyclerViewPadding() = binding.recyclerView.setPadding(0, 0, 0, 0)
 
     private val recyclerViewScrollListener = object : RecyclerViewScrollListener(
         { viewModel.getPagingPhotos() }
@@ -143,8 +140,9 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         override fun isLastPage(): Boolean = isLastPage
     }
 
-    private fun showErrorNotification(flag: Boolean) {
-        binding.loadingError.isVisible = flag
+    private fun showErrorNotification(flag: Boolean) = binding.apply {
+        loadingError.isVisible = flag
+        recyclerView.isVisible = !flag
     }
 
     private fun hideProgressBar() {
