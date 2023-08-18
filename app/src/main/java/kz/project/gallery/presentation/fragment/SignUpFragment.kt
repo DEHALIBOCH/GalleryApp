@@ -1,6 +1,8 @@
 package kz.project.gallery.presentation.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.Toast
@@ -17,6 +19,7 @@ import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.presentation.viewmodel.signin_signup.RegistrationForm
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
@@ -86,10 +89,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                         Toast.LENGTH_SHORT
                     ).show()
 
-                    parentFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
-                    }
+                    goToSignInFragment()
                 }
 
                 is Resource.Error -> {
@@ -99,6 +99,21 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 }
             }
         })
+    }
+
+    private fun goToSignInFragment() {
+        val fragment = parentFragmentManager.findFragmentByTag(SignInFragment.FRAGMENT_TAG)
+
+        if (fragment is SignInFragment) {
+            parentFragmentManager.popBackStack()
+            return
+        }
+
+        parentFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
+            addToBackStack(null)
+        }
     }
 
     /**
@@ -141,26 +156,47 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             parentFragmentManager.popBackStack()
         }
 
-        binding.signInButton.setOnClickListener {
-            val fragment = parentFragmentManager.findFragmentByTag(SignInFragment.FRAGMENT_TAG)
-
-            if (fragment is SignInFragment) {
-                parentFragmentManager.popBackStack()
-                return@setOnClickListener
-            }
-
-            parentFragmentManager.commit {
-                setReorderingAllowed(true)
-                replace<SignInFragment>(R.id.mainActivityFragmentContainerView)
-                addToBackStack(null)
-            }
+        signInButton.setOnClickListener {
+            goToSignInFragment()
         }
 
-        binding.signUpButton.setOnClickListener {
+        signUpButton.setOnClickListener {
             registerUser()
         }
+
+        progressBar.root.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainPink)
+
+        setupBirthdayEditText()
+
     }
 
+    private fun setupBirthdayEditText() = binding.apply {
+        birthdayEditText.addTextChangedListener(object : TextWatcher {
+            private var current = ""
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.toString() != current) {
+                    val userInput = s.toString().replace("[^\\d.]".toRegex(), "")
+                    val sb = StringBuilder(userInput)
+                    if (userInput.length >= 3) {
+                        sb.insert(2, "-")
+                    }
+                    if (userInput.length >= 6) {
+                        sb.insert(5, "-")
+                    }
+                    if (sb.toString() != current) {
+                        current = sb.toString()
+                        binding.birthdayEditText.setText(current)
+                        binding.birthdayEditText.setSelection(current.length)
+                    }
+                }
+            }
+        })
+    }
 
     /**
      *  Отправляет RegistrationForm в функцию ViewModel для валидации полей, при успешной валидации
@@ -215,9 +251,6 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
      */
     private fun getInputUsername() = binding.usernameEditText.text.toString()
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
     companion object {
         const val FRAGMENT_TAG = "SignUpFragment"

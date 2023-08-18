@@ -36,13 +36,8 @@ object Constants {
 
     const val OLD_IS_PASSWORD_INCORRECT = "oldPassword is incorrect"
 
+    const val OLD_PASSWORD_INCORRECT = "Old password is incorrect"
+
     const val PASSWORD_UPDATE_SUCCESSFUL = "Successful password update"
 
-    const val PHOTOS_PAGE_SIZE = 20
-
-    const val PHOTOS_PREFETCH_DISTANCE = 5
-
-    const val PHOTOS_MAX_SIZE = 30
-
-    const val PHOTOS_INITIAL_LOAD_SIZE = 40
 }

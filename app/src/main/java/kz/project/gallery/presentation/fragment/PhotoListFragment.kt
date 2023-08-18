@@ -27,6 +27,7 @@ import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.RecyclerViewScrollListener
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.SearchQueryEventBus
+import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
@@ -38,7 +39,8 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     @Inject
     lateinit var getPhotosByNameUseCase: GetPhotosByNameUseCase
 
-    private var popular: Boolean = false
+
+    private val popular: Boolean by lazy { arguments?.getBoolean(POPULAR) ?: false }
 
     private val factory: HomeViewModel.Factory by lazy {
         HomeViewModel.Factory(
@@ -64,12 +66,15 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        popular = arguments?.getBoolean(POPULAR) ?: false
-
+        setupProgressBar()
         observePhotosResult()
         setupRecyclerView()
         setupSwipeRefresh()
         observeSearchQuery()
+    }
+
+    private fun setupProgressBar() = binding.apply {
+        progressBar.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainGray)
     }
 
     /**
@@ -90,9 +95,7 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
 
     private fun setupSwipeRefresh() = binding.swipeRefreshLayout.apply {
-        setOnRefreshListener {
-            viewModel.refreshPhotos()
-        }
+        setOnRefreshListener { viewModel.refreshPhotos() }
         setColorSchemeResources(R.color.mainPink)
         setProgressBackgroundColorSchemeResource(R.color.grayLight)
     }
@@ -119,7 +122,6 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
                 showErrorNotification(false)
                 isLastPage = viewModel.photosPage == viewModel.maxPhotosPage
                 photoAdapter.submitList(resource.data?.map { it.copy() })
-                if (isLastPage) removeRecyclerViewPadding()
             }
         }
     }
@@ -127,8 +129,6 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     private fun hideSwipeRefresh() = binding.apply {
         swipeRefreshLayout.isRefreshing = false
     }
-
-    private fun removeRecyclerViewPadding() = binding.recyclerView.setPadding(0, 0, 0, 0)
 
     private val recyclerViewScrollListener = object : RecyclerViewScrollListener(
         { viewModel.getPagingPhotos() }
@@ -138,8 +138,9 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         override fun isLastPage(): Boolean = isLastPage
     }
 
-    private fun showErrorNotification(flag: Boolean) {
-        binding.loadingError.isVisible = flag
+    private fun showErrorNotification(flag: Boolean) = binding.apply {
+        loadingError.isVisible = flag
+        recyclerView.isVisible = !flag
     }
 
     private fun hideProgressBar() {

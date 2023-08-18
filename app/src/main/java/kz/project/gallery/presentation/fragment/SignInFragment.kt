@@ -17,6 +17,7 @@ import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.signin_signup.AuthenticationForm
 import kz.project.gallery.presentation.viewmodel.signin_signup.LoginViewModel
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
@@ -78,6 +79,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         signInButton.setOnClickListener {
             authenticateUser()
         }
+
+        progressBar.root.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainPink)
     }
 
     /**

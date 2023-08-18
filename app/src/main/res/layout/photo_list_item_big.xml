@@ -15,6 +15,6 @@
         android:foreground="?attr/selectableItemBackground"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/Widget.MyShapeableImage"
-        tools:src="@drawable/rectangle" />
+        tools:src="@tools:sample/avatars" />
 
 </FrameLayout>

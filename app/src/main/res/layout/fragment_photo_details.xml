@@ -58,9 +58,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
+            android:maxWidth="250dp"
             android:textColor="@color/blackText"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/viewsCountTextView"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/photoImageView"
@@ -85,11 +87,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:text="@string/views_count_plug"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/photoNameTextView"
             app:layout_constraintEnd_toStartOf="@id/viewsIconImageView"
-            app:layout_constraintTop_toTopOf="@id/photoNameTextView"
-            android:text="@string/views_count_plug" />
+            app:layout_constraintTop_toTopOf="@id/photoNameTextView" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/viewsIconImageView"

@@ -5,7 +5,7 @@ import kz.project.data.remote.dto.error.ApiException
 import kz.project.data.remote.dto.error.error_model.Error
 import kz.project.data.remote.dto.error.error_model.RegistrationErrorDetail
 import com.google.gson.Gson
-import kz.project.data.remote.dto.error.error_model.UpdatePasswordError
+import kz.project.data.remote.dto.error.error_model.UpdatePasswordErrorDto
 import javax.inject.Inject
 
 /**
@@ -40,14 +40,18 @@ class ErrorParser @Inject constructor(
      */
     fun parsePasswordUpdateError(errorBody: String?): Throwable {
         return try {
-            val errorDetail = gson.fromJson(errorBody, UpdatePasswordError::class.java)
+            val errorDetail = gson.fromJson(errorBody, UpdatePasswordErrorDto::class.java)
             return when (errorDetail.detail) {
                 Constants.NOTICE_TRYING_TO_ACCESS -> {
                     ApiException(Constants.PASSWORD_UPDATE_SUCCESSFUL)
                 }
 
+                Constants.OLD_IS_PASSWORD_INCORRECT -> {
+                    ApiException(Constants.OLD_PASSWORD_INCORRECT)
+                }
+
                 else -> {
-                    ApiException(errorDetail.detail ?: Constants.UNEXPECTED_ERROR)
+                    Exception(errorDetail.detail ?: Constants.UNEXPECTED_ERROR)
                 }
             }
         } catch (e: Exception) {

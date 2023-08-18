@@ -69,4 +69,10 @@
     <string name="not_checked_new_or_popular_chip">At least one of the New or Popular must be checked</string>
     <string name="something_went_wrong_pls_try_later">Something went wrong, please check your internet connection or try later</string>
     <string name="successfully_uploaded">Photo successfully uploaded!</string>
+    <string name="are_you_sure_to_sign_out">Are you sure you want to sign out?</string>
+    <string name="are_you_sure_to_delete_account">Are you sure you want to delete account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="account_successfully_deleted">Your account has been successfully deleted</string>
+    <string name="delete_account">Account deleting</string>
 </resources>

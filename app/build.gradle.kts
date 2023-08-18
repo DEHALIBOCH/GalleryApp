@@ -59,6 +59,8 @@ dependencies {
 
     // Glide
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation ("com.github.bumptech.glide:annotations:4.15.1")
+    implementation ("com.github.bumptech.glide:okhttp3-integration:4.15.1")
     //noinspection KaptUsageInsteadOfKsp
     kapt("com.github.bumptech.glide:compiler:4.15.1")
 

@@ -14,7 +14,7 @@ import java.util.Date
 import java.util.Locale
 
 /**
- * Базовый класс для фрагментов, в которых вынесена логика работы по созданию файлов
+ * Базовый класс для фрагментов, в который вынесена логика работы по созданию файлов
  */
 open class FileCreatingFragment(@LayoutRes contentLayoutId: Int) : Fragment(contentLayoutId) {
 

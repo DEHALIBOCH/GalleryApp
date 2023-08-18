@@ -28,5 +28,4 @@ interface AppBindsModule {
     @[Binds IntoMap ViewModelKey(CreatePhotoViewModel::class)]
     fun createPhotoViewModel(createPhotoViewModel: CreatePhotoViewModel): ViewModel
 
-
 }

@@ -3,6 +3,7 @@ package kz.project.gallery.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import android.viewbinding.library.fragment.viewBinding
+import android.widget.ProgressBar
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -20,6 +21,7 @@ import kz.project.gallery.presentation.adapter.PhotoAdapter
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.profile.ProfileViewModel
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
 
@@ -32,7 +34,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val binding: FragmentProfileBinding by viewBinding()
 
-    // TODO много общих полей с PhotoListFragment, нужно создать базовый класс и вынести из туда
     private lateinit var photoAdapter: PhotoAdapter
     private var isAlreadyLoaded = false
 
@@ -98,7 +99,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private fun observeCurrentUser() {
 
-        viewModel.currentUser.observe(viewLifecycleOwner) { resource ->
+        viewModel.currentUserLiveData.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> Unit
 
@@ -133,7 +134,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
      * Настраивает функционал кнопок
      */
     private fun setupButtons() = binding.apply {
-        // TODO
+
+        val progressBar = loadingProgressBar.root.findViewById<ProgressBar>(R.id.progressBarInLoadingProgressBar)
+        progressBar.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainGray)
+
         toolbarSettingsButton.root.setOnClickListener(::goToSettingsFragment)
     }
 
@@ -161,7 +165,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     companion object {
-        const val SAVE_BACK_STACK_PROFILE = "SAVE_BACK_STACK_PROFILE"
         const val FRAGMENT_TAG = "ProfileFragment"
     }
 }

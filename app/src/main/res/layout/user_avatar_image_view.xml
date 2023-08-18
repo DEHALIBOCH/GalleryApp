@@ -4,4 +4,6 @@
     style="@style/MyWidget.CircleButtonStroke"
     android:layout_width="100dp"
     android:layout_height="100dp"
+    tools:src="@tools:sample/avatars"
+    xmlns:tools="http://schemas.android.com/tools"
     app:srcCompat="@drawable/profile_avatar" />

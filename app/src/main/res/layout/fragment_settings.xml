@@ -5,212 +5,214 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/toolbarCancel"
+                    layout="@layout/toolbar_cancel_text" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/toolbarSave"
+                    style="@style/MyWidget.ClickableText.Pink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <include layout="@layout/gray_divider" />
 
             <include
-                android:id="@+id/toolbarCancel"
-                layout="@layout/toolbar_cancel_text" />
+                android:id="@+id/profileAvatarImageView"
+                style="@style/MyWidget.CircleButtonStroke"
+                layout="@layout/user_avatar_image_view" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/toolbarSave"
-                style="@style/MyWidget.ClickableText.Pink"
+                style="@style/MyWidget.TextView.PhotoDetailsAttrs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save" />
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/upload_photo" />
 
-        </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/MyWidget.SettingsFragment.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/personal_data" />
 
-        <include layout="@layout/gray_divider" />
-
-        <include
-            android:id="@+id/profileAvatarImageView"
-            style="@style/MyWidget.CircleButtonStroke"
-            layout="@layout/user_avatar_image_view" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/MyWidget.TextView.PhotoDetailsAttrs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="@string/upload_photo" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/MyWidget.SettingsFragment.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/personal_data" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutUsername"
-            style="@style/MyWidget.CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="@string/hint_user_name"
-            app:endIconDrawable="@drawable/user_outlined_icon"
-            app:endIconMode="custom">
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/usernameEditText"
-                style="@style/MyWidget.EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutUsername"
+                style="@style/MyWidget.CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:layout_marginTop="10dp"
+                android:hint="@string/hint_user_name"
+                app:endIconDrawable="@drawable/user_outlined_icon"
+                app:endIconMode="custom">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/usernameEditText"
+                    style="@style/MyWidget.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutBirthday"
-            style="@style/MyWidget.CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:hint="@string/hint_birthday"
-            app:endIconDrawable="@drawable/calendar_icon"
-            app:endIconMode="custom">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/birthdayEditText"
-                style="@style/MyWidget.EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutBirthday"
+                style="@style/MyWidget.CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number" />
+                android:layout_marginTop="4dp"
+                android:hint="@string/hint_birthday"
+                app:endIconDrawable="@drawable/calendar_icon"
+                app:endIconMode="custom">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/birthdayEditText"
+                    style="@style/MyWidget.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/MyWidget.SettingsFragment.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/e_mail_address" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutEmail"
-            style="@style/MyWidget.CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="@string/hint_email"
-            app:endIconDrawable="@drawable/mail_icon"
-            app:endIconMode="custom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutBirthday">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/MyWidget.SettingsFragment.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/e_mail_address" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/emailEditText"
-                style="@style/MyWidget.EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEmail"
+                style="@style/MyWidget.CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:layout_marginTop="10dp"
+                android:hint="@string/hint_email"
+                app:endIconDrawable="@drawable/mail_icon"
+                app:endIconMode="custom">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/emailEditText"
+                    style="@style/MyWidget.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            style="@style/MyWidget.SettingsFragment.TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/hint_password" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutOldPassword"
-            style="@style/MyWidget.CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="@string/old_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/mainGray">
+            <androidx.appcompat.widget.AppCompatTextView
+                style="@style/MyWidget.SettingsFragment.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/hint_password" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/oldPasswordEditText"
-                style="@style/MyWidget.EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutOldPassword"
+                style="@style/MyWidget.CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword" />
+                android:layout_marginTop="10dp"
+                android:hint="@string/old_password"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/mainGray">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/oldPasswordEditText"
+                    style="@style/MyWidget.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutNewPassword"
-            style="@style/MyWidget.CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:hint="@string/new_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/mainGray">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/newPasswordEditText"
-                style="@style/MyWidget.EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutNewPassword"
+                style="@style/MyWidget.CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword" />
+                android:layout_marginTop="4dp"
+                android:hint="@string/new_password"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/mainGray">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/newPasswordEditText"
+                    style="@style/MyWidget.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayoutConfirmNewPassword"
-            style="@style/MyWidget.CustomTextInputLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:hint="@string/confirm_new_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayoutEmail"
-            app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/mainGray">
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/confirmNewPasswordEditText"
-                style="@style/MyWidget.EditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutConfirmNewPassword"
+                style="@style/MyWidget.CustomTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword" />
+                android:layout_marginTop="4dp"
+                android:hint="@string/confirm_new_password"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="@color/mainGray">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/confirmNewPasswordEditText"
+                    style="@style/MyWidget.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/deleteAccountTextView"
-            style="@style/MyWidget.ClickableText.Settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:text="@string/you_can_delete_your_account" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/signOutTextView"
-            style="@style/MyWidget.ClickableText.Settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/mainPink"
-            android:paddingVertical="12dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/sign_out" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/deleteAccountTextView"
+                style="@style/MyWidget.ClickableText.Settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:text="@string/you_can_delete_your_account" />
 
-    </LinearLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/signOutTextView"
+                style="@style/MyWidget.ClickableText.Settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingVertical="12dp"
+                android:text="@string/sign_out"
+                android:textColor="@color/mainPink" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="60dp"
+            android:visibility="gone"
+            android:layout_height="60dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
 
 </ScrollView>

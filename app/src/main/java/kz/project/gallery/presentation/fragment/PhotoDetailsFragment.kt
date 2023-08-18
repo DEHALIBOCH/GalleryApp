@@ -9,7 +9,6 @@ import android.viewbinding.library.fragment.viewBinding
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.user.User
@@ -19,7 +18,9 @@ import kz.project.gallery.databinding.FragmentPhotoDetailsBinding
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.user.UserViewModel
 import kz.project.gallery.utils.Constants
+import kz.project.gallery.utils.GlideApp
 import kz.project.gallery.utils.Resource
+import kz.project.gallery.utils.createCircularProgressDrawable
 import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
 
@@ -42,15 +43,17 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
 
         val photo = arguments?.getSerializable(PHOTO_TAG) as? Photo
 
-        setupBackButton()
+        setupWidgets()
 
         observeUserResult(photo)
     }
 
-    private fun setupBackButton() = binding.apply {
+    private fun setupWidgets() = binding.apply {
         toolbarArrowBack.root.setOnClickListener {
             requireActivity().supportFragmentManager.popBackStack()
         }
+        loadingProgressBar.root.indeterminateDrawable =
+            createCircularProgressDrawable(requireContext(), R.color.mainPink)
     }
 
     private fun observeUserResult(photo: Photo?) = photo?.let {
@@ -84,7 +87,7 @@ class PhotoDetailsFragment : Fragment(R.layout.fragment_photo_details) {
     private fun setupWidgets(photo: Photo, user: User?) = binding.apply {
 
         val loadingUrl = "${Constants.IMAGE_LOADING_URL}${photo.image.name}"
-        Glide.with(requireActivity())
+        GlideApp.with(requireContext())
             .load(loadingUrl)
             .placeholder(ColorDrawable(Color.TRANSPARENT))
             .fitCenter()

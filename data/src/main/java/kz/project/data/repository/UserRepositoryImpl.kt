@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.core.Single
 import kz.project.data.mappers.toUser
 import kz.project.data.remote.UserApi
 import kz.project.data.remote.dto.error.parser.ErrorParser
+import kz.project.domain.model.user.UpdatePasswordErrorPlug
 import kz.project.domain.model.user.UpdatePasswordForm
 import kz.project.domain.model.user.User
 import kz.project.domain.repository.UserRepository
@@ -27,8 +28,8 @@ class UserRepositoryImpl @Inject constructor(
         ).onErrorResumeNext { throwable ->
             val errorBody = (throwable as HttpException).response()?.errorBody()?.string()
             Single.error(errorParser.parsePasswordUpdateError(errorBody))
-        }.flatMap { userToReceiveDto ->
-            Single.just(userToReceiveDto.toUser())
+        }.flatMap {
+            Single.just(UpdatePasswordErrorPlug("", ""))
         }
 
     override fun getUserById(id: Int) = userApi.getUserById(id).flatMap { userDto ->
