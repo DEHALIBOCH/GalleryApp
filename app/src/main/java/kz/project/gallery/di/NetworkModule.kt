@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import kz.project.data.core.UnsafeOkHttpClient
 import kz.project.data.remote.PhotoApi
 import kz.project.data.remote.UserApi
 import okhttp3.Authenticator
@@ -31,12 +32,11 @@ interface NetworkModule {
             authenticator: Authenticator,
             authTokenInterceptor: AuthTokenInterceptor
         ): OkHttpClient {
-            return OkHttpClient.Builder()
+            return UnsafeOkHttpClient.unsafeOkHttpClient
                 .authenticator(authenticator)
                 .addInterceptor(authTokenInterceptor)
                 .addInterceptor(loggingInterceptor)
                 .build()
-
         }
 
         @Provides
