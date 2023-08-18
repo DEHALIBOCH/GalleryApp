@@ -18,3 +18,12 @@
 
 ## Скриншоты
 
+![WelcomeFragment](screenshots/welcome_fragment.webp)
+![SignInFragment](screenshots/sign_in_fragment.webp)
+![SignUpFragment](screenshots/sign_up_fragment.webp)
+![HomeFragment(with error while loading)](screenshots/home_fragment_no_photos.webp)
+![HomeFragment](screenshots/home_fragment_with_photos.webp)
+![CreatePhotoBottomSheet](screenshots/create_photo_bottom_sheet.webp)
+![CreatePhotoFragment](screenshots/create_photo_fragment.webp)
+![ProfileFragment](screenshots/profile_fragment.webp)
+![SettingsFragment](screenshots/settings_fragment.webp)
