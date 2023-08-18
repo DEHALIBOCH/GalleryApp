@@ -10,6 +10,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import kz.project.domain.model.photo.Photo
 import kz.project.gallery.R
 import kz.project.gallery.utils.Constants
+import kz.project.gallery.utils.GlideApp
 
 class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -18,7 +19,7 @@ class PhotoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun bind(photo: Photo) {
         val imageName = photo.image.name
         val loadingUrl = "${Constants.IMAGE_LOADING_URL}$imageName"
-        Glide.with(photoImageView)
+        GlideApp.with(photoImageView)
             .load(loadingUrl)
             .placeholder(ColorDrawable(Color.TRANSPARENT))
             .error(AppCompatResources.getDrawable(itemView.context, R.drawable.error_with_loading))
