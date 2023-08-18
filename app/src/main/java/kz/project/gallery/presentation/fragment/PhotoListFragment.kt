@@ -39,8 +39,8 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     @Inject
     lateinit var getPhotosByNameUseCase: GetPhotosByNameUseCase
 
-    //    TODO lazy
-    private var popular: Boolean = false
+
+    private val popular: Boolean by lazy { arguments?.getBoolean(POPULAR) ?: false }
 
     private val factory: HomeViewModel.Factory by lazy {
         HomeViewModel.Factory(
@@ -65,8 +65,6 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        popular = arguments?.getBoolean(POPULAR) ?: false
 
         setupProgressBar()
         observePhotosResult()
