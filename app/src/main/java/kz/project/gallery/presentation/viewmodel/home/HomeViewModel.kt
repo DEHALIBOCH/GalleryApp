@@ -73,21 +73,25 @@ class HomeViewModel(
      * Если параметр isRefreshing == false, добавляет полученные фото в конец allPhotosResponse и возвращает его.
      * @param isRefreshing - происходит ли refresh с помощью SwipeRefreshLayout.
      */
-    private fun handleResponse(photoResponse: PhotoResponse, isRefreshing: Boolean): Resource<List<Photo>> =
-        if (!isRefreshing) {
+    private fun handleResponse(photoResponse: PhotoResponse, isRefreshing: Boolean): Resource<List<Photo>> {
+        val filteredPhotos = photoResponse.copy(
+            photos = photoResponse.photos.filter { it.user.isNotBlank() }.toMutableList()
+        )
+        return if (!isRefreshing) {
             photosPage++
-            maxPhotosPage = photoResponse.countOfPages
+            maxPhotosPage = filteredPhotos.countOfPages
             if (allPhotosResponse == null) {
-                allPhotosResponse = photoResponse
+                allPhotosResponse = filteredPhotos
             } else {
                 val oldPhotos = allPhotosResponse?.photos
-                val newPhotos = photoResponse.photos
+                val newPhotos = filteredPhotos.photos
                 oldPhotos?.addAll(newPhotos)
             }
-            Resource.Success(allPhotosResponse?.photos ?: photoResponse.photos)
+            Resource.Success(allPhotosResponse?.photos ?: filteredPhotos.photos)
         } else {
-            Resource.Success(photoResponse.photos)
+            Resource.Success(filteredPhotos.photos)
         }
+    }
 
     /**
      * Получение фото по имени
@@ -104,7 +108,9 @@ class HomeViewModel(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { photoResponse ->
-                    _photosLiveData.value = Resource.Success(photoResponse.photos)
+                    _photosLiveData.value = Resource.Success(
+                        photoResponse.photos.filter { it.user.isNotBlank() }.toMutableList()
+                    )
                 },
                 { error ->
                     _photosLiveData.value = Resource.Error(error.localizedMessage ?: Constants.UNEXPECTED_ERROR)
