@@ -48,21 +48,37 @@ class UserViewModel @Inject constructor(
 
     fun getUserById(userId: String) {
         val digits = userId.replace("\\D+".toRegex(), "")
-        val id = digits.toInt()
 
         _userById.value = Resource.Loading()
 
-        getUserByIdUseCase.invoke(id = id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { user ->
-                    _userById.value = Resource.Success(user)
-                },
-                { error ->
-                    _userById.value = Resource.Error(error.message ?: Constants.UNEXPECTED_ERROR)
-                }
-            ).let(compositeDisposable::add)
+        try {
+            getUserByIdUseCase.invoke(id = digits.toInt())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { user ->
+                        _userById.value = Resource.Success(user)
+                    },
+                    { error ->
+                        _userById.value = Resource.Error(error.message ?: Constants.UNEXPECTED_ERROR)
+                    }
+                ).let(compositeDisposable::add)
+        } catch (e: Exception) {
+            Resource.Success(
+                User(
+                    id = -1,
+                    email = "undefined@mail.com",
+                    enabled = false,
+                    phone = "",
+                    fullName = "",
+                    username = "",
+                    birthday = "",
+                    roles = emptyList(),
+                )
+            )
+        }
+
+
     }
 
     override fun onCleared() {
