@@ -16,6 +16,7 @@ import kz.project.domain.use_case.validation.ValidateConfirmPasswordUseCase
 import kz.project.domain.use_case.validation.ValidateEmailUseCase
 import kz.project.domain.use_case.validation.ValidatePasswordUseCase
 import kz.project.domain.use_case.validation.ValidateUsernameUseCase
+import kz.project.gallery.presentation.viewmodel.BaseViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
 import javax.inject.Inject
@@ -30,10 +31,7 @@ class LoginViewModel @Inject constructor(
     private val validateBirthdayUseCase: ValidateBirthdayUseCase,
     private val loginWithEmailAndPasswordUseCase: LoginWithEmailAndPasswordUseCase,
     private val saveAccessTokenUseCase: SaveAccessTokenUseCase,
-) : ViewModel() {
-
-    // TODO вынести в BaseViewModel
-    private val compositeDisposable = CompositeDisposable()
+) : BaseViewModel() {
 
     /** Результат валидации полей ввода регистрации */
     private val _registrationValidationResult = MutableLiveData<Resource<RegistrationForm>>()
@@ -166,11 +164,5 @@ class LoginViewModel @Inject constructor(
                     )
                 }
             ).let(compositeDisposable::add)
-    }
-
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
     }
 }
