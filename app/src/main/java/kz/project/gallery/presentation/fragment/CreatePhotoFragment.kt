@@ -36,7 +36,10 @@ class CreatePhotoFragment : FileCreatingFragment(R.layout.fragment_create_photo)
     private val viewModel: CreatePhotoViewModel by viewModels { factory }
 
     private val binding: FragmentCreatePhotoBinding by viewBinding()
-    private var photoUri: Uri? = null
+
+    private val photoUri: Uri? by lazy {
+        arguments?.getParcelable<Uri>(PHOTO_URI)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +48,6 @@ class CreatePhotoFragment : FileCreatingFragment(R.layout.fragment_create_photo)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // TODO подумать как показать ошибку, если uri прилетит null
-        photoUri = arguments?.getParcelable<Uri>(PHOTO_URI)
 
         binding.imageViewPhoto.setImageURI(photoUri)
 

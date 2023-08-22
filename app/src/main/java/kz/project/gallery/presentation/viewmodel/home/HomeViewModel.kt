@@ -73,25 +73,22 @@ class HomeViewModel(
      * Если параметр isRefreshing == false, добавляет полученные фото в конец allPhotosResponse и возвращает его.
      * @param isRefreshing - происходит ли refresh с помощью SwipeRefreshLayout.
      */
-    private fun handleResponse(photoResponse: PhotoResponse, isRefreshing: Boolean): Resource<List<Photo>> {
-        val filteredPhotos = photoResponse.copy(
-            photos = photoResponse.photos.filter { it.user.isNotBlank() }.toMutableList()
-        )
-        return if (!isRefreshing) {
+    private fun handleResponse(photoResponse: PhotoResponse, isRefreshing: Boolean): Resource<List<Photo>> =
+        if (!isRefreshing) {
             photosPage++
-            maxPhotosPage = filteredPhotos.countOfPages
+            maxPhotosPage = photoResponse.countOfPages
             if (allPhotosResponse == null) {
-                allPhotosResponse = filteredPhotos
+                allPhotosResponse = photoResponse
             } else {
                 val oldPhotos = allPhotosResponse?.photos
-                val newPhotos = filteredPhotos.photos
+                val newPhotos = photoResponse.photos
                 oldPhotos?.addAll(newPhotos)
             }
-            Resource.Success(allPhotosResponse?.photos ?: filteredPhotos.photos)
+            Resource.Success(allPhotosResponse?.photos ?: photoResponse.photos)
         } else {
-            Resource.Success(filteredPhotos.photos)
+            Resource.Success(photoResponse.photos)
         }
-    }
+
 
     /**
      * Получение фото по имени
@@ -109,7 +106,7 @@ class HomeViewModel(
             .subscribe(
                 { photoResponse ->
                     _photosLiveData.value = Resource.Success(
-                        photoResponse.photos.filter { it.user.isNotBlank() }.toMutableList()
+                        photoResponse.photos
                     )
                 },
                 { error ->

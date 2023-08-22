@@ -18,7 +18,6 @@ class LoginRepositoryImpl @Inject constructor(
     private val errorParser: ErrorParser
 ) : LoginRepository {
 
-    // TODO рефакторинг код стайла
 
     override fun loginWithEmailAndPassword(
         userName: String,

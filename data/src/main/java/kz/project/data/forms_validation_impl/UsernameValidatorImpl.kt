@@ -17,7 +17,7 @@ class UsernameValidatorImpl @Inject constructor() : UsernameValidator {
         if (username.isBlank()) {
             return ValidationResult(
                 successful = false,
-                errorMessage = "Username can't be empty"   //TODO посмотреть как в domain слое можно достать stringRes
+                errorMessage = "Username can't be empty"
             )
         }
         return ValidationResult(

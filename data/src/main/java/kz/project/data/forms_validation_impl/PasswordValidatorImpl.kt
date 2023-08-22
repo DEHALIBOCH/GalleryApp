@@ -16,7 +16,6 @@ class PasswordValidatorImpl @Inject constructor() : PasswordValidator {
         if (password.length < 5) {
             return ValidationResult(
                 successful = false,
-//                TODO хардкод(прокидывать id или константы)
                 errorMessage = "Minimum password length is 5 characters"
             )
         }
