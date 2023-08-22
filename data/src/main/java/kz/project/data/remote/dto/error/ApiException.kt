@@ -3,10 +3,9 @@ package kz.project.data.remote.dto.error
 /**
  * Класс для прокидывания ошибки дальше по иерархии обработки в presentation слой
  */
-// TODO доделать обработку ошибок
+
 class ApiException(message: String?) : Exception(message)
 
-// TODO добавить обработку ошибок регистрации
 enum class ErrorType {
 
     /**
