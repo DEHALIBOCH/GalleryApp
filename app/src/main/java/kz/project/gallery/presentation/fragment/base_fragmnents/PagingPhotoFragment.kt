@@ -45,7 +45,7 @@ abstract class PagingPhotoFragment<Binding : ViewBinding>(@LayoutRes contentLayo
     }
 
     /** Адаптер для RecyclerView */
-    private lateinit var photoAdapter: PhotoAdapter
+    protected lateinit var photoAdapter: PhotoAdapter
 
     /** Необходима для пагинации, необходимо обязательно менять ее значения при загрузке, получении фото или ошибки */
     protected var isLoading = false
