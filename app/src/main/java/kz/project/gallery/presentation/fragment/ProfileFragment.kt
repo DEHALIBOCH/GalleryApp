@@ -1,7 +1,9 @@
 package kz.project.gallery.presentation.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.viewbinding.library.fragment.viewBinding
 import android.widget.ProgressBar
 import androidx.core.os.bundleOf
@@ -18,6 +20,7 @@ import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentProfileBinding
 import kz.project.gallery.presentation.adapter.PhotoItemType
 import kz.project.gallery.presentation.adapter.PhotoAdapter
+import kz.project.gallery.presentation.fragment.base_fragmnents.PagingPhotoFragment
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import kz.project.gallery.presentation.viewmodel.profile.ProfileViewModel
 import kz.project.gallery.utils.Resource
@@ -26,15 +29,13 @@ import kz.project.gallery.utils.parseDate
 import javax.inject.Inject
 
 
-class ProfileFragment : Fragment(R.layout.fragment_profile) {
+class ProfileFragment : PagingPhotoFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
 
     @Inject
     lateinit var factory: MultiViewModelFactory
     private val viewModel: ProfileViewModel by viewModels { factory }
 
-    private val binding: FragmentProfileBinding by viewBinding()
 
-    private lateinit var photoAdapter: PhotoAdapter
     private var isAlreadyLoaded = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,7 +47,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         setupButtons()
-        setupRecyclerView()
+        setupRecyclerView(requireContext(), PhotoItemType.SmallItemFourColumns, 4, binding.recyclerView)
 
         observeUserPhotos()
         observeCurrentUser()
@@ -57,14 +58,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun setupRecyclerView() {
-        photoAdapter = PhotoAdapter(PhotoItemType.SmallItemFourColumns)
-        photoAdapter.setOnItemClickListener { photo ->
-            goToPhotoDetailsFragment(photo)
-        }
-        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
-        binding.recyclerView.adapter = photoAdapter
-    }
+    override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentProfileBinding.inflate(inflater, container, false)
+
+    override val getPagingData: () -> Unit
+        get() = { Unit }
 
     private fun observeUserPhotos() {
 
@@ -152,16 +150,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             addToBackStack(null)
         }
 
-    }
-
-    private fun goToPhotoDetailsFragment(photo: Photo) = requireActivity().supportFragmentManager.commit {
-        setReorderingAllowed(true)
-        replace<PhotoDetailsFragment>(
-            R.id.mainActivityFragmentContainerView,
-            PhotoDetailsFragment.FRAGMENT_TAG,
-            bundleOf(PhotoDetailsFragment.PHOTO_TAG to photo)
-        )
-        addToBackStack(null)
     }
 
     companion object {
