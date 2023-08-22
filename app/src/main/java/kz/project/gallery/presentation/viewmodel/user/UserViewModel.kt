@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.domain.model.user.User
 import kz.project.domain.use_case.user.GetCurrentUserUseCase
 import kz.project.domain.use_case.user.GetUserByIdUseCase
+import kz.project.gallery.presentation.viewmodel.BaseViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
 import javax.inject.Inject
@@ -19,9 +20,7 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val getUserByIdUseCase: GetUserByIdUseCase,
-) : ViewModel() {
-
-    private val compositeDisposable = CompositeDisposable()
+) : BaseViewModel() {
 
     private val _currentUser = MutableLiveData<Resource<User>>()
     val currentUser: LiveData<Resource<User>>
@@ -81,8 +80,4 @@ class UserViewModel @Inject constructor(
 
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
-    }
 }
