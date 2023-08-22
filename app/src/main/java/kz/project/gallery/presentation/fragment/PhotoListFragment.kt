@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kz.project.domain.model.photo.Photo
 import kz.project.domain.use_case.photo.GetPhotosByNameUseCase
 import kz.project.domain.use_case.photo.GetPhotosListUseCase
 import kz.project.gallery.GalleryApp
