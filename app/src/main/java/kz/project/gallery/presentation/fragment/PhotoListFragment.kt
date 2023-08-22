@@ -2,7 +2,9 @@ package kz.project.gallery.presentation.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.viewbinding.library.fragment.viewBinding
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -22,6 +24,7 @@ import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentPhotoListBinding
 import kz.project.gallery.presentation.adapter.PhotoAdapter
 import kz.project.gallery.presentation.adapter.PhotoItemType
+import kz.project.gallery.presentation.fragment.base_fragmnents.PagingPhotoFragment
 import kz.project.gallery.presentation.viewmodel.home.HomeViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.RecyclerViewScrollListener
@@ -31,7 +34,7 @@ import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
-class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
+class PhotoListFragment : PagingPhotoFragment<FragmentPhotoListBinding>(R.layout.fragment_photo_list) {
 
     @Inject
     lateinit var getPhotosListUseCase: GetPhotosListUseCase
@@ -51,12 +54,8 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     }
     private val viewModel: HomeViewModel by viewModels { factory }
 
-    private val binding: FragmentPhotoListBinding by viewBinding()
-    private lateinit var photoAdapter: PhotoAdapter
     private lateinit var disposable: Disposable
 
-    private var isLoading = false
-    private var isLastPage = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,16 +65,13 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupProgressBar()
+        setupProgressBar(binding.progressBar, R.color.mainPink, requireContext())
         observePhotosResult()
-        setupRecyclerView()
+        setupRecyclerView(requireContext(), PhotoItemType.BigItemTwoColumns, 2, binding.recyclerView)
         setupSwipeRefresh()
         observeSearchQuery()
     }
 
-    private fun setupProgressBar() = binding.apply {
-        progressBar.indeterminateDrawable = createCircularProgressDrawable(requireContext(), R.color.mainGray)
-    }
 
     /**
      * Обсервит запросы приходящие из фрагмента с searchView
@@ -130,16 +126,8 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         swipeRefreshLayout.isRefreshing = false
     }
 
-    private val recyclerViewScrollListener = object : RecyclerViewScrollListener(
-        { viewModel.getPagingPhotos() }
-    ) {
-        override fun isLoading(): Boolean = isLoading
-
-        override fun isLastPage(): Boolean = isLastPage
-    }
-
     private fun showErrorNotification(flag: Boolean) = binding.apply {
-        loadingError.isVisible = flag
+        loadingError.root.isVisible = flag
         recyclerView.isVisible = !flag
     }
 
@@ -147,27 +135,11 @@ class PhotoListFragment : Fragment(R.layout.fragment_photo_list) {
         binding.loadingProgressBar.isVisible = false
     }
 
-    private fun setupRecyclerView() {
-        photoAdapter = PhotoAdapter(PhotoItemType.BigItemTwoColumns)
-        photoAdapter.setOnItemClickListener { photo ->
-            goToPhotoDetailsFragment(photo)
-        }
-        binding.recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = photoAdapter
-            addOnScrollListener(recyclerViewScrollListener)
-        }
-    }
+    override fun inflateBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentPhotoListBinding.inflate(inflater, container, false)
 
-    private fun goToPhotoDetailsFragment(photo: Photo) = requireActivity().supportFragmentManager.commit {
-        setReorderingAllowed(true)
-        replace<PhotoDetailsFragment>(
-            R.id.mainActivityFragmentContainerView,
-            PhotoDetailsFragment.FRAGMENT_TAG,
-            bundleOf(PhotoDetailsFragment.PHOTO_TAG to photo)
-        )
-        addToBackStack(null)
-    }
+    override val getPagingData: () -> Unit
+        get() = { viewModel.getPagingPhotos() }
 
     override fun onDestroyView() {
         super.onDestroyView()
