@@ -15,7 +15,6 @@ import kz.project.domain.use_case.photo.GetPhotosListUseCase
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentPhotoListBinding
-import kz.project.gallery.presentation.adapter.PhotoAdapter
 import kz.project.gallery.presentation.adapter.PhotoItemType
 import kz.project.gallery.presentation.fragment.base_fragmnents.PagingPhotoFragment
 import kz.project.gallery.presentation.viewmodel.home.HomeViewModel
