@@ -81,7 +81,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                     hideProgressBar()
                     if (resource.data?.photos?.isEmpty() == true) showError(true)
                     setLoadedPhotosCount(resource.data?.photos?.size ?: 0)
-                    photoAdapter.submitList(resource.data?.photos)
+                    photoAdapter.submitList(resource.data?.photos?.map { it.copy() })
                 }
             }
         }
