@@ -19,7 +19,6 @@ import kz.project.gallery.presentation.adapter.PhotoItemType
 import kz.project.gallery.presentation.fragment.base_fragmnents.PagingPhotoFragment
 import kz.project.gallery.presentation.viewmodel.home.HomeViewModel
 import kz.project.gallery.utils.Constants
-import kz.project.gallery.utils.RecyclerViewScrollListener
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.SearchQueryEventBus
 import kz.project.gallery.utils.createCircularProgressDrawable
