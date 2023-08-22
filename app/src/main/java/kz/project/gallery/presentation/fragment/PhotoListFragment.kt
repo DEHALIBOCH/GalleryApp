@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
