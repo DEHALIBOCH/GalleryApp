@@ -21,7 +21,6 @@ import kz.project.gallery.presentation.viewmodel.home.HomeViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
 import kz.project.gallery.utils.SearchQueryEventBus
-import kz.project.gallery.utils.createCircularProgressDrawable
 import javax.inject.Inject
 
 
