@@ -45,37 +45,12 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <include
             android:id="@+id/loadingError"
+            layout="@layout/loading_error_with_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/error_with_loading" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:text="@string/sorry"
-                android:textColor="@color/mainGray"
-                android:textSize="17sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/there_is_no_pictures"
-                android:textColor="@color/mainGray" />
-
-        </LinearLayout>
+            android:layout_gravity="center" />
 
     </FrameLayout>
 
