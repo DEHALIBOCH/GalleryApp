@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("io.realm.kotlin")
 }
 
 android {
@@ -62,4 +63,6 @@ dependencies {
     implementation("com.google.dagger:dagger:2.44.2")
     kapt("com.google.dagger:dagger-compiler:2.44.2")
 
+    // Realm
+    implementation("io.realm.kotlin:library-base:1.10.0")
 }

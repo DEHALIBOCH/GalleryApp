@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("io.realm.kotlin")
 }
 
 android {
@@ -85,4 +86,6 @@ dependencies {
     // ViewBinding delegation
     implementation("com.github.yogacp:android-viewbinding:1.0.4")
 
+    // Realm
+    implementation("io.realm.kotlin:library-base:1.10.0")
 }
