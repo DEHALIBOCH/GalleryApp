@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import io.reactivex.rxjava3.core.Scheduler
+import io.realm.kotlin.Realm
 import kz.project.data.forms_validation_impl.BirthdayValidatorImpl
 import kz.project.data.forms_validation_impl.ConfirmPasswordValidatorImpl
 import kz.project.data.forms_validation_impl.EmailValidatorImpl
@@ -16,6 +18,7 @@ import kz.project.data.remote.UserApi
 import kz.project.data.remote.dto.error.parser.ErrorParser
 import kz.project.data.repository.AccessTokenRepositoryImpl
 import kz.project.data.repository.CompressImageRepositoryImpl
+import kz.project.data.repository.LocalPhotosRepositoryImpl
 import kz.project.data.repository.LoginRepositoryImpl
 import kz.project.data.repository.PhotoRepositoryImpl
 import kz.project.data.repository.UserRepositoryImpl
@@ -26,6 +29,7 @@ import kz.project.domain.forms_validation.PasswordValidator
 import kz.project.domain.forms_validation.UsernameValidator
 import kz.project.domain.repository.AccessTokenRepository
 import kz.project.domain.repository.CompressImageRepository
+import kz.project.domain.repository.LocalPhotosRepository
 import kz.project.domain.repository.LoginRepository
 import kz.project.domain.repository.PhotoRepository
 import kz.project.domain.repository.UserRepository
@@ -76,5 +80,10 @@ interface DataModule {
         @Provides
         fun provideUserRepository(userApi: UserApi, errorParser: ErrorParser): UserRepository =
             UserRepositoryImpl(userApi, errorParser)
+
+        @Provides
+        fun provideLocalPhotosRepository(realm: Realm, backgroundScheduler: Scheduler): LocalPhotosRepository =
+            LocalPhotosRepositoryImpl(realm, backgroundScheduler)
+
     }
 }
