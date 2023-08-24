@@ -16,7 +16,16 @@ import kz.project.gallery.presentation.fragment.SplashFragment
 import kz.project.gallery.presentation.viewmodel.MultiViewModelFactory
 import javax.inject.Singleton
 
-@[Singleton Component(modules = [AppBindsModule::class, DataModule::class, NetworkModule::class, PresentationModule::class])]
+@[Singleton Component(
+    modules = [
+        AppBindsModule::class,
+        DataModule::class,
+        NetworkModule::class,
+        PresentationModule::class,
+        RealmModule::class
+    ]
+)
+]
 interface AppComponent {
 
 
