@@ -1,5 +1,6 @@
 package kz.project.gallery.presentation.viewmodel.home
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,8 +9,10 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kz.project.domain.model.photo.Photo
 import kz.project.domain.model.photo.PhotoResponse
+import kz.project.domain.use_case.photo.GetCachedPhotosUseCase
 import kz.project.domain.use_case.photo.GetPhotosByNameUseCase
 import kz.project.domain.use_case.photo.GetPhotosListUseCase
+import kz.project.domain.use_case.photo.SaveCachedPhotosUseCase
 import kz.project.gallery.presentation.viewmodel.BaseViewModel
 import kz.project.gallery.utils.Constants
 import kz.project.gallery.utils.Resource
@@ -18,6 +21,8 @@ class HomeViewModel(
     private val isPopular: Boolean,
     private val getPhotosListUseCase: GetPhotosListUseCase,
     private val getPhotosByNameUseCase: GetPhotosByNameUseCase,
+    private val getCachedPhotosUseCase: GetCachedPhotosUseCase,
+    private val saveCachedPhotosUseCase: SaveCachedPhotosUseCase,
 ) : BaseViewModel() {
 
     private val popular: Boolean? = if (isPopular) true else null
@@ -46,6 +51,33 @@ class HomeViewModel(
         getPhotos(true)
     }
 
+    private fun getCachedPhotos() =
+        getCachedPhotosUseCase.invoke(
+            page = photosPage,
+            new = new ?: false,
+            popular = popular ?: false
+        ).observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+
+                },
+                {
+
+                }
+            ).let(compositeDisposable::add)
+
+    private fun saveCachedPhotos(photos: List<Photo>) =
+        saveCachedPhotosUseCase.invoke(photos)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Log.d("CachedPhotos", "Успешно сохранены")
+                },
+                {
+
+                }
+            )
+
     private fun getPhotos(isRefreshing: Boolean) {
 
         _photosLiveData.value = Resource.Loading()
@@ -60,11 +92,25 @@ class HomeViewModel(
             .subscribe(
                 { photoResponse ->
                     _photosLiveData.value = handleResponse(photoResponse, isRefreshing)
+                    saveCachedPhotos(photoResponse.photos)
                 },
                 { error ->
                     _photosLiveData.value = Resource.Error(error.localizedMessage ?: Constants.UNEXPECTED_ERROR)
                 }
             ).let(compositeDisposable::add)
+//        getCachedPhotosUseCase.invoke(
+//            page = photosPage,
+//            new = false,
+//            popular = true,
+//        ).observeOn(AndroidSchedulers.mainThread())
+//            .subscribe(
+//                { photoResponse ->
+//                    _photosLiveData.value = handleResponse(photoResponse, isRefreshing)
+//                },
+//                { error ->
+//                    _photosLiveData.value = Resource.Error(error.localizedMessage ?: Constants.UNEXPECTED_ERROR)
+//                }
+//            ).let(compositeDisposable::add)
     }
 
 
@@ -120,6 +166,8 @@ class HomeViewModel(
         private val popular: Boolean,
         private val getPhotosListUseCase: GetPhotosListUseCase,
         private val getPhotosByNameUseCase: GetPhotosByNameUseCase,
+        private val getCachedPhotosUseCase: GetCachedPhotosUseCase,
+        private val saveCachedPhotosUseCase: SaveCachedPhotosUseCase,
     ) : ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -127,7 +175,9 @@ class HomeViewModel(
                 return HomeViewModel(
                     isPopular = popular,
                     getPhotosListUseCase = getPhotosListUseCase,
-                    getPhotosByNameUseCase = getPhotosByNameUseCase
+                    getPhotosByNameUseCase = getPhotosByNameUseCase,
+                    getCachedPhotosUseCase = getCachedPhotosUseCase,
+                    saveCachedPhotosUseCase = saveCachedPhotosUseCase,
                 ) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
