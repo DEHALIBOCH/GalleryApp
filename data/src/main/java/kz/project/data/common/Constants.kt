@@ -2,6 +2,10 @@ package kz.project.data.common
 
 object Constants {
 
+    const val NO_PHOTOS: String = "There aren`t any photos in cache"
+
+    const val LIMIT: Int = 20
+
     /**
      * Жестко закодированное значение, без него невозможно авторизоваться
      */
