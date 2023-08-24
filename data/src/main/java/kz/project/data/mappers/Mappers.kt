@@ -1,6 +1,7 @@
 package kz.project.data.mappers
 
 import kz.project.data.common.Constants
+import kz.project.data.local.entity.PhotoEntity
 import kz.project.data.remote.dto.photo.ImageDto
 import kz.project.data.remote.dto.photo.PhotoDto
 import kz.project.data.remote.dto.photo.PhotoResponseDto
@@ -79,4 +80,26 @@ fun PhotoResponseDto.toPhotoResponse() = PhotoResponse(
     photos = photos?.map { it.toPhoto() }?.toMutableList() ?: mutableListOf(),
     itemsPerPage = itemsPerPage ?: 0,
     totalItems = totalItems ?: 0,
+)
+
+fun Photo.toPhotoEntity() = PhotoEntity().also { photoEntity ->
+    photoEntity.id = id
+    photoEntity.dateCreate = dateCreate
+    photoEntity.description = description
+    photoEntity.imageName = image.name
+    photoEntity.imageId = image.id
+    photoEntity.isNew = new
+    photoEntity.isPopular = popular
+    photoEntity.user = user
+}
+
+fun PhotoEntity.toPhoto() = Photo(
+    dateCreate = dateCreate ?: Constants.EPOCH_TIME,
+    description = description ?: "",
+    id = id ?: -1,
+    image = Image(id = imageId ?: -1, name = imageName ?: ""),
+    name = name ?: "",
+    new = isNew ?: true,
+    popular = isPopular ?: true,
+    user = user ?: ""
 )
