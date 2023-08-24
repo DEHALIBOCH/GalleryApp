@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kz.project.domain.use_case.photo.GetCachedPhotosUseCase
 import kz.project.domain.use_case.photo.GetPhotosByNameUseCase
 import kz.project.domain.use_case.photo.GetPhotosListUseCase
+import kz.project.domain.use_case.photo.SaveCachedPhotosUseCase
 import kz.project.gallery.GalleryApp
 import kz.project.gallery.R
 import kz.project.gallery.databinding.FragmentPhotoListBinding
@@ -28,9 +30,12 @@ class PhotoListFragment : PagingPhotoFragment<FragmentPhotoListBinding>(R.layout
 
     @Inject
     lateinit var getPhotosListUseCase: GetPhotosListUseCase
-
     @Inject
     lateinit var getPhotosByNameUseCase: GetPhotosByNameUseCase
+    @Inject
+    lateinit var getCachedPhotosUseCase: GetCachedPhotosUseCase
+    @Inject
+    lateinit var saveCachedPhotosUseCase: SaveCachedPhotosUseCase
 
 
     private val popular: Boolean by lazy { arguments?.getBoolean(POPULAR) ?: false }
@@ -40,6 +45,8 @@ class PhotoListFragment : PagingPhotoFragment<FragmentPhotoListBinding>(R.layout
             popular = popular,
             getPhotosListUseCase = getPhotosListUseCase,
             getPhotosByNameUseCase = getPhotosByNameUseCase,
+            getCachedPhotosUseCase = getCachedPhotosUseCase,
+            saveCachedPhotosUseCase = saveCachedPhotosUseCase,
         )
     }
     private val viewModel: HomeViewModel by viewModels { factory }
