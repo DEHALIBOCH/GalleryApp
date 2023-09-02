@@ -1,10 +1,13 @@
 # GalleryApp
 
-Приложение галлерея с функционалом регистрации, авторизации и отправки фото. При написании проекта были использованы принципы чистой архитектуры и MVVM.
+Приложение галлерея с функционалом регистрации, авторизации и отправки фото. При написании проекта были использованы
+принципы чистой архитектуры и MVVM.
 
-В api использованном для написания проекта используется протокол авторизации OAuth 2, для рефреша токена был использован интерфес Authenticator из OkHttp3.
+В api использованном для написания проекта используется протокол авторизации OAuth 2, для рефреша токена был использован
+интерфес Authenticator из OkHttp3.
 
-Для верстки экранов был использован императивный(view) подход. Приложение написано по принципу Single Activity. Для навигации по фрагментам используется Fragment Api, 
+Для верстки экранов был использован императивный(view) подход. Приложение написано по принципу Single Activity. Для
+навигации по фрагментам используется Fragment Api,
 для реализации асинхронности - библеотека RxJava3, для запросов в сеть - Retrofit. DI - Dagger2.
 
 ## Стек использованных технологий
@@ -32,5 +35,9 @@
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/create_photo_fragment.webp">
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/profile_fragment.webp">
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/settings_fragment.webp">
+   <br>
+   <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/registration_text_input_activated.webp">
+   <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/incorrectly_entered_data.webp">
+   <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/account_deleting.webp">
 </p> 
 
