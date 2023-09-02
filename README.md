@@ -27,7 +27,7 @@
    <br>
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/home_fragment_no_photos.webp">
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/home_fragment_with_photos.webp">
-   <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/create_photo_bottom_sheet.webp">
+   <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/photo_details_fragment.webp">
    <br>
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/create_photo_fragment.webp">
    <img width = "220px" height="500px" style="pointer-events: none;" src="screenshots/profile_fragment.webp">
