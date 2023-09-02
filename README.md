@@ -15,6 +15,8 @@
 - OkHttp
 - SwipeRefreshLayout
 - Dagger2
+- Glide
+- Realm
 
 ## Скриншоты
 
